@@ -23,7 +23,7 @@ stop_pin.irq(trigger=Pin.IRQ_FALLING, handler=callback)
 
 # Import the v01.py script and setup exception handling
 try:
-    exec(f"import {file_name}")
+    __import__(file_name)
 except KeyboardInterrupt as e:
     print("KEYBOARD INTERRUPT")
     print("--- Traceback ---")
