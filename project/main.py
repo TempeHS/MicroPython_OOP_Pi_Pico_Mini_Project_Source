@@ -4,7 +4,7 @@ from machine import Pin
 
 
 # File name of the script to import
-file_name = "v01"
+file_name = "v04"
 
 # Add the path to the sys.path
 sys.path.append("/py_scripts")
@@ -71,16 +71,6 @@ except ValueError as e:
     print(
         "Raised when a built-in operation or function receives an argument that has the right type but an inappropriate value."
     )
-    print("--- Traceback ---")
-    sys.print_exception(e)
-except FileExistsError as e:
-    print("FILE EXISTS ERROR")
-    print("Raised when trying to create a file or directory which already exists.")
-    print("--- Traceback ---")
-    sys.print_exception(e)
-except FileNotFoundError as e:
-    print("FILE NOT FOUND ERROR")
-    print("Raised when a file or directory is requested but doesn`t exist.")
     print("--- Traceback ---")
     sys.print_exception(e)
 except OSError as e:

@@ -1,38 +1,31 @@
-import time
-from servo import Servo
-from machine import Pin, PWM
+from machine import Pin
+from machine import PWM
 
-servo_pwm = PWM(Pin(16))
+# Pin Documentation: https://docs.micropython.org/en/latest/library/machine.Pin.html
+# PWM Documentation: https://docs.micropython.org/en/latest/library/machine.PWM.html
 
-# Set the parameters of the servo pulses, more details in the "Documentation" section
-freq = 50
-min_us = 500
-max_us = 2500
-dead_zone_us = 1500
+led_car_red = Pin(3, Pin.OUT)
+led_car_orange = Pin(5, Pin.OUT)
+led_car_green = Pin(7, Pin.OUT)
 
-# create a servo object
-my_servo = Servo(
-    pwm=servo_pwm, min_us=min_us, max_us=max_us, dead_zone_us=dead_zone_us, freq=freq
-)
+led_pedestrian_red = Pin(19, Pin.OUT)
+led_pedestrian_green = Pin(17, Pin.OUT)
+
+pedestrian_button = Pin(22, Pin.IN, Pin.PULL_DOWN)
+
+buzzer = machine.PWM(27)
 
 
 while True:
-    # Set the Servo to the mid-point (90 is half way between zero and 180 degrees)
-    my_servo.set_angle(0)
-    time.sleep(5)  # Wait for 1 second
-    print("Servo at 0 degrees")
 
-    # Set the Servo to the left most position
-    my_servo.set_angle(90)
-    time.sleep(2)  # Wait for 1 second
-    print("Servo Stop")
+    buzzer.freq(1000)
+    # buzzer.duty(512)
 
-    # Set the Servo to the right most position
-    my_servo.set_angle(180)
-    time.sleep(5)  # Wait for 1 second
-    print("Servo at 180 degrees")
+    led_car_red.high()
+    led_car_orange.high()
+    led_car_green.high()
 
-    # Set the Servo to the left most position
-    my_servo.set_angle(90)
-    time.sleep(2)  # Wait for 1 second
-    print("Servo Stop")
+    led_pedestrian_red.high()
+    led_pedestrian_green.high()
+
+    print(pedestrian_button.value())

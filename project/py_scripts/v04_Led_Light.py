@@ -38,9 +38,3 @@ class Led_Light(Pin):
                 self.on()
             else:
                 self.off()
-
-
-while True:
-    red_light = Led_Light(25)
-    red_light.on()
-    print(red_light.led_light_state)
