@@ -11,7 +11,7 @@ led_car_green = Pin(7, Pin.OUT)
 led_pedestrian_red = Pin(19, Pin.OUT)
 led_pedestrian_green = Pin(17, Pin.OUT)
 
-pedestrian_button = Pin(22, Pin.IN, Pin.PULL_DOWN)
+pedestrian_button = Pin(22, Pin.IN, Pin.PULL_UP)
 
 buzzer = machine.PWM(27)
 

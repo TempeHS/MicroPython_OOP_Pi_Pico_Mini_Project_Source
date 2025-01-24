@@ -1,0 +1,17 @@
+from machine import PWM
+
+
+class Audio_Notification(PWM):
+    def __init__(self, pin, debug):
+        super().__init__(pin)
+        self.__debug = debug
+
+    def warning_on(self):
+        if self.__debug:
+            print("Warning on")
+        self.freq(1000)
+
+    def warning_off(self):
+        if self.__debug:
+            print("Warning off")
+        self.freq(50)
