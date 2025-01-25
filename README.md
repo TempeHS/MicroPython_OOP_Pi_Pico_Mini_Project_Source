@@ -1,3 +1,11 @@
+# TODO
+
+- Test and refine buzzer
+- Controller class
+- Implement state machine in controller class
+- Refine variables, methods and class names
+- Add documentation
+
 # Learn MicroPython Raspberry Pi Pico
 
 This repository is a mini OOP based project to explicitly teach Object Oriented Paradigm programming concepts specifically in the microcontroller context.
