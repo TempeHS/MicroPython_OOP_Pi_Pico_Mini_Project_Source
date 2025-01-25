@@ -62,9 +62,9 @@ classDiagram
     PWM <|-- Buzzer : Inheritance
     Led_Light <|-- Flashing_Light : Inheritance
     Buzzer <|-- Flashing_Light : Inheritance
-    Button --> Pedestrian_Crossing : Association
-    Led_Light --> Pedestrian_Crossing : Association
-    Flashing_Light --> Pedestrian_Crossing : Association
+    Button --* Pedestrian_Crossing : Composition
+    Led_Light --* Pedestrian_Crossing : Composition
+    Flashing_Light --* Pedestrian_Crossing : Composition
     class PIN{
 
     }
