@@ -1,7 +1,10 @@
 #  STUDENTS SHOULD ONLY EDIT THE FILE NAME IN LINE 7
 import sys
 from machine import Pin
+from time import sleep
 
+# Wait for USB to become ready
+sleep(0.1)
 
 # File name of the script to import
 file_name = "v04"

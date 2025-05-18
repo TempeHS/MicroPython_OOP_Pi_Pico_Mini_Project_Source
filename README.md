@@ -6,11 +6,57 @@
 - Refine variables, methods and class names
 - Add documentation
 
-# Learn MicroPython Raspberry Pi Pico
+# MicroPython OOP Pi Pico Mini Project
 
-This repository is a mini OOP based project to explicitly teach Object Oriented Paradigm programming concepts specifically in the microcontroller context.
+This repository is a series of introduction tasks to teach students the basics of Pi Pico and common mechatronic components. Then students will create a mini OOP based project to explicitly teach Object Oriented Paradigm Programming concepts specifically in the microcontroller context.
 
 Students will be recreating a model of the pedestrian crossing on Unwins Bridge Road out the front of Tempe High School.
+
+## Introduction to Pi Pico & Common Mechatronic Commonents
+
+### Projects
+
+1. [Connect and control a LED](introduction_projects/1.blink_led.md)
+2. [Connect a digital sensor that controls the LEDs](introduction_projects/2.digital_sensor.md)
+3. [Connect a analog sensor that controls the LEDs](introduction_projects/3.analog_sensor.md)
+4. [Control the brightness of the LED with Pulse Width Modulation](introduction_projects/4.pulse_width_modulation.md)
+5. [Connect and control a servo motor](introduction_projects/5.servo_control.md)
+6. [Connect and read a ultrasonic sensor use it to control the servo motor](introduction_projects/6.ultrasonic_sensor.md)
+7. [Connect and control a I2C 16x2 LCD Display](introduction_projects/7.I2C_module.md)
+
+### Components
+
+- Breadboard
+- Jumper leads
+- Pi Pico
+- 1x LED
+- 1x 130Ω resistors
+- 1x Potentiometer or analog sensor
+- 1x Momentary switch or digital sensor
+- 1x Servo motor
+- 1x Ultrasonic sensor
+- 1x 2IC 16x2 LCD Display
+
+### Pin Allocation
+
+| Pin  |                        |
+| ---- | ---------------------- |
+| GP0  | SDA                    |
+| GP1  | SCL                    |
+| GP4  | Keyboard Interrupt     |
+| GP10 | Servo Motor Signal     |
+| GP11 | Ultrasonic Echo Signal |
+| GP12 | Ultrasonic Trig Signal |
+| GP13 | Digital Sensor Signal  |
+| GP15 | External LED           |
+| GP25 | Inbuilt LED            |
+| GP26 | Analog Sensor Signal   |
+| AGND | Analog Ground          |
+| GND  | Ground                 |
+| 3V3  | 3V Power               |
+| VBUS | 5V Power               |
+
+## OOP Mini Project
 
 ![A street view image of the system we will be modeling](/images/real_world_situation.png "The traffic lights, pedestrian warning lights, pedestrian button and control system.")
 
@@ -24,19 +70,19 @@ From the above real world control system we will model:
 - Encapsulation
 - Object instantiation, objects as instance variables
 
-## Wire your system
+### Wire your system
 
 ![A prototype of the model](/images/prototype_model.png "Use the below components to wire this model.")
 
 ### Components
 
 - Breadboard
-- Momentary switch
-- 5x LED
-- 1x Piezo buzzer
-- 5x 220Ω resistors
 - Jumper leads
 - Pi Pico
+- 1x Momentary switch
+- 5x LED
+- 1x Piezo buzzer
+- 5x 130Ω resistors
 
 ### Pin allocation
 
@@ -116,5 +162,5 @@ classDiagram
 | v06.py  | Implement a Event Trigger for when the button has been pressed.                                                           |
 | v07.py  | Demo code only of Multiple Inheritence.                                                                                   |
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/TempeHS/TempeHS_PI_Pico_Boilerplate">TempeHS Pi Pico Boilerplate
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/TempeHS/MicroPython_OOP_Pi_Pico_Mini_Project_Source">MicroPython_OOP_Pi_Pico_Mini_Project_Source
 </a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/benpaddlejones">Ben Jones</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
