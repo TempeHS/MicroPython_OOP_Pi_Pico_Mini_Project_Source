@@ -1,19 +1,45 @@
-import v08_Association_Examples
-import v04_Led_Light
-import v06_Audio_Notification
+"""
+Class associatiomn
+"""
 
-LED = v04_Led_Light.Led_Light(19, True)
-BUZ = v06_Audio_Notification.Audio_Notification(25, True)
+from led_light import Led_Light
+from pedestrian_button import Pedestrian_Button
+from audio_notification import Audio_Notification
 
-test = v08_Association_Examples.Walk_Light(17, 27, True)
 
-test2 = v08_Association_Examples.Walk_Light2(LED, BUZ, True)
+class Walk_Light:
+    def __init__(self, led_pin, buz_pin, debug):
+        self.LED = Led_Light(led_pin, debug)
+        self.BUZ = Audio_Notification(buz_pin, debug)
+        self.__debug = debug
 
-while True:
-    test2.walk_on()
-    test.walk_on()
-    print(1)
-    time.sleep(1)
-    test.walk_off()
-    test2.walk_off()
-    time.sleep(1)
+    def walk_on(self):
+        if self.__debug:
+            print("Beep and Light on")
+        self.LED.on()
+        self.BUZ.warning_on()
+
+    def walk_off(self):
+        if self.__debug:
+            print("Beep and Light off")
+        self.LED.off()
+        self.BUZ.warning_off()
+
+
+class Walk_Light2:
+    def __init__(self, led, buz, debug):
+        self.LED = led
+        self.BUZ = buz
+        self.__debug = debug
+
+    def walk_on(self):
+        if self.__debug:
+            print("Beep and Light on")
+        self.LED.on()
+        self.BUZ.warning_on()
+
+    def walk_off(self):
+        if self.__debug:
+            print("Beep and Light off")
+        self.LED.off()
+        self.BUZ.warning_off()

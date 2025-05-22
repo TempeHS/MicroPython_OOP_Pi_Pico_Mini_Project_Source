@@ -1,5 +1,5 @@
 from machine import Pin
-import time
+from time import sleep, time
 
 class Led_Light(Pin):
     # child class inherits the parent 'Pin' class
@@ -45,17 +45,17 @@ class Led_Light(Pin):
     def flash(self, duration=5):
         # Method to flash the LED on and off every 0.5 seconds for a given duration
         if self.__flashing:
-            end_time = time.time() + duration
-            while time.time() < end_time:
+            end_time = time() + duration
+            while time() < end_time:
                 self.toggle()
-                time.sleep(0.5)  # Delay for 0.5 seconds
+                sleep(0.5)  # Delay for 0.5 seconds
 
     def on_for(self, duration):
         # Turns the LED on for a specified duration (in seconds) and then turns it off.
         self.on()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is ON for {duration} seconds")
-        time.sleep(duration)
+        sleep(duration)
         self.off()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is OFF after {duration} seconds")

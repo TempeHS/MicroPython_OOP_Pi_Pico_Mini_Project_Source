@@ -1,19 +1,20 @@
 ''' 
 Build light class that inherits the Pin class
+Extend class to include functiuonality specific to design requirements
 Class demonstrates both method overloading and overriding in inheritance
 '''
 
 from machine import Pin
-import time
-
+from time import sleep, time
 
 class Led_Light(Pin):
     # child class inherits the parent 'Pin' class
-    def __init__(self, pin, debug=False):
+    def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
         self.led_light_state
         self.__debug = debug
         self.__pin = pin
+        self.__flashing = flashing
 
     def on(self):
         # method overiding polymorphism of the parent class
@@ -47,11 +48,29 @@ class Led_Light(Pin):
         elif value == 1:
             self.on()
 
+    def flash(self, duration=5):
+        # Method to flash the LED on and off every 0.5 seconds for a given duration
+        if self.__flashing:
+            end_time = time() + duration
+            while time() < end_time:
+                self.toggle()
+                sleep(0.5)  # Delay for 0.5 seconds
+
+    def on_for(self, duration):
+        # Turns the LED on for a specified duration (in seconds) and then turns it off.
+        self.on()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is ON for {duration} seconds")
+        sleep(duration)
+        self.off()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is OFF after {duration} seconds")
+
 
 red_light = Led_Light(3, True)
 
 while True:
     red_light.led_light_state = 1
-    time.sleep(0.5)
+    sleep(0.5)
     red_light.led_light_state = 0
-    time.sleep(0.5)
+    sleep(0.5)

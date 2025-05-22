@@ -5,10 +5,10 @@ The complexity of the implementation of the class 'Led_Light' in the module 'led
 '''
 
 from led_light import Led_Light
-import time
+from time import sleep
 
 red_light = Led_Light(3, True)
 
 while True:
     red_light.toggle()
-    time.sleep(0.5)
+    sleep(0.5)
