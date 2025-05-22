@@ -9,8 +9,9 @@ This code snippet is just to demonstrate the concept and
 syntax of multiple inheritance. 
 """
 
-import v04_Led_Light
-import v06_Audio_Notification
+from led_light import Led_Light
+from pedestrian_button import Pedestrian_Button
+from audio_notification import Audio_Notification
 
 
 class Walk_Light(Audio_Notification, Led_Light):

@@ -1,12 +1,15 @@
-import v04_Led_Light
-import v05_Pedestrian_Button
+'''
+Implement a debounced button event manager
+'''
+
+from led_light import Led_Light
+from pedestrian_button import Pedestrian_Button
 import time
 
-# Abstraction as simple interface hides (farcarde design pattern)
-# the complexity of the implementation of the class 'Led_Light' in the module 'v04_Led_Light'
+
 
 red_light = v04_Led_Light.Led_Light(3, False)
-ped_button = v05_Pedestrian_Button.Pedestrian_Button(22, True)
+ped_button = Pedestrian_Button(22, True)
 
 while True:
     time.sleep(1)

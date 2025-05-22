@@ -1,15 +1,12 @@
-import v04_Led_Light
-import v05_Pedestrian_Button
-import v06_Audio_Notification
-
+from led_light import Led_Light
+from pedestrian_button import Pedestrian_Button
+from audio_notification import Audio_Notification
 import time
 
-# Abstraction as simple interface hides (farcarde design pattern)
-# the complexity of the implementation of the class 'Led_Light' in the module 'v04_Led_Light'
 
-red_light = v04_Led_Light.Led_Light(3, False)
-ped_button = v05_Pedestrian_Button.Pedestrian_Button(22, True)
-buzzer = v06_Audio_Notification.Audio_Notification(27, True)
+red_light = Led_Light.Led_Light(3, False)
+ped_button = Pedestrian_Button(22, True)
+buzzer = Audio_Notification(27, True)
 
 while True:
     buzzer.warning_on()

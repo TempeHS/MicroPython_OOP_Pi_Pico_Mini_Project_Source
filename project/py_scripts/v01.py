@@ -1,3 +1,7 @@
+'''
+A simple blink script to unit test upload
+'''
+
 from machine import Pin
 from utime import sleep
 

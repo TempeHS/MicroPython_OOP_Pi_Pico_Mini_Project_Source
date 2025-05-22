@@ -1,3 +1,8 @@
+''' 
+Build light class that inherits the Pin class
+Class demonstrates both method overloading and overriding in inheritance
+'''
+
 from machine import Pin
 import time
 

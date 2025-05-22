@@ -95,48 +95,65 @@ From the above real world control system we will model:
 
 ```mermaid
 classDiagram
-    PIN <|-- Button : Inheritance
-    PIN <|-- Led_Light : Inheritance
-    PWM <|-- Buzzer : Inheritance
-    Led_Light <|-- Flashing_Light : Inheritance
-    Buzzer <|-- Flashing_Light : Inheritance
-    Button --* Pedestrian_Crossing : Composition
-    Led_Light --* Pedestrian_Crossing : Composition
-    Flashing_Light --* Pedestrian_Crossing : Composition
-    class PIN{
+    class Pin {
+        +value()
+        +high()
+        +low()
+    }
 
+    class PWM {
+        +freq(freq: int)
+        +duty_u16(duty: int)
     }
-    class Led_Light{
-        obj Servo
-        get_pos()
-        set_rot_cw(count)
-        set_rot_ccw(count)
+
+    class Audio_Notification {
+        -__debug: bool
+        +__init__(pin: int, debug: bool)
+        +warning_on()
+        +warning_off()
+        +beep(freq: int, duration: int)
     }
-    class Flashing_Light{
-        obj Servo
-        int start_angle
-        int min_set_angle
-        int max_set_angle
-        get_angle()
-        set_angle(angle)
+    PWM <|-- Audio_Notification : Inheritance
+
+    class Led_Light {
+        -__debug: bool
+        -__pin: int
+        -__flashing: bool
+        +__init__(pin: int, flashing: bool, debug: bool)
+        +on()
+        +off()
+        +toggle()
+        +flash(duration: int)
+        +on_for(duration: int)
+        +led_light_state: int
     }
-    class Button{
-        obj Servo
-        int open_angle
-        int closed_angle
-        bool claw_state
-        set_open()
-        set_closed()
-        get_state()
+    Pin <|-- Led_Light : Inheritance
+
+    class Pedestrian_Button {
+        -__debug: bool
+        -__pin: int
+        -__last_pressed: int
+        -pedestrian_waiting: bool
+        +__init__(pin: int, debug: bool)
+        +callback(pin: Pin)
+        +button_state: int
     }
-    class Pedestrian_Crossing{
-        obj Claw
-        obj Base
-        obj Elbow
-        obj Elbow
-        pick_cube()
-        place_cube()
+    Pin <|-- Pedestrian_Button : Inheritance
+
+    class Controller {
+        -__object: Led_Light
+        -__object: Led_Light
+        -__object: Led_Light
+        -__object: Led_Light
+        -__object: Led_Light
+        -__object: Pedestrian_Button
+        -__object: Audio_Notification
     }
+
+    Led_Light --> Controller : Composition
+    Audio_Notification --> Controller : Composition
+    Pedestrian_Button --> Controller : Composition
+
 ```
 
 > [!Note]
