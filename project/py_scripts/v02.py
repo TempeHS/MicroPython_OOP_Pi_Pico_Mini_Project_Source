@@ -18,11 +18,12 @@ led_pedestrian_green = Pin(17, Pin.OUT)
 
 pedestrian_button = Pin(22, Pin.IN, Pin.PULL_DOWN)
 
-buzzer = machine.PWM(27)
+buzzer = PWM(27)
 buzzer.freq(1000)
 
 
 while True:
+    
     buzzer.duty_u16(32768)
 
     led_car_red.high()

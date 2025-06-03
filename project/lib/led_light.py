@@ -25,9 +25,9 @@ class Led_Light(Pin):
     def toggle(self):
         # method overiding polymorphism of the parent class
         if self.value():
-            self.on()
-        else:
             self.off()
+        else:
+            self.on()
 
     @property
     def led_light_state(self):

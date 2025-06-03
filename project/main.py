@@ -1,4 +1,4 @@
-#  STUDENTS SHOULD ONLY EDIT THE FILE NAME IN LINE 7
+#  STUDENTS SHOULD ONLY EDIT THE FILE NAME IN LINE 10
 import sys
 from machine import Pin
 from time import sleep
@@ -7,7 +7,7 @@ from time import sleep
 sleep(0.1)
 
 # File name of the script to import
-file_name = "v04"
+file_name = "v02"
 
 # Add the path to the sys.path
 sys.path.append("/py_scripts")

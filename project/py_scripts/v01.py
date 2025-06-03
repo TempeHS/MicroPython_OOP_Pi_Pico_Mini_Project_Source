@@ -3,7 +3,7 @@ A simple blink script to unit test upload
 '''
 
 from machine import Pin
-from utime import sleep
+from time import sleep
 
 
 pin = Pin("LED", Pin.OUT)

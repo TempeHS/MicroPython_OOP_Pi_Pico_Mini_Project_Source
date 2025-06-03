@@ -133,10 +133,11 @@ classDiagram
         -__debug: bool
         -__pin: int
         -__last_pressed: int
-        -pedestrian_waiting: bool
+        -__pedestrian_waiting: bool
         +__init__(pin: int, debug: bool)
         +callback(pin: Pin)
-        +button_state: int
+        +button_state
+        +reset
     }
     Pin <|-- Pedestrian_Button : Inheritance
 

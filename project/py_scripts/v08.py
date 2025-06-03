@@ -1,5 +1,5 @@
 """
-Class associatiomn
+Class association
 """
 
 from led_light import Led_Light
