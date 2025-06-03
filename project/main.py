@@ -7,7 +7,7 @@ from time import sleep
 sleep(0.1)
 
 # File name of the script to import
-file_name = "v02"
+file_name = "v03"
 
 # Add the path to the sys.path
 sys.path.append("/py_scripts")

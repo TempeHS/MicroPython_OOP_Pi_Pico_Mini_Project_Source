@@ -96,12 +96,17 @@ From the above real world control system we will model:
 ```mermaid
 classDiagram
     class Pin {
+        -__pin: int
+        +__init__(pin: int)
         +value()
         +high()
         +low()
+        +toggle()
     }
 
     class PWM {
+        -__pin: int
+        +__init__(pin: int)
         +freq(freq: int)
         +duty_u16(duty: int)
     }

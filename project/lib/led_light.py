@@ -24,10 +24,10 @@ class Led_Light(Pin):
 
     def toggle(self):
         # method overiding polymorphism of the parent class
-        if self.value():
-            self.off()
-        else:
+        if self.value() == 0:
             self.on()
+        elif self.value() == 1:
+           self.off()
 
     @property
     def led_light_state(self):
@@ -37,9 +37,9 @@ class Led_Light(Pin):
     @led_light_state.setter
     def led_light_state(self, value):
         # method overloading polymorphism in this class
-        if value == 0:
+        if value == 1:
             self.off()
-        elif value == 1:
+        elif value == 0:
             self.on()
 
     def flash(self, duration=5):

@@ -1,5 +1,5 @@
 ''' 
-Build light class that inherits the Pin class
+Build basic light class that inherits the Pin class
 Extend class to include functiuonality specific to design requirements
 Class demonstrates both method overloading and overriding in inheritance
 '''
@@ -30,10 +30,10 @@ class Led_Light(Pin):
 
     def toggle(self):
         # method overiding polymorphism of the parent class
-        if self.value():
+        if self.value() == 0:
             self.on()
-        else:
-            self.off()
+        elif self.value() == 1:
+           self.off()
 
     @property
     def led_light_state(self):
@@ -43,31 +43,13 @@ class Led_Light(Pin):
     @led_light_state.setter
     def led_light_state(self, value):
         # method overloading polymorphism in this class
-        if value == 0:
+        if value == 1:
             self.off()
-        elif value == 1:
+        elif value == 0:
             self.on()
 
-    def flash(self, duration=5):
-        # Method to flash the LED on and off every 0.5 seconds for a given duration
-        if self.__flashing:
-            end_time = time() + duration
-            while time() < end_time:
-                self.toggle()
-                sleep(0.5)  # Delay for 0.5 seconds
 
-    def on_for(self, duration):
-        # Turns the LED on for a specified duration (in seconds) and then turns it off.
-        self.on()
-        if self.__debug:
-            print(f"LED connected to Pin {self.__pin} is ON for {duration} seconds")
-        sleep(duration)
-        self.off()
-        if self.__debug:
-            print(f"LED connected to Pin {self.__pin} is OFF after {duration} seconds")
-
-
-red_light = Led_Light(3, True)
+red_light = Led_Light(3, False, True)
 
 while True:
     red_light.led_light_state = 1
