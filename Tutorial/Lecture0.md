@@ -43,9 +43,9 @@ Wokwi is an online Electronics simulator. You can use it to simulate Arduino, ES
 
 Students can sign up or in with OAuth using either their School Google Account or GitHub account.
 
-[Wokwi](https://wokwi.com/)
-[Wokwi Introduction Video](https://www.youtube.com/watch?v=s4QKFw8fh-4)
-[Wokwi Pi Pico Docs](https://docs.wokwi.com/parts/wokwi-pi-pico)
+1. [Wokwi](https://wokwi.com/)
+2. [Wokwi Introduction Video](https://www.youtube.com/watch?v=s4QKFw8fh-4)
+3. [Wokwi Pi Pico Docs](https://docs.wokwi.com/parts/wokwi-pi-pico)
 
 > [!Note]
 > Students using Wokwi should start with [Template Wokwi Project](https://wokwi.com/projects/433242006092880897).
