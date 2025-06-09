@@ -112,13 +112,14 @@ In this case the Led_Light class inherits the Pin class and without any further 
 
 ```python
 from machine import Pin
+from time import sleep
 
 class Led_Light(Pin):
     # child class inherits the parent 'Pin' class
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
 
-red_light = Led_Light(3e)
+red_light = Led_Light(3)
 
 while True:
     red_light.on()
