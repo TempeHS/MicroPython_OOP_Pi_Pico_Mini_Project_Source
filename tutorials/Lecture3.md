@@ -91,9 +91,11 @@ while True:
 ## Extend the functionality of the led_light class
 
 > [!Important]
-> Make sur eyou now edit the class in the `project\lib\led_light.py` not your main python implementation.
+> Make sure you edit the class in the `project\lib\led_light.py`, not your main.py implementation.
 
 ```python
+from time import sleep, time
+
     def flash(self, duration=5):
         # Method to flash the LED on and off every 0.5 seconds for a given duration
         if self.__flashing:
@@ -104,7 +106,7 @@ while True:
                 self.toggle()
                 sleep(0.5)  # Delay for 0.5 seconds
 
-    def on_for(self, duration):
+    def on_for(self, duration=5):
         # Turns the LED on for a specified duration (in seconds) and then turns it off.
         self.on()
         if self.__debug:
