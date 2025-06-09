@@ -2,8 +2,8 @@
 
 ## Lecture 1 Concepts
 - Unit Testing
-- Parent/Child Class
 - Generalisation
+- Parent/Child Class
 - Pin & PWM Parent Classes
 - Instantiation
 - Inheritance
@@ -13,6 +13,10 @@
 Unit testing is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
 
 Unit testing is especially valuable in embedded systems, such as the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works independently, you can build more complex mechatronic solutions.
+
+## Generalisation
+
+On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
 
 ## Parent/Child Classes
 
@@ -74,10 +78,6 @@ classDiagram
     Pin <|-- Pedestrian_Button : Inheritance
 
 ```
-
-## Generalisation
-
-On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
 
 ## Pin Library
 
