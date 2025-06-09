@@ -68,6 +68,7 @@ It is called 'overriding' or also compilation polymorphism, as in many languages
 
 ```python
 from machine import Pin
+from time import sleep
 
 class Led_Light(Pin):
     # child class inherits the parent 'Pin' class
