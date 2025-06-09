@@ -13,7 +13,7 @@ The Introduction projects should be completed before starting the OOP Mini Proje
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;">
   <figure style="text-align: center;">
     <img src="../introduction_projects/images/blink_led.png" alt="Blink LED" width="200"/>
-    <figcaption>Blink LED</figcaption>
+    <figcaption style="display:block">Blink LED</figcaption>
   </figure>
   <figure style="text-align: center;">
     <img src="../introduction_projects/images/digital_sensor.png" alt="Digital Sensor" width="200"/>
