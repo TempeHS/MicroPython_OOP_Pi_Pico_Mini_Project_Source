@@ -10,7 +10,23 @@ class Pedestrian_Button(Pin):
         self.__pin = pin
         self.__last_pressed = 0  # Track the last time the button was pressed
         self.__pedestrian_waiting = False
+        self.button_state
         self.irq(trigger=Pin.IRQ_RISING, handler=self.callback) # Set up interrupt on rising edge
+
+    @property
+    def button_state(self):
+        state = self.value()  # Directly read the pin's value
+        if self.__debug:
+            print(f"Button connected to Pin {self.__pin} is {'PRESSED' if state else 'NOT PRESSED'}")
+        self.__pedestrian_waiting = state
+        return state
+
+    @button_state.setter
+    def button_state(self, value):
+        self.__pedestrian_waiting = value
+        if self.__debug:
+            print(f"Button state on Pin {self.__pin} set to {value}")
+
 
     def callback(self, pin):
         current_time = time.ticks_ms()  # Get the current time in milliseconds
@@ -19,16 +35,3 @@ class Pedestrian_Button(Pin):
             self.__pedestrian_waiting = True
             if self.__debug:
                 print(f"Button pressed on Pin {self.__pin} at {current_time}ms")
-
-    @property
-    def button_state(self):
-        self.__pedestrian_waiting = self.value()
-        if self.__debug:
-            print(f"Button connected to Pin {self.__pin} is {self.__button_state}")
-        return self.__pedestrian_waiting
-
-    @property
-    def reset(self):
-        self.__pedestrian_waiting = False
-        if self.__debug:
-            print(f"Button pressed on Pin {self.__pin} at {current_time}ms")

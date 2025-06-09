@@ -1,0 +1,18 @@
+Video 1
+
+1. Show hardware
+2. Demo unit testing on VSCode and Wokwiki
+3. Show Pin Library (init, on, off, high low, value, toggle)
+4. Show PWM Library (init, duty)
+5. Explain parent/super child/sub class relationship
+6. Demo instantiation
+7. Demonstrate Inheritence
+8. Demo Inheritence
+9. Explain Generalisation in OOP
+
+Video 2
+1. Introduce UML
+2. Demo Inheritence
+3. Explain DRY
+
+Video 3

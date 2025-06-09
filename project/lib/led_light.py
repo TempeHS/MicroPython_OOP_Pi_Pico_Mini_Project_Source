@@ -45,6 +45,8 @@ class Led_Light(Pin):
     def flash(self, duration=5):
         # Method to flash the LED on and off every 0.5 seconds for a given duration
         if self.__flashing:
+            if self.__debug:
+                print(f"LED connected to Pin {self.__pin} is flashing for {duration} seconds")
             end_time = time() + duration
             while time() < end_time:
                 self.toggle()

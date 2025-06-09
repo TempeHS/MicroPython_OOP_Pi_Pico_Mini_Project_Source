@@ -12,5 +12,5 @@ red_light = Led_Light(3, False)
 ped_button = Pedestrian_Button(22, True)
 
 while True:
-    sleep(1)
     red_light.led_light_state = ped_button.button_state
+    sleep(0.5)
