@@ -10,32 +10,11 @@
 
 The Introduction projects should be completed before starting the OOP Mini Project. Ultimately, students should have a basic understanding of the following concepts: different sensors and actuators, wiring a breadboard, Unit Testing, and debugging software and hardware.
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;">
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/blink_led.png" alt="Blink LED" width="200"/>
-    <figcaption style="display:block">Blink LED</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/digital_sensor.png" alt="Digital Sensor" width="200"/>
-    <figcaption>Digital Sensor</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/analog_sensor.png" alt="Analog Sensor" width="200"/>
-    <figcaption>Analog Sensor</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/servo_control.png" alt="Servo Control" width="200"/>
-    <figcaption>Servo Control</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/ultrasonic_sensor.png" alt="Ultrasonic Sensor" width="200"/>
-    <figcaption>Ultrasonic Sensor</figcaption>
-  </figure>
-  <figure style="text-align: center;">
-    <img src="../introduction_projects/images/I2C_module.png" alt="I2C Module" width="200"/>
-    <figcaption>I2C Module</figcaption>
-  </figure>
-</div>
+| | |
+| --- | --- |
+| ![Blink LED](../introduction_projects/images/blink_led.png)<br/>Blink LED | ![Digital Sensor](../introduction_projects/images/digital_sensor.png)<br/>Digital Sensor |
+| ![Analog Sensor](../introduction_projects/images/analog_sensor.png)<br/>Analog Sensor | ![Servo Control](../introduction_projects/images/servo_control.png)<br/>Servo Control |
+| ![Ultrasonic Sensor](../introduction_projects/images/ultrasonic_sensor.png)<br/>Ultrasonic Sensor | ![I2C Module](../introduction_projects/images/I2C_module.png)<br/>I2C Module |
 
 ## Wokwi
 
