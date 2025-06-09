@@ -1,6 +1,7 @@
 from machine import Pin
 from time import sleep, time
 
+
 class Led_Light(Pin):
     # child class inherits the parent 'Pin' class
     def __init__(self, pin, flashing=False, debug=False):
@@ -9,6 +10,7 @@ class Led_Light(Pin):
         self.__debug = debug
         self.__pin = pin
         self.__flashing = flashing
+        self._last_toggle_time = time()
 
     def on(self):
         # method overiding polymorphism of the parent class
@@ -27,7 +29,7 @@ class Led_Light(Pin):
         if self.value() == 0:
             self.on()
         elif self.value() == 1:
-           self.off()
+            self.off()
 
     @property
     def led_light_state(self):
@@ -42,22 +44,9 @@ class Led_Light(Pin):
         elif value == 0:
             self.on()
 
-    def flash(self, duration=5):
-        # Method to flash the LED on and off every 0.5 seconds for a given duration
-        if self.__flashing:
-            if self.__debug:
-                print(f"LED connected to Pin {self.__pin} is flashing for {duration} seconds")
-            end_time = time() + duration
-            while time() < end_time:
-                self.toggle()
-                sleep(0.5)  # Delay for 0.5 seconds
-
-    def on_for(self, duration):
-        # Turns the LED on for a specified duration (in seconds) and then turns it off.
-        self.on()
-        if self.__debug:
-            print(f"LED connected to Pin {self.__pin} is ON for {duration} seconds")
-        sleep(duration)
-        self.off()
-        if self.__debug:
-            print(f"LED connected to Pin {self.__pin} is OFF after {duration} seconds")
+    def flash(self):
+        # Non-blocking flash: toggles LED every 0.5s for the given duration
+        now = time()
+        if self.__flashing and now - self._last_toggle_time >= 0.5:
+            self.toggle()
+            self._last_toggle_time = now

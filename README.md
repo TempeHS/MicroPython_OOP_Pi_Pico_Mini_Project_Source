@@ -55,15 +55,9 @@ Students will be recreating a model of the pedestrian crossing on Unwins Bridge 
 
 ![A street view image of the system we will be modeling](/images/real_world_situation.png "The traffic lights, pedestrian warning lights, pedestrian button and control system.")
 
-From the above real world control system we will model:
+### Final Product
 
-- Overloading and overriding polymorphism
-- Inheritance, multilevel inheritance and multiple class inheritance
-- Abstraction
-- Decomposition and composition
-- Generalisation
-- Encapsulation
-- Object instantiation, objects as instance variables
+![Video of Final Project in Operations](/images/demonstration.gif)
 
 ### Wire your system
 

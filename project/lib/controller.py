@@ -1,99 +1,3 @@
-# Lecture 5
-
-## Lecture 5 concepts
-
-- State Machine
-
-## State Machine
-
-A state machine (also known as a finite state machine or FSM) is a computational model used to design and describe systems that can be in one of a finite number of states at any given time. It transitions between these states in response to external inputs or events such as time, button presses of sensor values.
-
-Key concepts:
-
-- States: Distinct modes or conditions in which the system can exist.
-- Transitions: Rules that define how and when the system moves from one state to another, often triggered by events or inputs.
-- Events/Inputs: External actions or signals that cause state transitions.
-
-## Implement a State Machine
-
-## Usage: Controller Class (State Machine Example)
-
-The `Controller` class manages the state machine for a pedestrian crossing system, coordinating LEDs, buzzer, and button input. It handles the sequence of traffic and pedestrian signals based on button presses and timing.
-
-### Constructor
-
-```python
-Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug
-)
-```
-- `ped_red`, `ped_green`, `car_red`, `car_amber`, `car_green`: Instances of `Led_Light` for each light.
-- `button`: An instance of `Pedestrian_Button`.
-- `buzzer`: An instance of `Audio_Notification`.
-- `debug`: Set to `True` to enable debug print statements.
-
-### Example Usage
-
-```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
-from controller import Controller
-from time import sleep
-
-# Instantiate hardware objects
-ped_red = Led_Light(19)
-ped_green = Led_Light(17, flashing=True)
-car_red = Led_Light(3)
-car_amber = Led_Light(5)
-car_green = Led_Light(6)
-button = Pedestrian_Button(22)
-buzzer = Audio_Notification(27)
-
-# Create the controller
-controller = Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug=True
-)
-
-# Main loop
-while True:
-    controller.update()
-    sleep(0.1)
-```
-
-### Methods
-
-- **walk_on()**  
-  Activates the pedestrian walk signal, turns on the green pedestrian LED, and sounds the buzzer.
-
-- **walk_warning()**  
-  Activates the warning state (flashing red pedestrian LED, buzzer off).
-
-- **walk_off()**  
-  Deactivates the pedestrian walk signal, turns on the red pedestrian LED, and turns off the buzzer.
-
-- **change()**  
-  Changes the traffic lights to amber for cars, preparing for pedestrian crossing.
-
-- **update()**  
-  Runs the state machine. Call this method repeatedly (e.g., in a loop) to process button presses and manage signal timing.
-
-### State Machine Overview
-
-- **IDLE**: Waiting for a pedestrian button press.
-- **CAR_AMBER**: Amber light for cars, preparing to stop traffic.
-- **WALK_ON**: Pedestrian walk signal active, buzzer sounds.
-- **WALK_WARNING**: Pedestrian warning state (flashing red, buzzer off).
-- **Transitions**: Each state transitions automatically after a set time or event.
-
----
-
-**Note:**  
-- The controller expects the hardware classes (`Led_Light`, `Pedestrian_Button`, `Audio_Notification`) to be implemented and working.
-- The button's `button_state` property is set by the button's interrupt handler when pressed.
-- Timing and state transitions are handled automatically by the `update()` method.
-
-```python
 from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification
@@ -134,7 +38,7 @@ class Controller:
         self.__Car_Amber.off()
         self.__Car_Red.on()
         self.__Buzzer.warning_off()
-        
+
     def walk_off(self):
         if self.__debug:
             print("No Walking")
@@ -204,4 +108,3 @@ class Controller:
             self.__Car_Red.off()
             self.__Ped_Green.off()
             sleep(1)
-```

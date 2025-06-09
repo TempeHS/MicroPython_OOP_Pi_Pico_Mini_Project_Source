@@ -16,6 +16,10 @@ The Introduction projects should be completed before starting the OOP Mini Proje
 | ![Analog Sensor](../introduction_projects/images/analog_sensor.png)<br/>Analog Sensor | ![Servo Control](../introduction_projects/images/servo_control.png)<br/>Servo Control |
 | ![Ultrasonic Sensor](../introduction_projects/images/ultrasonic_sensor.png)<br/>Ultrasonic Sensor | ![I2C Module](../introduction_projects/images/I2C_module.png)<br/>I2C Module |
 
+## Final Product
+
+![Video of Final Project in Operations](/images/demonstration.gif)
+
 ## Wokwi
 
 Wokwi is an online Electronics simulator. You can use it to simulate Arduino, ESP32, STM32, and many other popular boards, parts and sensors. We will be using it for Pi Pico, you can also use the integrated IDE.
@@ -47,7 +51,7 @@ Watch the [Pi Pico Breadboard Introduction Video](https://www.youtube.com/watch?
 
 ### Physical Prototype
 
-![Physical Prototype](/images/prototype_model.png)
+![Physical Prototype](/images/physical_prototype.png)
 
 ### Physical Unit Testing
 
