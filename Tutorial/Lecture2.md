@@ -1,14 +1,14 @@
 # Lecture 2
 
 ## Lecture 2 Concepts
-- UML (Unified Modeling Language)
+- UML (Unified Modelling Language)
 - Overriding Polymorphism
 - Overloading Polymorphism
 
 ## UML Class Diagrams
 
 What is a UML Class Diagram?
-A UML (Unified Modeling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
+A UML (Unified Modelling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
 
 ```txt
 ---------------------
@@ -55,7 +55,7 @@ Explanation:
 2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
 3. Methods/Operations (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
 Each method is shown with its visibility, name, parameters, and return type.
-4. Connections (lines and arrows): These lines and arrows show relationships (like inheritance, association, aggregation, composition) between class boxes.
+4. Connections (lines and arrows): These lines and arrows represent relationships (such as inheritance, association, aggregation, and composition) between class boxes.
 
 ## Overriding Polymorphism
 
@@ -64,7 +64,7 @@ Overriding is when a child (subclass) provides a new implementation for a method
 
 The child class method has the same name and parameters as the method in the parent class. When you call the method on a child class object, Python (or any OOP language) uses the child’s version—even if the object is referenced by the parent type.
 
-It is called 'overriding' or also compilation polymorphism as in many langauges like C++ or C# the overridden (parent method) is not compiled at all.
+It is called 'overriding' or also compilation polymorphism, as in many languages like C++ or C#, the overridden (parent method) is not compiled at all.
 
 ```python
 from machine import Pin
@@ -78,19 +78,19 @@ class Led_Light(Pin):
         self.__flashing = flashing
 
     def on(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         self.high()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is high")
 
     def off(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         self.low()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is low")
 
     def toggle(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         if self.value() == 0:
             self.on()
         elif self.value() == 1:
@@ -110,13 +110,13 @@ while True:
 
 **Polymorphism means “many forms.”**
 
-Overloading is when a child (subclass) and or parent (superclass) has multiple methods with the same name but different parameters (number or type).
+Overloading occurs when a child (subclass) and/or parent (superclass) have multiple methods with the same name but different parameters (number or type).
 
-When you call the method depending on the parameters passed the coresponding method is executed.
+When you call the method, depending on the parameters passed, the corresponding method is executed.
 
-It is called 'overloading' or also runtime polymorphism as in many langauges like C++ or C# all the methods are compiled but depending on the parameters the appropriate method is executed at runtime. 
+It is called 'overloading' or also known as runtime polymorphism, as in many languages like C++ or C#, all the methods are compiled. However, depending on the parameters, the appropriate method is executed at runtime. 
 
-Becuase Python is dynamically typed it does not allow Overloaded Polymorphism as the last definition of a method overwrites any previous ones.
+Because Python is dynamically typed, it does not support overloaded polymorphism, as the last definition of a method overwrites any previous ones.
 
 ```pseudocode
 Class Led_Light inherits from Pin:
@@ -154,7 +154,7 @@ Class Led_Light inherits from Pin:
 ```
 
 > [!Note]
-> The Following Implementation is not techncially Polymorphism it is just demonstration
+> The Following Implementation is not technically Polymorphism; it is just a demonstration of the idea that the same method can be called with different parameters.
 
 ```python
 from machine import Pin
@@ -170,19 +170,19 @@ class Led_Light(Pin):
         self.__flashing = flashing
 
     def on(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         self.high()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is {self.led_light_state}")
 
     def off(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         self.low()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is {self.led_light_state}")
 
     def toggle(self):
-        # method overiding polymorphism of the parent class
+        # method overriding polymorphism of the parent class
         if self.value() == 0:
             self.on()
         elif self.value() == 1:
@@ -212,4 +212,3 @@ while True:
     red_light.led_light_state = 0
     sleep(0.25)
 ```
-
