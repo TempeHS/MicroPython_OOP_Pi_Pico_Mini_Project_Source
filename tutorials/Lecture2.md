@@ -117,6 +117,53 @@ The DRY pattern stands for "**Don't Repeat Yourself**"; it is a fundamental prin
 - Readability: The code is easier to read and understand because there is less repetition.
 - Consistency: Reduces the risk of inconsistencies and errors that can occur when updating duplicated code in multiple places.
 
+```python
+##### WET #####
+    def on(self):
+        # method overriding polymorphism of the parent class
+        self.high()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is high")
+
+    def off(self):
+        # method overriding polymorphism of the parent class
+        self.low()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is low")
+
+    def toggle(self):
+        # method overriding polymorphism of the parent class
+        if self.value() == 0:
+            self.high()
+            if self.__debug:
+                print(f"LED connected to Pin {self.__pin} is high")
+        elif self.value() == 1:
+           self.low()
+            if self.__debug:
+                print(f"LED connected to Pin {self.__pin} is low")
+
+##### DRY #####
+    def on(self):
+        # method overriding polymorphism of the parent class
+        self.high()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is high")
+
+    def off(self):
+        # method overriding polymorphism of the parent class
+        self.low()
+        if self.__debug:
+            print(f"LED connected to Pin {self.__pin} is low")
+
+    def toggle(self):
+        # method overriding polymorphism of the parent class
+        if self.value() == 0:
+            self.on()
+        elif self.value() == 1:
+           self.off()
+
+```
+
 ## Overloading Polymorphism
 
 **Polymorphism means “many forms.”**
