@@ -60,6 +60,7 @@ Each method is shown with its visibility, name, parameters, and return type.
 ## Overriding Polymorphism
 
 **Polymorphism means “many forms.”**
+
 Overriding is when a child (subclass) provides a new implementation for a method that it inherits from its parent (superclass).
 
 The child class method has the same name and parameters as the method in the parent class. When you call the method on a child class object, Python (or any OOP language) uses the child’s version—even if the object is referenced by the parent type.
@@ -106,6 +107,14 @@ while True:
     red_light.off()
     sleep(1)
 ```
+
+## DRY
+The DRY pattern stands for "**Don't Repeat Yourself**"; it is a fundamental principle of programming aimed at reducing repetition of code and logic. This is to avoid duplicating code, logic, or data.
+
+### Why Use DRY?
+- Maintainability: When logic is defined in only one place, updates or bug fixes are only needed once.
+- Readability: The code is easier to read and understand because there is less repetition.
+- Consistency: Reduces the risk of inconsistencies and errors that can occur when updating duplicated code in multiple places.
 
 ## Overloading Polymorphism
 
