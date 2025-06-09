@@ -10,14 +10,26 @@
 What is a UML Class Diagram?
 A UML (Unified Modeling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
 
+```txt
+---------------------
+|     Student       |   <-- Class Name
+---------------------
+| -name: String     |   <-- Attributes
+| -age: int         |
+---------------------
+| +getName(): String|   <-- Methods
+| +setAge(int): void|
+---------------------
+```
+
 Mermaid Markdown UML Class Diagram Example
 Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom Led_Light class that inherits from it.
 
-
 ```mermaid
 classDiagram
+
     class Pin {
-        -__pin: int
+        -pin: int
         +__init__(pin: int)
         +value()
         +high()
@@ -26,26 +38,24 @@ classDiagram
     }
 
     class Led_Light {
-        -__debug: bool
-        -__pin: int
-        -__flashing: bool
+        -debug: bool
+        -pin: int
+        -flashing: bool
         +__init__(pin: int, flashing: bool, debug: bool)
         +on()
         +off()
         +toggle()
     }
-    Pin <|-- Led_Light : Inheritance
+    Pin <|-- Led_Light : inherits
 ```
-Explanation:
-- Pin class: Represents a generic GPIO pin on the Pi Pico.
-- Attributes: id (pin number), mode (input/output).
-- Methods: high(), low(), value().
-- Led_Light class: Inherits from Pin and adds:
-- Attributes: __debug, __pin, __flashing
-- Methods: on(), off(), toggle()
-- Inheritance: The arrow (<|--) shows that Led_Light is a subclass of Pin.
 
-UML class diagrams help visualize the design and relationships of classes. Mermaid markdown provides a simple way to draw these diagrams in Markdown. Using Pi Pico’s Pin and custom Led_Light classes makes the diagram relevant to embedded hardware programming.
+Explanation:
+
+1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, Car).
+2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
+3. Methods/Operations (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
+Each method is shown with its visibility, name, parameters, and return type.
+4. Connections (lines and arrows): These lines and arrows show relationships (like inheritance, association, aggregation, composition) between class boxes.
 
 ## Overriding Polymorphism
 
@@ -96,7 +106,7 @@ while True:
     sleep(1)
 ```
 
-## Overloaded Polymorphism
+## Overloading Polymorphism
 
 **Polymorphism means “many forms.”**
 

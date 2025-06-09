@@ -1,5 +1,5 @@
-# Lecture 2
+# Lecture 4
 
-## Lecture 2 Concepts
-- Abstraction
-- Extend the LED class
+## Lecture 4 Concepts
+- Implement a debounced button
+- Implement a audio notification

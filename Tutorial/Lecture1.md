@@ -24,8 +24,6 @@ Unit testing, is the process of writing and running small, isolated tests that c
 
 Unit testing is especially valuable in embedded systems like the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works in isolation, you can build more mechatronic soltution.
 
-Once you have constructed your traffic light system, unit tets teh hardware with the v02.py script.
-
 ## Parent Child Classes
 
 A parent/child (or super/sub) class relationship is a key concept in object-oriented programming (OOP), also known as inheritance. The parent class defines common attributes and methods.
@@ -139,4 +137,4 @@ while True:
 
 ## Generalisation
 
-On the Pi Pico, the Pin and PWM libraries are designed to be generalized to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()` `off()` or `high()` `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inhreitated and teh classes are extended they become more specific (less generalised) and functional to specific hardware for which they are designed.
+On the Pi Pico, the Pin and PWM libraries are designed to be generalized to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inhreitated and teh classes are extended they become more specific (less generalised) and functional to specific hardware for which they are designed.
