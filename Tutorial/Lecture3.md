@@ -7,13 +7,13 @@
 - Extend LED functionality
 
 ## Encapsulation
-Encapsulation restricts direct access to some of an object's components (attributes or methods), which means that the internal representation of an object is hidden from the outside. This is usually achieved by making some attributes or methods private (not accessible from outside the class), and providing public methods (getters and setters) to access or modify those private members.
+Encapsulation restricts direct access to some of an object's components (attributes or methods), which means that the internal representation of an object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., not accessible from outside the class) and providing public methods (such as getters and setters) to access or modify those private members.
 
 ### Benefits of Encapsulation:
 
 - Data Hiding: Internal object details are hidden, exposing only what is necessary.
 - Improved Security: Prevents external code from directly modifying internal state in unexpected ways.
-- Modularity: Each object manages its own state and behavior, making code more modular and easier to maintain.
+- Modularity: Each object manages its own state and behaviour, making code more modular and easier to maintain.
 - Flexibility: Implementation can change without affecting code that uses the object, as long as the public interface remains the same.
 
 ```python
@@ -32,12 +32,12 @@ Setters and getters are special methods used in object-oriented programming to a
 ### Getter
 
 - A getter is a method that retrieves (gets) the value of a private attribute.
-- It lets you read the value without allowing direct access to the underlying variable.
+- It allows you to read the value without providing direct access to the underlying variable.
 
 ### Setter
 
 - A setter is a method that sets (updates) the value of a private attribute.
-- It lets you validate or restrict changes before updating the attribute.
+- It allows you to validate or restrict changes before updating the attribute.
 
 ### Why Use Setters & Getters
 - Encapsulation: Protects the internal state of the object.
@@ -46,17 +46,17 @@ Setters and getters are special methods used in object-oriented programming to a
 
 ## Abstraction
 
-Abstraction in Object-Oriented Programming (OOP) is a principle that focuses on exposing only the essential features of an object while hiding the unnecessary details. The main idea is to provide a simplified, high-level interface to interact with complex systems, making your code easier to use and understand.
+Abstraction in Object-Oriented Programming (OOP) is a principle that focuses on exposing only the essential features of an object while hiding the unnecessary details. The primary goal is to offer a simplified, high-level interface for interacting with complex systems, thereby making your code easier to use and understand.
 
 ### Benefits of Abstraction
 
 - What vs. How: Abstraction tells you what an object does, not how it does it.
 - Simplification: It reduces complexity by hiding implementation details.
-- Interface: Abstraction is often achieved by hiding the complex impelmentation and provdijng on the interface methods or attributes.
+- Interface: Abstraction is often achieved by hiding the complex implementation and providing only the interface methods or attributes.
 
-1. Create a bank python file in `project\lib` called `led_light.py`
+1. Create a bank Python file in `project\lib` called `led_light.py`
 2. Copy the Class only to `project\lib\led_light.py`
-3. Update your Python implementaion so you import the abstracted class and can directly call the class, class attributres and class methdods.
+3. Update your Python implementation so that you can import the abstracted class and directly call its class attributes and methods.
 
 ```Python
 from led_light import Led_Light
