@@ -1,24 +1,12 @@
 # Lecture 1
 
 ## Lecture 1 Concepts
-- Pin & PWM Parent Classes
 - Unit Testing
 - Parent/Child Class
+- Generalisation
+- Pin & PWM Parent Classes
 - Instantiation
 - Inheritance
-- Generalisation
-
-## Pin Library
-
-[Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.Pin.html)
-
-The Pin library in MicroPython for the Pi Pico allows you to control the General Purpose Input/Output (GPIO) pins of the Pico. It allows you to configure pins as digital (binary) inputs or outputs.
-
-## PWM Library
-
-[Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.PWM.html)
-
-The PWM Library provides an interface for controlling PWM signals on a specified GPIO pin. It allows you to configure any GPIO pin as a PWM and set the duty cycle and frequency.
 
 ## Unit Testing
 
@@ -37,6 +25,8 @@ classDiagram
         -__pin: int
         +__init__(pin: int)
         +value()
+        +high()
+        +low()
         +high()
         +low()
         +toggle()
@@ -65,10 +55,9 @@ classDiagram
         +__init__(pin: int, flashing: bool, debug: bool)
         +on()
         +off()
+        +high()
+        +Low
         +toggle()
-        +flash(duration: int)
-        +on_for(duration: int)
-        +led_light_state: int
     }
     Pin <|-- Led_Light : Inheritance
 
@@ -85,6 +74,22 @@ classDiagram
     Pin <|-- Pedestrian_Button : Inheritance
 
 ```
+
+## Generalisation
+
+On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
+
+## Pin Library
+
+[Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.Pin.html)
+
+The Pin library in MicroPython for the Pi Pico allows you to control the General Purpose Input/Output (GPIO) pins of the Pico. It allows you to configure pins as digital (binary) inputs or outputs.
+
+## PWM Library
+
+[Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.PWM.html)
+
+The PWM Library provides an interface for controlling PWM signals on a specified GPIO pin. It allows you to configure any GPIO pin as a PWM and set the duty cycle and frequency.
 
 ## Instantiation
 
@@ -137,7 +142,3 @@ while True:
     red_light.toggle()
     sleep(4)
 ```
-
-## Generalisation
-
-On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
