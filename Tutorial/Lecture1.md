@@ -16,13 +16,13 @@ The Pin library in MicroPython for the Pi Pico allows you to control the General
 
 [Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.PWM.html)
 
-The PWM Library provides an interface for controlling PWM signals on a specified GPIO pin. It allows you to configrure any GPIO pin as a PWM and set the duty cycle and frequency.
+The PWM Library provides an interface for controlling PWM signals on a specified GPIO pin. It allows you to configure any GPIO pin as a PWM and set the duty cycle and frequency.
 
 ## Unit Testing
 
-Unit testing, is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
+Unit testing is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
 
-Unit testing is especially valuable in embedded systems like the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works in isolation, you can build more mechatronic soltution.
+Unit testing is especially valuable in embedded systems, such as the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works independently, you can build more complex mechatronic solutions.
 
 ## Parent Child Classes
 
@@ -105,7 +105,7 @@ while(True):
 
 ## Inheritence
 
-Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to acquire properties and behaviors (methods and attributes) from another class (called a parent or superclass).
+Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to acquire properties and behaviours (methods and attributes) from another class (called a parent or superclass).
 
 In this case the Led_Light class inherits the Pin class and without any further instrcutions the sub class inherits and can call all the mthods of the super class including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
 
@@ -137,4 +137,4 @@ while True:
 
 ## Generalisation
 
-On the Pi Pico, the Pin and PWM libraries are designed to be generalized to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inhreitated and teh classes are extended they become more specific (less generalised) and functional to specific hardware for which they are designed.
+On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
