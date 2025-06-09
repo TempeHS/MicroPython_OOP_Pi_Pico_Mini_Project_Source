@@ -39,6 +39,21 @@ Setters and getters are special methods used in object-oriented programming to a
 - A setter is a method that sets (updates) the value of a private attribute.
 - It allows you to validate or restrict changes before updating the attribute.
 
+```python
+    @property
+    def led_light_state(self):
+        # method overloading polymorphism in this class
+        return self.value()
+
+    @led_light_state.setter
+    def led_light_state(self, value):
+        # method overloading polymorphism in this class
+        if value == 1:
+            self.off()
+        elif value == 0:
+            self.on()
+```
+
 ### Why Use Setters & Getters
 - Encapsulation: Protects the internal state of the object.
 - Validation: Allows you to add checks before changing values.
