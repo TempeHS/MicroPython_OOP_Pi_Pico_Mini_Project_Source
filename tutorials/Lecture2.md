@@ -3,6 +3,7 @@
 ## Lecture 2 Concepts
 - UML (Unified Modelling Language)
 - Overriding Polymorphism
+- DRY
 - Overloading Polymorphism
 
 ## UML Class Diagrams
