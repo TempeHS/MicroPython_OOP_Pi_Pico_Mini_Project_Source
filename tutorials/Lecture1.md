@@ -1,9 +1,11 @@
 # Lecture 1
 
 ## Lecture 1 Concepts
-- Pin & PWM
+- Pin & PWM Parent Classes
 - Unit Testing
-- Parent Class
+- Parent/Child Class
+- Instantiation
+- Inheritance
 - Generalisation
 
 ## Pin Library
@@ -24,7 +26,7 @@ Unit testing is the process of writing and running small, isolated tests that ch
 
 Unit testing is especially valuable in embedded systems, such as the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works independently, you can build more complex mechatronic solutions.
 
-## Parent Child Classes
+## Parent/Child Classes
 
 A parent/child (or super/sub) class relationship is a key concept in object-oriented programming (OOP), also known as inheritance. The parent class defines common attributes and methods.
 It acts as a template for other classes.
@@ -103,7 +105,7 @@ while(True):
     sleep(1)
 ```
 
-## Inheritence
+## Inheritance
 
 Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to acquire properties and behaviours (methods and attributes) from another class (called a parent or superclass).
 
