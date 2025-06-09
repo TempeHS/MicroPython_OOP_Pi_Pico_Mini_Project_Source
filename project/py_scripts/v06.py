@@ -1,5 +1,5 @@
 """
-Lecture 2 - Overriding Polymorphism
+Lecture 2 - Polymorphism WET v DRY
 """
 
 from machine import Pin

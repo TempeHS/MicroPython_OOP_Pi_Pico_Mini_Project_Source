@@ -152,7 +152,7 @@ led.led_light_state = 1  # Turns LED OFF
 # Non-blocking flash: call repeatedly in your main loop
 while True:
     led.flash()  # Will toggle every 0.5s if flashing is enabled
-    sleep(0.05)
+    sleep(0.1)
 ```
 
 ### Methods and Properties
