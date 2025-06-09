@@ -119,31 +119,10 @@ classDiagram
     Audio_Notification  --> Controller: Association
 ```
 
-```python
-# Alternative association method
-class Walk_Light:
-    def __init__(self, led_pin, buz_pin, debug):
-        self.LED = Led_Light(led_pin, debug)
-        self.BUZ = Audio_Notification(buz_pin, debug)
-        self.__debug = debug
-
-    def walk_on(self):
-        if self.__debug:
-            print("Beep and Light on")
-        self.LED.on()
-        self.BUZ.warning_on()
-
-    def walk_off(self):
-        if self.__debug:
-            print("Beep and Light off")
-        self.LED.off()
-        self.BUZ.warning_off()
-```
-
-### Setup differnet states of the controller
+### Setup differnet states of the controller using association
 
 ```python
-    from led_light import Led_Light
+from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification
 from time import sleep, time
@@ -203,4 +182,25 @@ class Controller:
         self.__Car_Red.off()
         self.__Ped_Green.off()
         self.__Buzzer.warning_off()
+```
+
+```python
+# Alternative association method
+class Walk_Light:
+    def __init__(self, led_pin, buz_pin, debug):
+        self.LED = Led_Light(led_pin, debug)
+        self.BUZ = Audio_Notification(buz_pin, debug)
+        self.__debug = debug
+
+    def walk_on(self):
+        if self.__debug:
+            print("Beep and Light on")
+        self.LED.on()
+        self.BUZ.warning_on()
+
+    def walk_off(self):
+        if self.__debug:
+            print("Beep and Light off")
+        self.LED.off()
+        self.BUZ.warning_off()
 ```

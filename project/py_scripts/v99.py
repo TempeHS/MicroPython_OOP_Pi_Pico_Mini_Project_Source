@@ -1,3 +1,7 @@
+"""
+Lecture 6 - Completed system with state machine
+"""
+
 from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification

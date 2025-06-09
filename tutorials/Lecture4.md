@@ -24,7 +24,7 @@ from pedestrian_button import Pedestrian_Button
 import time
 
 # Create a Pedestrian_Button on GPIO pin 14 with debug enabled
-button = Pedestrian_Button(14, debug=True)
+button = Pedestrian_Button(22, debug=True)
 
 while True:
     # Check if the button has been pressed (pedestrian waiting)
@@ -115,7 +115,7 @@ from audio_notification import Audio_Notification
 import time
 
 # Create an Audio_Notification on GPIO pin 15 with debug enabled
-buzzer = Audio_Notification(15, debug=True)
+buzzer = Audio_Notification(27, debug=True)
 
 # Sound a warning beep (non-blocking, call repeatedly in your loop)
 buzzer.warning_on()
