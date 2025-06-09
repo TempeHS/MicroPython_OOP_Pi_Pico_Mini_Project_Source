@@ -10,16 +10,16 @@
 What is a UML Class Diagram?
 A UML (Unified Modelling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
 
-```text
----------------------
-|     Student       |   <-- Class Name
----------------------
-| -name: String     |   <-- Attributes
-| -age: int         |
----------------------
-| +getName(): String|   <-- Methods
-| +setAge(int): void|
----------------------
+```txt
+----------------------
+|     Student        |   <-- Class Name
+----------------------
+| -name: String      |   <-- Attributes
+| -age: int          |
+----------------------
+| +getName(): String |   <-- Methods
+| +setAge(int): void |
+----------------------
 ```
 
 Mermaid Markdown UML Class Diagram Example
