@@ -20,7 +20,7 @@ Encapsulation restricts direct access to some of an object's components (attribu
 while True:
     print(red_light.led_light_state) # Allowed
     red_light.led_light_state = 1 # Allowed
-    print(red_light.__pin) # Not allowed, raises AttributeError
+    print(f"Not allowed: {red_light.__pin} ???") # Not allowed, should raise AttributeError
 ```
 > [!Note]
 > In Python, identifiers (variable or method names) that start with double underscores (e.g., `__my_var`) are not truly private in the sense of other languages like C# or C++. Instead, Python uses a mechanism called name mangling. When you define a variable with double underscores, Python changes its name internally to `_ClassName__my_var`. This means it is harder (but not impossible) to access it from outside the class.
