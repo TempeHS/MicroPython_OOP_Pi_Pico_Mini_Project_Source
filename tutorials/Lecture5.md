@@ -9,6 +9,27 @@
 ## Multiple Inheritance
 Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware classes in MicroPython.
 
+```mermaid
+classDiagram
+    class A {
+        +methodA()
+    }
+    class B {
+        +methodB()
+    }
+    class C {
+        +methodC()
+    }
+    class D {
+        +methodD()
+    }
+
+    A <|-- C : Inheritance
+    B <|-- C : Inheritance
+    B <|-- D : Inheritance
+    C <|-- D : Inheritance
+```
+
 This code snippet is just to demonstrate the concept and syntax of multiple inheritance. 
 
 ```python
@@ -120,6 +141,10 @@ classDiagram
 ```
 
 ### Setup differnet states of the controller using association
+
+In the context of a microcontroller, state refers to the current values or conditions of the system’s internal variables, inputs, outputs, and memory at a specific moment in time. State is crucial for determining how the microcontroller should behave next.
+
+For example, in a simple traffic light controller, one of the states could be `Traffic_Go` in which the green lights are `on()` while both the red and amber lights are `off()`.
 
 ```python
 from led_light import Led_Light
