@@ -93,7 +93,7 @@ The PWM Library provides an interface for controlling PWM signals on a specified
 
 ## Instantiation
 
-A class is like a blueprint for an object—it defines what attributes and methods the object will have, but by itself, it isn’t an actual object. Instantiation is when you use the class to create an actual, usable object in memory.
+A class is like a blueprint for an object—it defines the attributes and methods the object will have, but it isn’t an actual object itself. Instantiation is the process of using the class to create a real, usable object in memory.
 
 ```python
 from machine import Pin
@@ -112,9 +112,9 @@ while(True):
 
 ## Inheritance
 
-Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to acquire properties and behaviours (methods and attributes) from another class (called a parent or superclass).
+Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to inherit properties and behaviours (methods and attributes) from another class (called a parent or superclass).
 
-In this case the Led_Light class inherits the Pin class and without any further instrcutions the sub class inherits and can call all the mthods of the super class including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
+In this case, the `Led_Light` class inherits from the Pin class, and without any further instructions, the subclass inherits and can call all the methods of the superclass, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
 
 
 ```python

@@ -8,7 +8,7 @@
 
 ## Introduction Projects
 
-The Introduction projects should be completed before starting the OOP Mini Project. Ultimately, students should have a basic understanding of the following concepts: different sensors and actuators, wiring a breadboard, Unit Testing, and debugging software and hardware.
+The Introduction projects should be completed before starting the OOP Mini Project. Ultimately, students should have a basic understanding of the following concepts: different sensors and actuators, wiring a breadboard, Unit Testing, and debugging both software and hardware.
 
 | | |
 | --- | --- |
@@ -45,11 +45,10 @@ First students should copy the provided script [v02.py](..\project\py_scripts\v0
 2. The buzzer should emit animated musical note on screen and if volume is turned up a constant tone.
 3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
 
-## Physical Wiring
-
+## Physical Breadboard Protoytype
 Watch the [Pi Pico Breadboard Introduction Video](https://www.youtube.com/watch?v=Ex7AJll-FsM). Students should wire their board, then unit test using the provided script [v02.py](..\project\py_scripts\v02.py). 
 
-### Physical Prototype
+### Finished Prototype
 
 ![Physical Prototype](/images/physical_prototype.png)
 

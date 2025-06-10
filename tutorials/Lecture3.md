@@ -8,7 +8,7 @@
 - Complete led light class
 
 ## Encapsulation
-Encapsulation restricts direct access to some of an object's components (attributes or methods), which means that the internal representation of an object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., not accessible from outside the class) and providing public methods (such as getters and setters) to access or modify those private members.
+Encapsulation restricts direct access to some of an object's components (such as attributes or methods), meaning the internal representation of the object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., inaccessible from outside the class) and providing public methods (such as getters and setters) to access or modify those private members.
 
 ### Benefits of Encapsulation:
 

@@ -26,17 +26,6 @@ class Led_Light(Pin):
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is low")
 
-    def toggle(self):
-        # method overriding polymorphism of the parent class
-        if self.value() == 0:
-            self.high()
-            if self.__debug:
-                print(f"LED connected to Pin {self.__pin} is high")
-        elif self.value() == 1:
-            self.low()
-            if self.__debug:
-                print(f"LED connected to Pin {self.__pin} is low")
-
 
 red_light = Led_Light(3, False, False)
 

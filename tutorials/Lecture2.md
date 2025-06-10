@@ -8,7 +8,6 @@
 
 ## UML Class Diagrams
 
-What is a UML Class Diagram?
 A UML (Unified Modelling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
 
 ```text
@@ -23,7 +22,7 @@ A UML (Unified Modelling Language) class diagram visually describes the structur
 ----------------------
 ```
 
-Mermaid Markdown UML Class Diagram Example
+### Mermaid Markdown UML Class Diagram Example
 Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom Led_Light class that inherits from it.
 
 ```mermaid
@@ -54,7 +53,7 @@ Explanation:
 
 1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, Car).
 2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
-3. Methods/Operations (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
+3. Methods (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
 Each method is shown with its visibility, name, parameters, and return type.
 4. Connections (lines and arrows): These lines and arrows represent relationships (such as inheritance, association, aggregation, and composition) between class boxes.
 
@@ -62,11 +61,9 @@ Each method is shown with its visibility, name, parameters, and return type.
 
 **Polymorphism means “many forms.”**
 
-Overriding is when a child (subclass) provides a new implementation for a method that it inherits from its parent (superclass).
+Polymorphism Overriding occurs when a child class (subclass) provides a new implementation for a method it inherits from its parent class (superclass).
 
-The child class method has the same name and parameters as the method in the parent class. When you call the method on a child class object, Python (or any OOP language) uses the child’s version—even if the object is referenced by the parent type.
-
-It is called 'overriding' or also compilation polymorphism, as in many languages like C++ or C#, the overridden (parent method) is not compiled at all.
+The method in the child class has the same name and parameters as the one in the parent class. When the method is called on an object of the child class, Python (or any object-oriented language) uses the child’s version—even if the object is referenced using the parent type.
 
 ```python
 from machine import Pin
@@ -171,8 +168,6 @@ The DRY pattern stands for "**Don't Repeat Yourself**"; it is a fundamental prin
 Overloading occurs when a child (subclass) and/or parent (superclass) have multiple methods with the same name but different parameters (number or type).
 
 When you call the method, depending on the parameters passed, the corresponding method is executed.
-
-It is called 'overloading' or also known as runtime polymorphism, as in many languages like C++ or C#, all the methods are compiled. However, depending on the parameters, the appropriate method is executed at runtime. 
 
 Because Python is dynamically typed, it does not support overloaded polymorphism, as the last definition of a method overwrites any previous ones.
 
