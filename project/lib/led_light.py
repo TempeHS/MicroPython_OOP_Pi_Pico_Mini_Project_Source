@@ -10,7 +10,7 @@ class Led_Light(Pin):
         self.__debug = debug
         self.__pin = pin
         self.__flashing = flashing
-        self._last_toggle_time = time()
+        self.__last_toggle_time = time()
 
     def on(self):
         # method overiding polymorphism of the parent class
@@ -47,6 +47,6 @@ class Led_Light(Pin):
     def flash(self):
         # Non-blocking flash: toggles LED every 0.5s for the given duration
         now = time()
-        if self.__flashing and now - self._last_toggle_time >= 0.5:
+        if self.__flashing and now - self.__last_toggle_time >= 0.5:
             self.toggle()
-            self._last_toggle_time = now
+            self.__last_toggle_time = now

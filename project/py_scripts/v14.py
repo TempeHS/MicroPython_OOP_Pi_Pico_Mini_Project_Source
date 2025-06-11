@@ -1,13 +1,25 @@
 """
-Lecture 4 - Completed Audio_Notification Implementation
+Lecture 4 - Manual Unit Test for Audio_Notification Class
 """
 
+from time import sleep
 from audio_notification import Audio_Notification
-import time
 
-# Create an Audio_Notification on GPIO pin 15 with debug enabled
-buzzer = Audio_Notification(27, debug=True)
+# Replace 18 with the GPIO pin your buzzer is connected to
+buzzer = Audio_Notification(18, debug=True)
 
-while True:
-    # Sound a warning beep (non-blocking, call repeatedly in your loop)
+print("Testing beep()")
+buzzer.beep(freq=1000, duration=200)
+print("Did you hear a beep? (Check your buzzer)")
+
+print("Testing warning_on() (should beep every ~0.5s for 2 seconds)")
+start = buzzer._last_toggle_time
+for _ in range(5):
     buzzer.warning_on()
+    sleep(0.5)
+
+print("Testing warning_off() (should silence the buzzer)")
+buzzer.warning_off()
+print("Buzzer should now be off.")
+
+print("Manual test complete.")

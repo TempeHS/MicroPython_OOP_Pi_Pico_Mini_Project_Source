@@ -6,7 +6,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "editor.fontSize": 18,
+  "editor.fontSize": 26,
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "window.restoreWindows": "preserve",
   "workbench.editorAssociations": {

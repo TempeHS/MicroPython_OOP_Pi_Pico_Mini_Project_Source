@@ -2,8 +2,9 @@
 
 ## Lecture 4 Concepts
 - Implement an advanced button
+- Unit test the predestrian button class
 - Implement audio notification class
-
+- Unit test the audio notification class
 
 ## Advanced Button (with Debouncing and Interrupt)
 
@@ -51,6 +52,46 @@ while True:
 - The class uses the internal pull-down resistor and sets up an interrupt for rising edge detection.
 - Debouncing is handled in software (200ms).
 
+### Class Unit Test
+
+```python
+from time import sleep
+from pedestrian_button import Pedestrian_Button
+
+# Replace 22 with the GPIO pin your button is connected to
+button = Pedestrian_Button(22, debug=True)
+
+print("Testing initial button_state (should be False if not pressed)")
+initial_state = button.button_state
+if initial_state is False:
+    print("Initial .button_state passed")
+else:
+    print("Initial .button_state failed")
+
+print("Please press and release the button within 5 seconds...")
+pressed = False
+for _ in range(50):
+    if button.button_state:
+        pressed = True
+        break
+    sleep(0.1)
+
+if pressed:
+    print("Button press detected: .button_state passed")
+else:
+    print("Button press not detected: .button_state failed")
+
+print("Testing button_state setter (reset to False)")
+button.button_state = False
+sleep(0.1)
+if button.button_state is False:
+    print(".button_state setter passed")
+else:
+    print(".button_state setter failed")
+
+print("Manual test complete.")
+```
+### Class Implementation
 
 ```python
 from machine import Pin
@@ -145,6 +186,33 @@ buzzer.beep(freq=2000, duration=1000)
 - The pin must support PWM output on your board.
 - Call `warning_on()` repeatedly in your main loop for periodic beeping.
 
+### Class Unit test
+
+```python
+from time import sleep
+from audio_notification import Audio_Notification
+
+# Replace 18 with the GPIO pin your buzzer is connected to
+buzzer = Audio_Notification(18, debug=True)
+
+print("Testing beep()")
+buzzer.beep(freq=1000, duration=200)
+print("Did you hear a beep? (Check your buzzer)")
+
+print("Testing warning_on() (should beep every ~0.5s for 2 seconds)")
+start = buzzer._last_toggle_time
+for _ in range(5):
+    buzzer.warning_on()
+    sleep(0.5)
+
+print("Testing warning_off() (should silence the buzzer)")
+buzzer.warning_off()
+print("Buzzer should now be off.")
+
+print("Manual test complete.")
+```
+
+### Class Implementation
 
 ```python
 from machine import Pin, PWM
