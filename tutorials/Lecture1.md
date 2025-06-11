@@ -2,17 +2,70 @@
 
 ## Lecture 1 Concepts
 - Unit Testing
+- UML (Unified Modelling Language)
 - Generalisation
 - Parent/Child Class
 - Pin & PWM Parent Classes
 - Instantiation
 - Inheritance
 
+
 ## Unit Testing
 
 Unit testing is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
 
 Unit testing is especially valuable in embedded systems, such as the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works independently, you can build more complex mechatronic solutions.
+
+## UML Class Diagrams
+
+A UML (Unified Modelling Language) class diagram visually describes the structure of a system by showing its classes, their attributes (variables), methods (functions), and relationships (like inheritance).
+
+```text
+----------------------
+|     Student        |   <-- Class Name
+----------------------
+| -name: String      |   <-- Attributes
+| -age: int          |
+----------------------
+| +getName(): String |   <-- Methods
+| +setAge(int): void |
+----------------------
+```
+
+### Mermaid Markdown UML Class Diagram Example
+Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom Led_Light class that inherits from it.
+
+```mermaid
+classDiagram
+
+    class Pin {
+        -pin: int
+        +__init__(pin: int)
+        +value()
+        +high()
+        +low()
+        +toggle()
+    }
+
+    class Led_Light {
+        -debug: bool
+        -pin: int
+        -flashing: bool
+        +__init__(pin: int, flashing: bool, debug: bool)
+        +on()
+        +off()
+        +toggle()
+    }
+    Pin <|-- Led_Light : inherits
+```
+
+Explanation:
+
+1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, Car).
+2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
+3. Methods (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
+Each method is shown with its visibility, name, parameters, and return type.
+4. Connections (lines and arrows): These lines and arrows represent relationships (such as inheritance, association, aggregation, and composition) between class boxes.
 
 ## Generalisation
 

@@ -1,136 +1,150 @@
-# Lecture 5
+# Lecture 6
 
-## Lecture 5 concepts
+## Lecture 6 Concepts
+- Multiple Inheritance
+- Association
+- Setup controller states
 
-- Open & Closed Loop Control Systems
-- Open Loop State Machine
-- Implement an Open Loop State Machine
 
-## Open & Closed Loop Control Systems
+## Multiple Inheritance
+Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware classes in MicroPython.
 
-Open and closed loop control systems are two fundamental types of control systems used in engineering, automation, robotics, and other fields to manage the behavior of devices or processes.
+```mermaid
+classDiagram
+    class A {
+        +methodA()
+    }
+    class B {
+        +methodB()
+    }
+    class C {
+        +methodC()
+    }
+    class D {
+        +methodD()
+    }
 
-### Open-Loop
-
-An open-loop control system is a type of system in which the control action is independent of the desired output or the actual system output.
-
-How it works:
-
-- The system receives an input (command or reference signal).
-- The controller processes this input and sends a control signal to the actuator.
-- The actuator executes the control action, affecting the system or process.
-- There is no feedback mechanism to compare the output with the input.
-
-Example:
-
-A microwave oven: You set the cooking time, and the microwave runs for that duration regardless of how hot the food actually gets.
-
-### Closed-Loop
-
-A closed-loop control system (also called a feedback control system) is a system in which the control action is dependent on the desired output and the actual system output.
-
-How it works:
-
-- The system receives an input (desired value or setpoint).
-- The controller processes this input and sends a control signal to the actuator.
-- The actuator operates on the system.
-- A sensor measures the actual output.
-- The output is fed back and compared with the input (setpoint).
-- The difference (error) is used to adjust the control action to reduce the error.
-
-Example:
-
-A home thermostat works by allowing the homeowner to set a desired temperature. The system then measures the actual room temperature and adjusts the heater or cooler to reach and maintain the set temperature. As the system approaches—or overshoots—the desired temperature, it modifies its output accordingly.
-
-## State Machine
-
-A state machine (also known as a finite state machine or FSM) is a computational model used to design and describe systems that can be in one of a finite number of states at any given time. It transitions between these states in response to external inputs or events such as time, button presses of sensor values.
-
-Key concepts:
-
-- States: Distinct modes or conditions in which the system can exist.
-- Transitions: Rules that define how and when the system moves from one state to another, often triggered by events or inputs.
-- Events/Inputs: External actions or signals that cause state transitions.
-- A State Machine can be open or closed
-
-## Implement an Open Loop State Machine
-
-## Usage: Controller Class (State Machine Example)
-
-The `Controller` class manages the state machine for a pedestrian crossing system, coordinating LEDs, buzzer, and button input. It handles the sequence of traffic and pedestrian signals based on button presses and timing.
-
-### Constructor
-
-```python
-Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug
-)
+    A <|-- C : Inheritance
+    B <|-- C : Inheritance
+    B <|-- D : Inheritance
+    C <|-- D : Inheritance
 ```
-- `ped_red`, `ped_green`, `car_red`, `car_amber`, `car_green`: Instances of `Led_Light` for each light.
-- `button`: An instance of `Pedestrian_Button`.
-- `buzzer`: An instance of `Audio_Notification`.
-- `debug`: Set to `True` to enable debug print statements.
 
-### Example Usage
+This code snippet is just to demonstrate the concept and syntax of multiple inheritance. 
 
 ```python
 from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification
-from controller import Controller
-from time import sleep
 
-# Instantiate hardware objects
-ped_red = Led_Light(19)
-ped_green = Led_Light(17, flashing=True)
-car_red = Led_Light(3)
-car_amber = Led_Light(5)
-car_green = Led_Light(6)
-button = Pedestrian_Button(22)
-buzzer = Audio_Notification(27)
 
-# Create the controller
-controller = Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug=True
-)
+class Walk_Light(Audio_Notification, Led_Light):
+    def __init__(self, led_pin, buz_pin, debug):
+        Led_Light.super().__init__(self, led_pin, False, debug)
+        Audio_Notification.super().__init__(self, buz_pin, debug)
 
-# Main loop
-while True:
-    controller.update()
-    sleep(0.1)
+    def walk_on(self):
+        if self.__debug:
+            print("Beep and Light on")
+        self.on()
+        self.warning_on()
+
+    def walk_off(self):
+        if self.__debug:
+            print("Beep and Light off")
+        self.off()
+        self.warning_off()
 ```
 
-### Methods
+## Association
 
-- **walk_on()**  
-  Activates the pedestrian walk signal, turns on the green pedestrian LED, and sounds the buzzer.
+Association in Object-Oriented Programming (OOP) describes the relationship between two separate classes that are connected, but neither "owns" the other. It simply means that objects of one class use or interact with objects of another class.
 
-- **walk_warning()**  
-  Activates the warning state (flashing red pedestrian LED, buzzer off).
+- Association is a broad term for any relationship between classes that is not inheritance.
+- It represents a "uses-a" or "knows-a" relationship.
+- The lifetime of associated objects is independent—neither object controls the lifecycle of the other.
 
-- **walk_off()**  
-  Deactivates the pedestrian walk signal, turns on the red pedestrian LED, and turns off the buzzer.
 
-- **change()**  
-  Changes the traffic lights to amber for cars, preparing for pedestrian crossing.
+```mermaid
+classDiagram
+    class Pin {
+        -__pin: int
+        +__init__(pin: int)
+        +value()
+        +high()
+        +low()
+        +on()
+        +off()
+        +toggle()
+    }
 
-- **update()**  
-  Runs the state machine. Call this method repeatedly (e.g., in a loop) to process button presses and manage signal timing.
+    class PWM {
+        -__pin: int
+        +__init__(pin: int)
+        +freq(freq: int)
+        +duty_u16(duty: int)
+    }
 
-### State Machine Overview
+    class Audio_Notification {
+        -__debug: bool
+        +__init__(pin: int, debug: bool)
+        +warning_on()
+        +warning_off()
+        +beep(freq: int, duration: int)
+    }
+    PWM <|-- Audio_Notification : Inheritance
 
-- **IDLE**: Waiting for a pedestrian button press.
-- **CAR_AMBER**: Amber light for cars, preparing to stop traffic.
-- **WALK_ON**: Pedestrian walk signal active, buzzer sounds.
-- **WALK_WARNING**: Pedestrian warning state (flashing red, buzzer off).
-- **Transitions**: Each state transitions automatically after a set time or event.
+    class Led_Light {
+        -__debug: bool
+        -__pin: int
+        -__flashing: bool
+        +__init__(pin: int, flashing: bool, debug: bool)
+        +on()
+        +off()
+        +high()
+        +Low
+        +toggle()
+    }
+    Pin <|-- Led_Light : Inheritance
 
----
+    class Pedestrian_Button {
+        -__debug: bool
+        -__pin: int
+        -__last_pressed: int
+        -__pedestrian_waiting: bool
+        +__init__(pin: int, debug: bool)
+        +callback(pin: Pin)
+        +button_state
+        +reset
+    }
+    Pin <|-- Pedestrian_Button : Inheritance
 
-**Note:**  
-- The controller expects the hardware classes (`Led_Light`, `Pedestrian_Button`, `Audio_Notification`) to be implemented and working.
-- The button's `button_state` property is set by the button's interrupt handler when pressed.
-- Timing and state transitions are handled automatically by the `update()` method.
+    class Controller {
+        -self.__Ped_Red = ped_red
+        -self.__Ped_Green = ped_green
+        -self.__Car_Red = car_red
+        -self.__Car_Amber = car_amber
+        -self.__Car_Green = car_green
+        -self.__Buzzer = buzzer
+        -self.__Button = button
+        -self.__debug = debug
+        +update()
+        +walk_on()
+        +walk_off()
+        +walk_warning()
+        +change()
+    }
+
+    Led_Light --> Controller: Association
+    Pedestrian_Button --> Controller : Association
+    Audio_Notification  --> Controller: Association
+```
+
+### Setup differnet states of the controller using association
+
+In the context of a microcontroller, state refers to the current values or conditions of the system’s internal variables, inputs, outputs, and memory at a specific moment in time. State is crucial for determining how the microcontroller should behave next.
+
+For example, in a simple traffic light controller, one of the states could be `Traffic_Go` in which the green lights are `on()` while both the red and amber lights are `off()`.
 
 ```python
 from led_light import Led_Light
@@ -151,8 +165,6 @@ class Controller:
         self.__Buzzer = buzzer
         self.__Button = button
         self.__debug = debug
-        self.state = "IDLE"
-        self.last_state_change = time()
 
     def walk_on(self):
         if self.__debug:
@@ -195,52 +207,26 @@ class Controller:
         self.__Car_Red.off()
         self.__Ped_Green.off()
         self.__Buzzer.warning_off()
+```
 
-    def update(self):
-        # State machine logic
-        if self.state == "IDLE":
-            if self.__Button.button_state:
-                if self.__debug:
-                    print("Pedestrian waiting detected, switching to CAR_AMBER")
-                self.state = "CAR_AMBER"
-                self.last_state_change = time()
-                self.change()
-            else:
-                self.walk_off()
-        elif self.state == "CAR_AMBER":
-            # Wait 10 seconds before allowing walk
-            self.change()
-            if time() - self.last_state_change > 5:
-                if self.__debug:
-                    print("Switching to WALK_ON")
-                self.state = "WALK_ON"
-                self.last_state_change = time()
-                self.walk_on()
-        elif self.state == "WALK_ON":
-            # Walk signal for 5 seconds
-            self.walk_on()
-            if time() - self.last_state_change > 5:
-                if self.__debug:
-                    print("Switching to No Walk Warning")
-                self.state = "WALK_WARNING"
-                self.last_state_change = time()
-                self.walk_warning()
-        elif self.state == "WALK_WARNING":
-            # Walk signal for 5 seconds
-            self.walk_warning()
-            if time() - self.last_state_change > 5:
-                if self.__debug:
-                    print("Returning to IDLE")
-                self.state = "IDLE"
-                self.last_state_change = time()
-                self.walk_off()
-                self.__Button.button_state = False
-        else:  # error
-            self.__Ped_Red.on()
-            self.__Ped_Green.off()
-            self.__Car_Green.off()
-            self.__Car_Amber.toggle()
-            self.__Car_Red.off()
-            self.__Ped_Green.off()
-            sleep(1)
+```python
+# Alternative association method that
+# encapsulates the associated objects
+class Walk_Light:
+    def __init__(self, led_pin, buz_pin, debug):
+        self.LED = Led_Light(led_pin, debug)
+        self.BUZ = Audio_Notification(buz_pin, debug)
+        self.__debug = debug
+
+    def walk_on(self):
+        if self.__debug:
+            print("Beep and Light on")
+        self.LED.on()
+        self.BUZ.warning_on()
+
+    def walk_off(self):
+        if self.__debug:
+            print("Beep and Light off")
+        self.LED.off()
+        self.BUZ.warning_off()
 ```
