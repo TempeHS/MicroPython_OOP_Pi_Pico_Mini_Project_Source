@@ -19,7 +19,7 @@ class Controller:
         self.state = "IDLE"
         self.last_state_change = time()
 
-    def walk_on(self):
+    def walk(self):
         if self.__debug:
             print("Walking")
         self.__Ped_Red.off()
@@ -39,7 +39,7 @@ class Controller:
         self.__Car_Red.on()
         self.__Buzzer.warning_off()
 
-    def walk_off(self):
+    def idle(self):
         if self.__debug:
             print("No Walking")
         self.__Ped_Red.on()
@@ -66,27 +66,27 @@ class Controller:
         if self.state == "IDLE":
             if self.__Button.button_state:
                 if self.__debug:
-                    print("Pedestrian waiting detected, switching to CAR_AMBER")
-                self.state = "CAR_AMBER"
+                    print("Pedestrian waiting detected, switching to CHANGE")
+                self.state = "CHANGE"
                 self.last_state_change = time()
                 self.change()
             else:
-                self.walk_off()
-        elif self.state == "CAR_AMBER":
+                self.idle()
+        elif self.state == "CHANGE":
             # Wait 10 seconds before allowing walk
             self.change()
             if time() - self.last_state_change > 5:
                 if self.__debug:
-                    print("Switching to WALK_ON")
-                self.state = "WALK_ON"
+                    print("Switching to WALK")
+                self.state = "WALK"
                 self.last_state_change = time()
-                self.walk_on()
-        elif self.state == "WALK_ON":
+                self.walk()
+        elif self.state == "WALK":
             # Walk signal for 5 seconds
-            self.walk_on()
+            self.walk()
             if time() - self.last_state_change > 5:
                 if self.__debug:
-                    print("Switching to No Walk Warning")
+                    print("Switching to WALK WARNING")
                 self.state = "WALK_WARNING"
                 self.last_state_change = time()
                 self.walk_warning()
@@ -98,7 +98,7 @@ class Controller:
                     print("Returning to IDLE")
                 self.state = "IDLE"
                 self.last_state_change = time()
-                self.walk_off()
+                self.idle()
                 self.__Button.button_state = False
         else:  # error
             self.__Ped_Red.on()
