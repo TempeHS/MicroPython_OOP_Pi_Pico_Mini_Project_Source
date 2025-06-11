@@ -31,8 +31,8 @@ classDiagram
         +value()
         +high()
         +low()
-        +high()
-        +low()
+        +on()
+        +off()
         +toggle()
     }
 

@@ -11,6 +11,4 @@ led_car_green = Pin(6, Pin.OUT)
 
 while True:
     led_car_red.toggle()
-    led_car_orange.toggle()
-    led_car_green.toggle()
     sleep(1)
