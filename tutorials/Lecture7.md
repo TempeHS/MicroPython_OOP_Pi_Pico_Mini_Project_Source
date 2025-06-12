@@ -68,13 +68,13 @@ classDiagram
     class Audio_Notification
 
     class Controller {
-        - Led_Light __Ped_Red
-        - Led_Light __Ped_Green
-        - Led_Light __Car_Red
-        - Led_Light __Car_Amber
-        - Led_Light __Car_Green
-        - Audio_Notification __Buzzer
-        - Pedestrian_Button __Button
+        - __Ped_Red: Class Led_Light
+        - __Ped_Green: Class Led_Light
+        - __Car_Red: Class Led_Light
+        - __Car_Amber: Class Led_Light
+        - __Car_Green: Class Led_Light
+        - __Buzzer: Class Audio_Notification
+        - __Button: Class Pedestrian_Button
         - bool __debug
         - str state
         - float last_state_change

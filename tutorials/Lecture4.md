@@ -14,10 +14,10 @@ classDiagram
     class Pin
 
     class Pedestrian_Button {
-        - int __pin
-        - bool __debug
-        - int __last_pressed
-        - bool __pedestrian_waiting
+        - __pin: int
+        - __debug: bool
+        - __last_pressed: int
+        - __pedestrian_waiting: bool
         + Pedestrian_Button(pin, debug)
         + button_state : bool
         + button_state(value)

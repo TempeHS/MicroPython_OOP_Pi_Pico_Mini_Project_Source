@@ -114,8 +114,9 @@ classDiagram
     }
 
     class Audio_Notification {
-        - bool __debug
-        - float _last_toggle_time
+        - __debug: bool
+        - __last_toggle_time: floot
+        - __pin: int
         + Audio_Notification(pin, debug=False)
         + warning_on()
         + warning_off()
@@ -124,10 +125,10 @@ classDiagram
     PWM <|-- Audio_Notification : Inheritance
 
     class Led_Light {
-        - bool __debug
-        - int __pin
-        - bool __flashing
-        - float __last_toggle_time
+        - __debug: bool
+        - __pin: int
+        - __flashing: int
+        - __last_toggle_time: float
         + Led_Light(pin, flashing=False, debug=False)
         + on()
         + off()
@@ -139,10 +140,10 @@ classDiagram
     Pin <|-- Led_Light : Inheritance
 
     class Pedestrian_Button {
-        - int __pin
-        - bool __debug
-        - int __last_pressed
-        - bool __pedestrian_waiting
+        - __pin: int
+        - __debug: bool
+        - __last_pressed: int
+        - __pedestrian_waiting: bool
         + Pedestrian_Button(pin, debug)
         + button_state : bool
         + button_state(value)
@@ -151,13 +152,13 @@ classDiagram
     Pin <|-- Pedestrian_Button : Inheritance
 
     class Controller {
-        - Led_Light __Ped_Red
-        - Led_Light __Ped_Green
-        - Led_Light __Car_Red
-        - Led_Light __Car_Amber
-        - Led_Light __Car_Green
-        - Audio_Notification __Buzzer
-        - Pedestrian_Button __Button
+        - __Ped_Red: Class Led_Light
+        - __Ped_Green: Class Led_Light
+        - __Car_Red: Class Led_Light
+        - __Car_Amber: Class Led_Light
+        - __Car_Green: Class Led_Light
+        - __Buzzer: Class Audio_Notification
+        - __Button: Class Pedestrian_Button
         - bool __debug
         - str state
         - float last_state_change

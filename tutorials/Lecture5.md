@@ -14,8 +14,9 @@ classDiagram
     class PWM
 
     class Audio_Notification {
-        - bool __debug
-        - float _last_toggle_time
+        - __debug: bool
+        - __last_toggle_time: floot
+        - __pin: int
         + Audio_Notification(pin, debug=False)
         + warning_on()
         + warning_off()
