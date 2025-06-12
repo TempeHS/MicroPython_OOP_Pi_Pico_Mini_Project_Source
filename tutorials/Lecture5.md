@@ -7,6 +7,24 @@
 
 The `Audio_Notification` class extends the `machine.PWM` class to provide an interface for controlling a piezo buzzer or speaker, with optional debug output. It supports warning beeps and custom tones.
 
+### UML
+
+```mermaid
+classDiagram
+    class PWM
+
+    class Audio_Notification {
+        - bool __debug
+        - float _last_toggle_time
+        + Audio_Notification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
+    }
+
+    PWM <|-- Audio_Notification
+```
+
 ### Constructor
 
 ```python

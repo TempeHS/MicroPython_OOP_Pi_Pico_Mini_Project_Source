@@ -59,6 +59,38 @@ Key concepts:
 
 The `Controller` class manages the state machine for a pedestrian crossing system, coordinating LEDs, buzzer, and button input. It handles the sequence of traffic and pedestrian signals based on button presses and timing.
 
+### UML
+
+```mermaid
+classDiagram
+    class Led_Light
+    class Pedestrian_Button
+    class Audio_Notification
+
+    class Controller {
+        - Led_Light __Ped_Red
+        - Led_Light __Ped_Green
+        - Led_Light __Car_Red
+        - Led_Light __Car_Amber
+        - Led_Light __Car_Green
+        - Audio_Notification __Buzzer
+        - Pedestrian_Button __Button
+        - bool __debug
+        - str state
+        - float last_state_change
+        + Controller(ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug)
+        + walk()
+        + walk_warning()
+        + idle()
+        + change()
+        + update()
+    }
+
+    Led_Light --> Controller : Association
+    Audio_Notification --> Controller : Association
+    Pedestrian_Button --> Controller : Association
+```
+
 ### Constructor
 
 ```python

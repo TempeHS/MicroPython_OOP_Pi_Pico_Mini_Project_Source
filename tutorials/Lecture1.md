@@ -97,36 +97,39 @@ classDiagram
     }
 
     class Audio_Notification {
-        -__debug: bool
-        +__init__(pin: int, debug: bool)
-        +warning_on()
-        +warning_off()
-        +beep(freq: int, duration: int)
+        - bool __debug
+        - float _last_toggle_time
+        + Audio_Notification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
     }
     PWM <|-- Audio_Notification : Inheritance
 
     class Led_Light {
-        -__debug: bool
-        -__pin: int
-        -__flashing: bool
-        +__init__(pin: int, flashing: bool, debug: bool)
-        +on()
-        +off()
-        +high()
-        +Low
-        +toggle()
+        - bool __debug
+        - int __pin
+        - bool __flashing
+        - float __last_toggle_time
+        + Led_Light(pin, flashing=False, debug=False)
+        + on()
+        + off()
+        + toggle()
+        + flash()
+        + led_light_state
+        + led_light_state(value)
     }
     Pin <|-- Led_Light : Inheritance
 
     class Pedestrian_Button {
-        -__debug: bool
-        -__pin: int
-        -__last_pressed: int
-        -__pedestrian_waiting: bool
-        +__init__(pin: int, debug: bool)
-        +callback(pin: Pin)
-        +button_state
-        +reset
+        - int __pin
+        - bool __debug
+        - int __last_pressed
+        - bool __pedestrian_waiting
+        + Pedestrian_Button(pin, debug)
+        + button_state : bool
+        + button_state(value)
+        + callback(pin)
     }
     Pin <|-- Pedestrian_Button : Inheritance
 

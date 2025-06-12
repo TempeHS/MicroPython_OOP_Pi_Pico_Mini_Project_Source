@@ -101,6 +101,8 @@ classDiagram
         +value()
         +high()
         +low()
+        +on()
+        +off()
         +toggle()
     }
 
@@ -112,53 +114,64 @@ classDiagram
     }
 
     class Audio_Notification {
-        -__debug: bool
-        +__init__(pin: int, debug: bool)
-        +warning_on()
-        +warning_off()
-        +beep(freq: int, duration: int)
+        - bool __debug
+        - float _last_toggle_time
+        + Audio_Notification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
     }
     PWM <|-- Audio_Notification : Inheritance
 
     class Led_Light {
-        -__debug: bool
-        -__pin: int
-        -__flashing: bool
-        +__init__(pin: int, flashing: bool, debug: bool)
-        +on()
-        +off()
-        +toggle()
-        +flash(duration: int)
-        +on_for(duration: int)
-        +led_light_state: int
+        - bool __debug
+        - int __pin
+        - bool __flashing
+        - float __last_toggle_time
+        + Led_Light(pin, flashing=False, debug=False)
+        + on()
+        + off()
+        + toggle()
+        + flash()
+        + led_light_state
+        + led_light_state(value)
     }
     Pin <|-- Led_Light : Inheritance
 
     class Pedestrian_Button {
-        -__debug: bool
-        -__pin: int
-        -__last_pressed: int
-        -__pedestrian_waiting: bool
-        +__init__(pin: int, debug: bool)
-        +callback(pin: Pin)
-        +button_state
-        +reset
+        - int __pin
+        - bool __debug
+        - int __last_pressed
+        - bool __pedestrian_waiting
+        + Pedestrian_Button(pin, debug)
+        + button_state : bool
+        + button_state(value)
+        + callback(pin)
     }
     Pin <|-- Pedestrian_Button : Inheritance
 
     class Controller {
-        -__object: Led_Light
-        -__object: Led_Light
-        -__object: Led_Light
-        -__object: Led_Light
-        -__object: Led_Light
-        -__object: Pedestrian_Button
-        -__object: Audio_Notification
+        - Led_Light __Ped_Red
+        - Led_Light __Ped_Green
+        - Led_Light __Car_Red
+        - Led_Light __Car_Amber
+        - Led_Light __Car_Green
+        - Audio_Notification __Buzzer
+        - Pedestrian_Button __Button
+        - bool __debug
+        - str state
+        - float last_state_change
+        + Controller(ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug)
+        + walk()
+        + walk_warning()
+        + idle()
+        + change()
+        + update()
     }
 
-    Led_Light --> Controller : Composition
-    Audio_Notification --> Controller : Composition
-    Pedestrian_Button --> Controller : Composition
+    Led_Light --> Controller : Association
+    Audio_Notification --> Controller : Association
+    Pedestrian_Button --> Controller : Association
 
 ```
 
