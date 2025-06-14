@@ -1,5 +1,5 @@
 """
-Lecture 3 - Abstraction
+Abstraction Example
 """
 
 from project.py_scripts.LL_unit_Test import Led_Light

@@ -1,6 +1,6 @@
-'''
+"""
 A simple script to unit test hardware
-'''
+"""
 
 from machine import Pin
 from machine import PWM
@@ -23,7 +23,7 @@ buzzer.freq(1000)
 
 
 while True:
-    
+
     buzzer.duty_u16(32768)
 
     led_car_red.high()

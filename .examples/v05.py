@@ -1,5 +1,5 @@
 """
-Lecture 2 - Overriding Polymorphism
+Overriding Polymorphism Example
 """
 
 from machine import Pin
@@ -7,7 +7,7 @@ from time import sleep
 
 
 class Led_Light(Pin):
-    # child class inherits the parent 'Pin' class
+    # Sub Class inherits the 'Pin' Class
     def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
         self.__debug = debug
@@ -15,13 +15,13 @@ class Led_Light(Pin):
         self.__flashing = flashing
 
     def on(self):
-        # method overriding polymorphism of the parent class
+        # method overriding polymorphism of the Super Class
         self.high()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is high")
 
     def off(self):
-        # method overriding polymorphism of the parent class
+        # method overriding polymorphism of the Super Class
         self.low()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is low")

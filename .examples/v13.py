@@ -1,5 +1,5 @@
 """
-Lecture 4 - Manually unit test Pedestrian_Button Implementation
+Manually Unit Test for Pedestrian_Button Class
 """
 
 from time import sleep

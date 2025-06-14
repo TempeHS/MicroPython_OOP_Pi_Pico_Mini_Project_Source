@@ -1,13 +1,19 @@
 # Lecture 1
 
 ## Lecture 1 Concepts
-- Unit Testing
-- UML (Unified Modelling Language)
-- Generalisation
-- Parent/Child Class
-- Pin & PWM Parent Classes
-- Instantiation
-- Inheritance
+
+- [Lecture 1](#lecture-1)
+  - [Lecture 1 Concepts](#lecture-1-concepts)
+  - [Unit Testing](#unit-testing)
+    - [Wokwi Unit Testing](#wokwi-unit-testing)
+    - [Physical Unit Testing](#physical-unit-testing)
+  - [UML Class Diagrams](#uml-class-diagrams)
+    - [Mermaid Markdown UML Class Diagram Example](#mermaid-markdown-uml-class-diagram-example)
+  - [Generalisation](#generalisation)
+  - [Super/Sub Classes](#supersub-classes)
+    - [Pin Library](#pin-library)
+    - [PWM Library](#pwm-library)
+  - [Instantiation](#instantiation)
 
 
 ## Unit Testing
@@ -15,6 +21,22 @@
 Unit testing is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
 
 Unit testing is especially valuable in embedded systems, such as the Pi Pico, where debugging can be challenging due to limited resources and hardware complexity. By ensuring each component works independently, you can build more complex mechatronic solutions.
+
+### Wokwi Unit Testing
+
+Students should copy the provided script [v02.py](..\project\py_scripts\v02.py) into the main.py tab in the [Wokwi](https://wokwi.com/) IDE. Then click the `Play` button in the simulator window.
+
+1. All 5 LEDs should illuminate.
+2. The buzzer should emit animated musical note on screen and if volume is turned up a constant tone.
+3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
+
+### Physical Unit Testing
+
+Unit test using the provided script [\project\py_scripts\v02.py](..\project\py_scripts\v02.py). In VSCode: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> -> Select **MicroPico: Connect**. Then right click `v02.py` -> choose **_run current file on pico_**.  
+
+1. All 5 LEDs should illuminate.
+2. The buzzer should emit a constant tone.
+3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
 
 ## UML Class Diagrams
 
@@ -71,9 +93,9 @@ Each method is shown with its visibility, name, parameters, and return type.
 
 On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
 
-## Parent/Child Classes
+## Super/Sub Classes
 
-A parent/child (or super/sub) class relationship is a key concept in object-oriented programming (OOP), also known as inheritance. The parent class defines common attributes and methods.
+A Super/Sub (or Parent/Child) Class relationship is a key concept in object-oriented programming (OOP), also known as inheritance. The Super Class defines common attributes and methods.
 It acts as a template for other classes.
 
 ```mermaid
@@ -132,13 +154,13 @@ classDiagram
 
 ```
 
-## Pin Library
+### Pin Library
 
 [Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.Pin.html)
 
 The Pin library in MicroPython for the Pi Pico allows you to control the General Purpose Input/Output (GPIO) pins of the Pico. It allows you to configure pins as digital (binary) inputs or outputs.
 
-## PWM Library
+### PWM Library
 
 [Machine.Pin Library Documentation](https://docs.micropython.org/en/latest/library/machine.PWM.html)
 
@@ -146,7 +168,7 @@ The PWM Library provides an interface for controlling PWM signals on a specified
 
 ## Instantiation
 
-A class is like a blueprint for an object—it defines the attributes and methods the object will have, but it isn’t an actual object itself. Instantiation is the process of using the class to create a real, usable object in memory.
+A class is like a blueprint for an object—it defines the attributes and methods the object will have, but it isn’t an actual object itself. Instantiation is the process of creating a copy of the class structure that will be a real, usable object in memory.
 
 ```python
 from machine import Pin
@@ -165,9 +187,9 @@ while(True):
 
 ## Inheritance
 
-Inheritance is a fundamental concept in object-oriented programming (OOP). It allows a class (called a child or subclass) to inherit properties and behaviours (methods and attributes) from another class (called a parent or superclass).
+Inheritance is a fundamental concept in object-oriented programming (OOP). It allows another class (called a Sub Class) to inherit properties and behaviours (methods and attributes) from another Class (called a Super Class).
 
-In this case, the `Led_Light` class inherits from the Pin class, and without any further instructions, the subclass inherits and can call all the methods of the superclass, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
+In this case, the `Led_Light` Class inherits from the Pin Class, and without any further instructions, the Sub Class inherits and can call all the methods of the Super Class, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
 
 
 ```python
@@ -175,7 +197,7 @@ from machine import Pin
 from time import sleep
 
 class Led_Light(Pin):
-    # child class inherits the parent 'Pin' class
+    # Sub Class inherits the 'Pin' Class 
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
 

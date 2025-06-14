@@ -170,7 +170,7 @@ classDiagram
 | Version | Notes                                                                                                                     |
 | ------- | ------------------------------------------------------------------------------------------------------------------------- |
 | v01.py  | Basic "Blink" Program (the Hello World of mechatronics) for Unit Testing the Microcontroller.                                                                  |
-| v02.py  | Unit Test for wiring and use basic methods from parent `Pin` and `PWM` class.                                                                |
+| v02.py  | Unit Test for wiring and use basic methods from Super `Pin` and `PWM` .                                                                |
 | v03.py  | A blank python script.    |
 
 ##

@@ -1,11 +1,11 @@
 # Lecture 4
 
 ## Lecture 4 Concepts
-- Implement an pedestrian button class
+- Implement an pedestrian button 
 
 ## Advanced Button (with Debouncing and Interrupt)
 
-The `Pedestrian_Button` class extends the `machine.Pin` class to provide a debounced, interrupt-driven interface for a pedestrian button, with optional debug output.
+The `Pedestrian_Button`  extends the `machine.Pin`  to provide a debounced, interrupt-driven interface for a pedestrian button, with optional debug output.
 
 ### Constructor
 
@@ -46,7 +46,7 @@ while True:
 
 **Notes:**  
 - The button should be wired between the specified GPIO pin and GND.
-- The class uses the internal pull-down resistor and sets up an interrupt for rising edge detection.
+- The  uses the internal pull-down resistor and sets up an interrupt for rising edge detection.
 - Debouncing is handled in software (200ms).
 
 ### Class Unit Test
@@ -96,7 +96,7 @@ import time
 
 
 class Pedestrian_Button(Pin):
-    # child class inherits the parent 'Pin' class
+    # Sub Class inherits the Super 'Pin' 
 
     def __init__(self, pin, debug):
         super().__init__(pin, Pin.IN, Pin.PULL_DOWN)

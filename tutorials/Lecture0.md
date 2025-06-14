@@ -1,10 +1,18 @@
 # Lecture 0
 
-## Lecture 0 Concepts
+## Table of Contents
 
-- Introduction Projects
-- Prototyping & Unit Testing in Wokwi
-- Physically Wiring
+- [Table of Contents](#table-of-contents)
+- [Introduction Projects](#introduction-projects)
+- [Common Mistakes Students Make](#common-mistakes-students-make)
+- [Wokwi](#wokwi)
+- [Final Project](#final-project)
+- [Wire your system](#wire-your-system)
+    - [Wokwi Prototype](#wokwi-prototype)
+    - [Physical Prototype](#physical-prototype)
+- [Components](#components)
+- [Pin allocation](#pin-allocation)
+
 
 ## Introduction Projects
 
@@ -16,9 +24,14 @@ The Introduction projects should be completed before starting the OOP Mini Proje
 | ![Analog Sensor](../introduction_projects/images/analog_sensor.png)<br/>Analog Sensor | ![Servo Control](../introduction_projects/images/servo_control.png)<br/>Servo Control |
 | ![Ultrasonic Sensor](../introduction_projects/images/ultrasonic_sensor.png)<br/>Ultrasonic Sensor | ![I2C Module](../introduction_projects/images/I2C_module.png)<br/>I2C Module |
 
-## Final Product
+## Common Mistakes Students Make
+1. Programming GPIO Pin 3 but wiring to the 3rd Pin not GP3 (check diagram).
+2. Incorrect polarity on an LED.
+3. Connecting to the wrong row on a breadboard.
+4. Connecting an analogue sensor to the GND rather than the specific analogue ground AGND.
+5. Not uploading the 2IC Libraries either to the Pi Pico or to Wokwi.
+6. Overcurrent as the Pi Pico and most sensors are 3.3v sensitive. Only motors should be connected to the VBUS (5v). If a sensor is connected to the VBUS, it will return 5V to the GND, causing an overcurrent situation.
 
-![Video of Final Project in Operations](/images/demonstration.gif)
 
 ## Wokwi
 
@@ -33,27 +46,44 @@ Students can sign up or in with OAuth using either their School Google Account o
 > [!Note]
 > Students using Wokwi should start with [Template Wokwi Project](https://wokwi.com/projects/433242006092880897).
 
-### Wokwi Prototype
+## Final Project
 
-![Wokwi Prototype](/images/prototype_model.png)
+![Video of Final Project in Operations](/images/demonstration.gif)
 
-### Wokwi Unit Testing
+### Wire your system
 
-First students should copy the provided script [v02.py](..\project\py_scripts\v02.py) into the terminal. 
+#### Wokwi Prototype
 
-1. All 5 LEDs should illuminate.
-2. The buzzer should emit animated musical note on screen and if volume is turned up a constant tone.
-3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
+![A prototype of the model](/images/prototype_model.png "Use the below components to wire this model.")
 
-## Physical Breadboard Protoytype
-Watch the [Pi Pico Breadboard Introduction Video](https://www.youtube.com/watch?v=Ex7AJll-FsM). Students should wire their board, then unit test using the provided script [v02.py](..\project\py_scripts\v02.py). 
+#### Physical Prototype
 
-### Finished Prototype
+![A prototype of the model](/images/physical_prototype.png "Use the below components to wire this model.")
 
-![Physical Prototype](/images/physical_prototype.png)
+### Components
 
-### Physical Unit Testing
+> [!Note]
+> Students can build using physical components or prototype using this [Template Wokwi Project](https://wokwi.com/projects/433242006092880897).
 
-1. All 5 LEDs should illuminate.
-2. The buzzer should emit a constant tone.
-3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
+- Breadboard
+- Jumper leads
+- Pi Pico
+- 1x Momentary switch
+- 5x LED
+- 1x Piezo buzzer
+- 5x 130Ω resistors
+
+### Pin allocation
+
+| Pin  |                      |
+| ---- | -------------------- |
+| GP3  | Red LED              |
+| GP4  | Keyboard Interrupt   |
+| GP5  | Amber LED            |
+| GP7  | Red LED              |
+| GP17 | Flashing Green LED   |
+| GP19 | Flashing Red LED     |
+| GP22 | Button signal        |
+| GP27 | Piezo Buzzer         |
+| GND  | Circuit Ground       |
+| 3V3  | Button logic voltage |

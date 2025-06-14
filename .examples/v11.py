@@ -1,5 +1,5 @@
 """
-Lecture 3 - Extend Led_light class
+Extend Led_light
 """
 
 from project.py_scripts.LL_unit_Test import Led_Light

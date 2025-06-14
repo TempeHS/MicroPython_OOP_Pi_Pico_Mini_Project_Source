@@ -1,5 +1,5 @@
 """
-Lecture 3 - Unit Test Led_light Implementation
+Unit Test for Led_light Class
 """
 
 from time import sleep
@@ -52,7 +52,7 @@ else:
 print("Testing led_light_state property (setter) to 1 (should turn on)")
 set1 = led.led_light_state = 1
 set0 = led.led_light_state = 0
-if set1 == 1 and set0 == 0 :
+if set1 == 1 and set0 == 0:
     print(".led_light_state setter passed")
 else:
     print(".led_light_state setter failed")

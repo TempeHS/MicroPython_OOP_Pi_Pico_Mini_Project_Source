@@ -1,5 +1,5 @@
 """
-Lecture 4 - Manual Unit Test for Audio_Notification Class
+Manual Unit Test for Audio_Notification Class
 """
 
 from time import sleep

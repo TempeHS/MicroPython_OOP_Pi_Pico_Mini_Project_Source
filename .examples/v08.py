@@ -1,5 +1,5 @@
 """
-Lecture 3 - Encapsulation
+Encapsulation Example
 """
 
 from machine import Pin
@@ -7,7 +7,7 @@ from time import sleep, time
 
 
 class Led_Light(Pin):
-    # child class inherits the parent 'Pin' class
+    # Sub Class inherits the Super 'Pin' Class
     def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
         self.led_light_state
@@ -16,19 +16,19 @@ class Led_Light(Pin):
         self.__flashing = flashing
 
     def on(self):
-        # method overriding polymorphism of the parent class
+        # method overriding polymorphism of the Super Class
         self.high()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is {self.led_light_state}")
 
     def off(self):
-        # method overriding polymorphism of the parent class
+        # method overriding polymorphism of the Super Class
         self.low()
         if self.__debug:
             print(f"LED connected to Pin {self.__pin} is {self.led_light_state}")
 
     def toggle(self):
-        # method overriding polymorphism of the parent class
+        # method overriding polymorphism of the Super Class
         if self.value() == 0:
             self.on()
         elif self.value() == 1:
@@ -36,12 +36,12 @@ class Led_Light(Pin):
 
     @property
     def led_light_state(self):
-        # method overloading polymorphism in this class
+        # method overloading polymorphism in this Class
         return self.value()
 
     @led_light_state.setter
     def led_light_state(self, value):
-        # method overloading polymorphism in this class
+        # method overloading polymorphism in this Class
         if value == 1:
             self.off()
         elif value == 0:

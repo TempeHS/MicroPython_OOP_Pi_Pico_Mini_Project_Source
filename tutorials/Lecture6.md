@@ -7,7 +7,7 @@
 
 
 ## Multiple Inheritance
-Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware classes in MicroPython.
+Multiple Inheritance is used to inherit the properties of multiple es. However, Python does not allow multiple inheritance from es that have incompatible memory layouts at the C level, which is common with hardware es in MicroPython.
 
 ```mermaid
 classDiagram
@@ -58,7 +58,7 @@ class Walk_Light(Audio_Notification, Led_Light):
 
 ## Association
 
-Association in Object-Oriented Programming (OOP) describes the relationship between two separate classes that are connected, but neither "owns" the other. It simply means that objects of one class use or interact with objects of another class.
+Association in Object-Oriented Programming (OOP) describes the relationship between two separate es that are connected, but neither "owns" the other. It simply means that objects of one  use or interact with objects of another .
 
 - Association is a broad term for any relationship between classes that is not inheritance.
 - It represents a "uses-a" or "knows-a" relationship.

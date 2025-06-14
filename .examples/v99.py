@@ -1,5 +1,5 @@
 """
-Lecture 6 - Completed system with state machine
+Completed system ready for System Testing
 """
 
 from project.py_scripts.LL_unit_Test import Led_Light
