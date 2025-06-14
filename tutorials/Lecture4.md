@@ -7,6 +7,26 @@
 
 The `Pedestrian_Button`  extends the `machine.Pin`  to provide a debounced, interrupt-driven interface for a pedestrian button, with optional debug output.
 
+### UML
+
+```mermaid
+classDiagram
+    class Pin
+
+    class Pedestrian_Button {
+        - __pin: int
+        - __debug: bool
+        - __last_pressed: int
+        - __pedestrian_waiting: bool
+        + Pedestrian_Button(pin, debug)
+        + button_state : bool
+        + button_state(value)
+        + callback(pin)
+    }
+
+    Pin <|-- Pedestrian_Button
+```
+
 ### Constructor
 
 ```python
