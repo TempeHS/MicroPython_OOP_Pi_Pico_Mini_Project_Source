@@ -2,7 +2,7 @@
 Completed system ready for System Testing
 """
 
-from project.py_scripts.LL_unit_Test import Led_Light
+from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification
 from controller import Controller

@@ -2,10 +2,14 @@
 
 ## Lecture 7 concepts
 
-- [Open & Closed Loop Control Systems](#open-and-closed-loop-control-systems)
+- [Open and Closed Loop Control Systems](#open-and-closed-loop-control-systems)
   - [Open-Loop](#open-loop)
   - [Closed-Loop](#closed-loop)
 - [State Machine](#state-machine)
+- [Implement an Open Loop State Machine](#implement-an-open-loop-state-machine)
+  - [Define the Controller Class and Initialiser](#define-the-controller-class-and-initialiser)
+  - [Define the States](#define-the-states)
+  - [Implement the State Machine](#implement-the-state-machine)
 
 ## Open and Closed Loop Control Systems
 
@@ -174,4 +178,3 @@ The system cycles through the following states:
             self.set_error_state()
             sleep(1)
 ```
-

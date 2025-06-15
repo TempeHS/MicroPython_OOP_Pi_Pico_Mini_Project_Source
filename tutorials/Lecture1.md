@@ -2,18 +2,16 @@
 
 ## Lecture 1 Concepts
 
-- [Lecture 1](#lecture-1)
-  - [Lecture 1 Concepts](#lecture-1-concepts)
-  - [Unit Testing](#unit-testing)
-    - [Wokwi Unit Testing](#wokwi-unit-testing)
-    - [Physical Unit Testing](#physical-unit-testing)
-  - [UML Class Diagrams](#uml-class-diagrams)
-    - [Mermaid Markdown UML Class Diagram Example](#mermaid-markdown-uml-class-diagram-example)
-  - [Generalisation](#generalisation)
-  - [Super/Sub Classes](#supersub-classes)
-    - [Pin Library](#pin-library)
-    - [PWM Library](#pwm-library)
-  - [Instantiation](#instantiation)
+- [Unit Testing](#unit-testing)
+  - [Wokwi Unit Testing](#wokwi-unit-testing)
+  - [Physical Unit Testing](#physical-unit-testing)
+- [UML Class Diagrams](#uml-class-diagrams)
+  - [Mermaid Markdown UML Class Diagram Example](#mermaid-markdown-uml-class-diagram-example)
+- [Generalisation](#generalisation)
+- [Super/Sub Classes](#supersub-classes)
+  - [Pin Library](#pin-library)
+  - [PWM Library](#pwm-library)
+- [Instantiation](#instantiation)
 
 
 ## Unit Testing

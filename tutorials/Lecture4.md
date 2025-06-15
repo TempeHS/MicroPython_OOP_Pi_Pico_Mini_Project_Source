@@ -2,23 +2,23 @@
 
 ## Lecture 4 Concepts
 
-- [Class Overview](#class-overview)
-- [Create Files](#create-files)
-- [Imports and Constructor](#imports-and-constructor)
-- [Implement an Interrupt](#implement-an-interrupt)
-- [Getter and Setter](#getter-and-setter)
-- [Create a Callback Method for the Interrupt Trigger](#create-a-callback-method-for-the-interrupt-trigger)
+- [Pedestrian_Button Class](#pedestrian_button-class)
+    - [Create Files](#create-files)
+    - [Imports and Constructor](#imports-and-constructor)
+    - [Implement an Interrupt](#implement-an-interrupt)
+    - [Getter and Setter](#getter-and-setter)
+    - [Create a Callback Method for the Interrupt Trigger](#create-a-callback-method-for-the-interrupt-trigger)
 
-## Class Overview
+## Pedestrian_Button Class
 
 The Pedestrian_Button class extends the Pin class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses. It also provides optional debug output.
 
-## Create Files
+### Create Files
 
 1. Create a Python file in `project\lib` called `pedestrian_button.py`
 2. Create a Python file in `project\py_scripts` called `v05.py`
 
-## Imports and Constructor
+### Imports and Constructor
 
 In your `pedestrian_button.py` include your imports, define the class and configure the initialiser with the parameters pin and debug. Add the required parameters to store time and hold state if the button has been pressed.
 
@@ -41,7 +41,7 @@ class Pedestrian_Button(Pin):
         )  # Set up interrupt on rising edge
 ```
 
-## Implement an Interrupt
+### Implement an Interrupt
 
 An interrupt is a signal to the processor that an event needs immediate attention. Instead of constantly checking (polling) if something has happened, interrupts allow the system to be notified immediately when an event occurs.
 
@@ -60,7 +60,7 @@ class Pedestrian_Button(Pin):
         )  # Set up interrupt on rising edge
 ```
 
-## Getter and Setter
+### Getter and Setter
 
 Our system has a design requirement that the button state is stored until the walk lights have been displayed. So, because we are not setting or getting the current state of the button as we did with the LED_Light Class, we will use an ad hoc method that updates the `__pedestrian_waiting` attribute.
 
@@ -86,7 +86,7 @@ Our system has a design requirement that the button state is stored until the wa
                 )
 ```
 
-## Create a Callback Method for the Interrupt Trigger
+### Create a Callback Method for the Interrupt Trigger
 
 This `callback()` was configured in the attributes and will be executed in response to an interrupt call.
 

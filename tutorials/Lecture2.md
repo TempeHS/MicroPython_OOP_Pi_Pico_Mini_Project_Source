@@ -7,7 +7,7 @@
     - [Why Use DRY?](#why-use-dry)
 - [Encapsulation](#encapsulation)
     - [Benefits of Encapsulation](#benefits-of-encapsulation)
-- [Setters & Getters](#setters--getters)
+- [Setters and Getters](#setters-and-getters)
     - [State Attribute](#state-attribute)
     - [Getter](#getter)
     - [Setter](#setter)
@@ -143,7 +143,7 @@ while True:
 > [!Note]
 > In Python, identifiers (variable or method names) that start with double underscores (e.g., `__my_var`) are not truly private in the sense of other languages like C# or C++. Instead, Python uses a mechanism called name mangling. When you define a variable with double underscores, Python changes its name internally to `_ClassName__my_var`. This means it is harder (but not impossible) to access it from outside the class.
 
-## Setters & Getters
+## Setters and Getters
 
 Setters and getters are special methods used in object-oriented programming to access (get) or modify (set) the values of private or protected attributes of a class. They help encapsulate the internal state of an object, providing controlled access.
 

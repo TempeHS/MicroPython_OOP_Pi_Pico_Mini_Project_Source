@@ -1,13 +1,17 @@
 # Lecture 6
 
 ## Lecture 6 Concepts
+
 - [Multiple Inheritance](#multiple-inheritance)
 - [Association](#association)
-  - [Facade pattern](#facade-pattern)
+- [Facade Pattern](#facade-pattern)
 - [Implement the Subsystems](#implement-the-subsystems)
   - [Create Files](#create-files)
   - [Imports](#imports)
   - [Define the TrafficLightSubsystem](#define-the-trafficlightsubsystem)
+  - [Implement the TrafficLightSubsystem States](#define-the-trafficlightsubsystem-states)
+  - [Define the PedestrianSubsystem](#define-the-pedestriansubsystem)
+  - [Implement the PedestrianSubsystem States](#define-the-pedestriansubsystem-states)
 
 ## Multiple Inheritance
 Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware in MicroPython.
@@ -134,12 +138,12 @@ classDiagram
     Pedestrian_Button --> PedestrianSubsystem : Association 
 ```
 
-### Facade pattern 
+## Facade pattern 
 The Facade Pattern provides a simplified interface to a complex subsystem, shielding clients from the complexity of its components. Subsystems help manage complexity, improve modularity, and make systems more maintainable, testable, and understandable.
 
 Continuing our 'Bottom-Up' approach, we will create two subsystems, one for traffic and one for pedestrians.
 
-## Implement The Subsystems
+## Implement the Subsystems
 
 ### Create Files
 
@@ -168,7 +172,7 @@ class TrafficLightSubsystem:
         self.__debug = debug
 ```
 
-### Define the TrafficLightSubsystem
+### Implement the TrafficLightSubsystem
 
 ```python
     def show_red(self):
@@ -205,7 +209,7 @@ class TrafficLightSubsystem:
         self.__debug = debug
 ```
 
-### Define the PedestrianSubsystem States
+### Implement the PedestrianSubsystem States
 
 ```python
     def show_stop(self):

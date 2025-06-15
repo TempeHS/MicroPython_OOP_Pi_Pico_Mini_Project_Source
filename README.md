@@ -4,7 +4,26 @@ This repository is a series of introduction tasks to teach students the basics o
 
 Students will be recreating a model of the pedestrian crossing on Unwins Bridge Road out the front of Tempe High School.
 
+## Tutorials
+
+| Tutorial | OOP/Pi Pico Concepts Covered |
+| --- | --- |
+| [Lecture0](tutorials\Lecture0.md) | • Introduction Projects<br>• Wokwi<br>• Wire your system |
+| [Lecture1](tutorials\Lecture1.md) | • Unit Testing<br>• UML Class Diagrams<br>• Generalisation<br>• Super/Sub Classes<br>• Instantiation |
+| [Lecture2](tutorials\Lecture2.md) | • Overriding Polymorphism<br>• DRY<br>• Encapsulation<br>• Setter and Getters<br>• Overloading Polymorphism  |
+| [Lecture3](tutorials\Lecture3.md) | • Abstraction<br>• Non-Blocking |
+| [Lecture4](tutorials\Lecture4.md) | • Pull Down Button<br>• Interrupts |
+| [Lecture5](tutorials\Lecture5.md) | • PWM<br>• Stubs and Drivers |
+| [Lecture6](tutorials\Lecture6.md) | • Multiple Inheritance<br>• Association<br>• Facade pattern<br>• Subsystems |
+| [Lecture7](tutorials\Lecture7.md) | • Open & Closed Loop Control Systems<br>• State Machine |
+
+<hr>
+
 ## Introduction to Pi Pico & Common Mechatronic Commonents
+
+Students will follow text-based instructions to build simple Pi Pico circuits and implement straightforward procedural programs to test their functionality. These activities will help students understand basic hardware connections and programming concepts while reinforcing their debugging skills.
+
+All projects can be physically wired and tested (see [components list](#components-required)) or simulated and programmed in the IDE of [Wokwi](https://wokwi.com/).
 
 ### Projects
 
@@ -16,7 +35,7 @@ Students will be recreating a model of the pedestrian crossing on Unwins Bridge 
 6. [Connect and read a ultrasonic sensor use it to control the servo motor](introduction_projects/6.ultrasonic_sensor.md)
 7. [Connect and control a I2C 16x2 LCD Display](introduction_projects/7.I2C_module.md)
 
-### Components
+### Components Required
 
 > [!Note]
 > Students can build using physical components or prototype using this [Template Wokwi Project](https://wokwi.com/projects/433242006092880897).
@@ -51,7 +70,15 @@ Students will be recreating a model of the pedestrian crossing on Unwins Bridge 
 | 3V3  | 3V Power               |
 | VBUS | 5V Power               |
 
+<hr>
+
 ## OOP Mini Project
+
+Students will follow text and video-based lectures to develop a pedestrian and traffic controller system using the Pi Pico. Through this system, they will learn a range of Object-Oriented Programming (OOP) concepts and practices, including encapsulation, inheritance, polymorphism, and abstraction. Additionally, students will explore hardware integration concepts such as GPIO pin control, PWM signals, and interrupt handling.
+
+The lectures will guide them through building subsystems like traffic lights and pedestrian signals, implementing state machines, and understanding open-loop and closed-loop control systems. By the end of the course, students will have gained practical experience in designing, testing, and debugging both software and hardware components.
+
+All projects can be physically wired and tested (see [components list](#components)) or simulated and programmed in the IDE of [Wokwi](https://wokwi.com/).
 
 ![A street view image of the system we will be modeling](/images/real_world_situation.png "The traffic lights, pedestrian warning lights, pedestrian button and control system.")
 
@@ -199,16 +226,12 @@ classDiagram
     PedestrianSubsystem --o Controller : Contains   
 ```
 
-> [!Note]
-> Inheritance and association labels are note required in a UML diagram but have been added for understanding.
-
 ## Script Versions Provided
 
 | Version | Notes                                                                                                                     |
 | ------- | ------------------------------------------------------------------------------------------------------------------------- |
 | v01.py  | Basic "Blink" Program (the Hello World of mechatronics) for Unit Testing the Microcontroller.                                                                  |
 | v02.py  | Unit Test for wiring and use basic methods from Super `Pin` and `PWM` .                                                                |
-| v03.py  | A blank python script.    |
 
 ##
 
