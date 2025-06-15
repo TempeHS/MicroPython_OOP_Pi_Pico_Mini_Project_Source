@@ -113,17 +113,6 @@ classDiagram
         +duty_u16(duty: int)
     }
 
-    class Audio_Notification {
-        - __debug: bool
-        - __last_toggle_time: floot
-        - __pin: int
-        + Audio_Notification(pin, debug=False)
-        + warning_on()
-        + warning_off()
-        + beep(freq=1000, duration=500)
-    }
-    PWM <|-- Audio_Notification : Inheritance
-
     class Led_Light {
         - __debug: bool
         - __pin: int
@@ -145,11 +134,22 @@ classDiagram
         - __last_pressed: int
         - __pedestrian_waiting: bool
         + Pedestrian_Button(pin, debug)
-        + button_state : bool
+        + button_state() : bool
         + button_state(value)
         + callback(pin)
     }
     Pin <|-- Pedestrian_Button : Inheritance
+
+    class Audio_Notification {
+        - __debug: bool
+        - __last_toggle_time: floot
+        - __pin: int
+        + Audio_Notification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
+    }
+    PWM <|-- Audio_Notification : Inheritance
 
     class TrafficLightSubsystem {
         -__red: Led_Light
@@ -195,8 +195,8 @@ classDiagram
         +update()
     }  
 
-    TrafficLightSubsystem --o Controller : contains
-    PedestrianSubsystem --o Controller : contains   
+    TrafficLightSubsystem --o Controller : Contains
+    PedestrianSubsystem --o Controller : Contains   
 ```
 
 > [!Note]

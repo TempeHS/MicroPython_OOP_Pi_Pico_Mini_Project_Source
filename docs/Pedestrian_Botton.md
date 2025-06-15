@@ -1,87 +1,91 @@
 # Pedestrian_Button Class
 
-The `Pedestrian_Button`  extends the `machine.Pin`  to provide a debounced, interrupt-driven interface for a pedestrian button, with optional debug output.
+The `Pedestrian_Button` class extends the `machine.Pin` class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses.
 
 ## Constructor
 
 ```python
 Pedestrian_Button(pin, debug=False)
 ```
-- `pin`: The GPIO pin number the button is connected to.
-- `debug`: Set to `True` to enable debug print statements.
+- `pin` (`int`): The GPIO pin number the button is connected to.
+- `debug` (`bool`, optional): Enable debug print statements. Defaults to False.
 
 ## Example Usage
 
 ```python
 from pedestrian_button import Pedestrian_Button
-import time
+from time import sleep
 
-# Create a Pedestrian_Button on GPIO pin 14 with debug enabled
+# Create a Pedestrian_Button on GPIO pin 22 with debug enabled
 button = Pedestrian_Button(22, debug=True)
 
+# Main loop
 while True:
-    # Check if the button has been pressed (pedestrian waiting)
-    if button.button_state:
-        print("Pedestrian button pressed!")
-        # Reset the waiting state after handling
-        button.button_state = False
-    time.sleep(0.1)
+    # Check if button has been pressed
+    if button.button_state():
+        print("Pedestrian waiting - processing crossing request")
+        # Process crossing request
+        
+        # Reset the button state after handling
+        button.button_state(False)
+    
+    sleep(0.1)  # Small delay to prevent busy waiting
 ```
 
-## Methods and Properties
+## Methods
 
-- **button_state** (property)  
-  - Gets: Returns `True` if the button is pressed or has been pressed since last reset, `False` otherwise. Prints debug info if enabled.
-  - Sets: Allows manual reset of the internal waiting state.
-
+- **button_state(value=None)**  
+  Multi-purpose method that acts as both getter and setter for the pedestrian waiting state.
+  - When called with no arguments: Returns the current waiting state
+  - When called with a boolean argument: Sets the waiting state
+  
 - **callback(pin)**  
-  Interrupt handler called on button press (rising edge). Handles debouncing and sets the waiting state.
+  Internal interrupt handler that's called when the button is pressed.
+  Implements software debouncing (200ms) and sets the pedestrian waiting flag.
 
----
+## Notes
 
-**Notes:**  
-- The button should be wired between the specified GPIO pin and GND.
-- The  uses the internal pull-down resistor and sets up an interrupt for rising edge detection.
-- Debouncing is handled in software (200ms).
+- The button should be connected between the specified GPIO pin and 3.3V.
+- The class uses the internal pull-down resistor configuration.
+- Debouncing prevents multiple rapid detections from a single button press.
+- The interrupt triggers on the rising edge (when button is pressed).
 
 ## Class Unit Test
 
 ```python
-from time import sleep
 from pedestrian_button import Pedestrian_Button
+from time import sleep
 
-# Replace 22 with the GPIO pin your button is connected to
+# Create button with debug enabled
 button = Pedestrian_Button(22, debug=True)
 
-print("Testing initial button_state (should be False if not pressed)")
-initial_state = button.button_state
-if initial_state is False:
-    print("Initial .button_state passed")
+print("Testing initial state (should be False)")
+if button.button_state() == False:
+    print("Initial state test passed")
 else:
-    print("Initial .button_state failed")
+    print("Initial state test failed")
 
-print("Please press and release the button within 5 seconds...")
-pressed = False
-for _ in range(50):
-    if button.button_state:
-        pressed = True
-        break
-    sleep(0.1)
-
-if pressed:
-    print("Button press detected: .button_state passed")
+print("Testing manual state setting")
+button.button_state(True)
+if button.button_state() == True:
+    print("Manual state setting test passed")
 else:
-    print("Button press not detected: .button_state failed")
+    print("Manual state setting test failed")
 
-print("Testing button_state setter (reset to False)")
-button.button_state = False
-sleep(0.1)
-if button.button_state is False:
-    print(".button_state setter passed")
+print("Press the button within 5 seconds to test interrupt...")
+sleep(5)
+
+if button.button_state():
+    print("Button press detected - interrupt test passed")
 else:
-    print(".button_state setter failed")
+    print("No button press detected")
 
-print("Manual test complete.")
+print("Testing state reset")
+button.button_state(False)
+if button.button_state() == False:
+    print("State reset test passed")
+else:
+    print("State reset test failed")
 ```
 
 ## Class Implementation
@@ -117,36 +121,38 @@ class Pedestrian_Button(Pin):
         self.__pin = pin
         self.__last_pressed = ticks_ms()  # Track the last time the button was pressed
         self.__pedestrian_waiting = False
-        self.button_state
         self.irq(
             trigger=Pin.IRQ_RISING, handler=self.callback
         )  # Set up interrupt on rising edge
 
-    @property
-    def button_state(self):
-        """Get the current state of the pedestrian waiting flag.
-
-        Returns:
-            bool: True if a pedestrian is waiting (button has been pressed), False otherwise.
+    def button_state(self, value=None):
         """
-        if self.__debug:
-            print(
-                f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}"
-            )
-        return self.__pedestrian_waiting
+        Get or set the current state of the pedestrian waiting flag.
 
-    @button_state.setter
-    def button_state(self, value):
-        """Set the pedestrian waiting state manually.
-
-        This allows external code to reset the waiting state after handling a button press.
+        - If called with no arguments, returns the current state (getter).
+        - If called with a boolean argument, sets the state (setter).
 
         Args:
-            value (bool): The new state to set, typically False to reset after handling.
+            value (bool, optional): If provided, sets the pedestrian waiting state.
+
+        Returns:
+            bool: Current state if called without arguments.
         """
-        self.__pedestrian_waiting = value
-        if self.__debug:
-            print(f"Button state on Pin {self.__pin} set to {value}")
+        if value is None:
+            # Getter
+            if self.__debug:
+                print(
+                    f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}"
+                )
+            return self.__pedestrian_waiting
+        else:
+            self.__pedestrian_waiting = bool(
+                value
+            )  # Convert to boolean to ensure proper type
+            if self.__debug:
+                print(
+                    f"Button state on Pin {self.__pin} set to {self.__pedestrian_waiting}"
+                )
 
     def callback(self, pin):
         """Interrupt handler called when the button is pressed (rising edge).
@@ -159,9 +165,7 @@ class Pedestrian_Button(Pin):
             pin (Pin): The pin that triggered the interrupt.
         """
         current_time = ticks_ms()  # Get the current time in milliseconds
-        if (
-            ticks_diff(current_time, self.__last_pressed) > 200
-        ):  # 200ms debounce delay
+        if ticks_diff(current_time, self.__last_pressed) > 200:  # 200ms debounce delay
             self.__last_pressed = current_time
             self.__pedestrian_waiting = True
             if self.__debug:

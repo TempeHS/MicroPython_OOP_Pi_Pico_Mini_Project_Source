@@ -206,7 +206,7 @@ class Controller:
             ped_red, ped_green, button, buzzer, debug
         )
 
-        # Other controller properties
+        # Other controller attributes
         self.__debug = debug
         self.state = "IDLE"
         self.__last_state_change = time()

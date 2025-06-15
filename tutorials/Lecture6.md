@@ -1,12 +1,16 @@
 # Lecture 6
 
 ## Lecture 6 Concepts
-- Multiple Inheritance
-- Association
-- Setup controller states
+- [Multiple Inheritance](#multiple-inheritance)
+- [Association](#association)
+  - [Facade pattern](#facade-pattern)
+- [Implement Subsytems](#implement-subsytems)
+  - [Create Files](#create-files)
+  - [Imports](#imports)
+  - [Define the TrafficLightSubsystem](#define-the-trafficlightsubsystem)
 
 ## Multiple Inheritance
-Multiple Inheritance is used to inherit the properties of multiple es. However, Python does not allow multiple inheritance from es that have incompatible memory layouts at the C level, which is common with hardware es in MicroPython.
+Multiple Inheritance is used to inherit the properties of multiple es. However, Python does not allow multiple inheritance from es that have incompatible memory layouts at the C level, which is common with hardwares in MicroPython.
 
 ```mermaid
 classDiagram
@@ -63,28 +67,8 @@ Association in Object-Oriented Programming (OOP) describes the relationship betw
 - It represents a "uses-a" or "knows-a" relationship.
 - The lifetime of associated objects is independent—neither object controls the lifecycle of the other.
 
-### Association UML
-We will create two subsystem one for the cars and one for teh pedestrians. We will then associate the components with each subsystem.
-
 ```mermaid
 classDiagram
-    class Pin {
-    }
-
-    class PWM {
-    }
-
-    class Audio_Notification {
-        - __debug: bool
-        - __last_toggle_time: floot
-        - __pin: int
-        + Audio_Notification(pin, debug=False)
-        + warning_on()
-        + warning_off()
-        + beep(freq=1000, duration=500)
-    }
-    PWM <|-- Audio_Notification : Inheritance
-
     class Led_Light {
         - __debug: bool
         - __pin: int
@@ -98,7 +82,6 @@ classDiagram
         + led_light_state
         + led_light_state(value)
     }
-    Pin <|-- Led_Light : Inheritance
 
     class Pedestrian_Button {
         - __pin: int
@@ -106,11 +89,20 @@ classDiagram
         - __last_pressed: int
         - __pedestrian_waiting: bool
         + Pedestrian_Button(pin, debug)
-        + button_state : bool
+        + button_state() : bool
         + button_state(value)
         + callback(pin)
     }
-    Pin <|-- Pedestrian_Button : Inheritance
+
+    class Audio_Notification {
+        - __debug: bool
+        - __last_toggle_time: floot
+        - __pin: int
+        + Audio_Notification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
+    }
 
     class TrafficLightSubsystem {
         -__red: Led_Light
@@ -142,98 +134,104 @@ classDiagram
     Pedestrian_Button --> PedestrianSubsystem : Association 
 ```
 
-```python
+### Facade pattern 
+The Facade Pattern provides a simplified interface to a complex subsystem/s, which shields clients from the complexity of subsystem components. Subsystems help manage complexity, improve modularity, and make systems more maintainable, testable, and understandable.
 
-```
+Continuing our 'Bottom-Up' approach we will create two subsystems one for traffic and one for pedestrians.
 
+## Implement Subsytems
 
-### Setup differnet states of the controller using association
+### Create Files
 
-In the context of a microcontroller, state refers to the current values or conditions of the system’s internal variables, inputs, outputs, and memory at a specific moment in time. State is crucial for determining how the microcontroller should behave next.
+1. Create a Python file in `project\lib` called `controller.py`
+2. Create a Python file in `project\py_scripts` called `v06.py`
 
-For example, in a simple traffic light controller, one of the states could be `Traffic_Go` in which the green lights are `on()` while both the red and amber lights are `off()`.
+### Imports
+
+In your `controller.py` include your imports. This imports all the associated classes and the time library needed for the final controller class.
 
 ```python
 from led_light import Led_Light
 from pedestrian_button import Pedestrian_Button
 from audio_notification import Audio_Notification
 from time import sleep, time
-
-
-class Controller:
-    def __init__(
-        self, ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug
-    ):
-        self.__Ped_Red = ped_red
-        self.__Ped_Green = ped_green
-        self.__Car_Red = car_red
-        self.__Car_Amber = car_amber
-        self.__Car_Green = car_green
-        self.__Buzzer = buzzer
-        self.__Button = button
-        self.__debug = debug
-
-    def walk_on(self):
-        if self.__debug:
-            print("Walking")
-        self.__Ped_Red.off()
-        self.__Ped_Green.on()
-        self.__Car_Green.off()
-        self.__Car_Amber.off()
-        self.__Car_Red.on()
-        self.__Buzzer.warning_on()
-
-    def walk_warning(self):
-        if self.__debug:
-            print("No Walking Warning")
-        self.__Ped_Red.flash()
-        self.__Ped_Green.off()
-        self.__Car_Green.off()
-        self.__Car_Amber.off()
-        self.__Car_Red.on()
-        self.__Buzzer.warning_off()
-        
-    def walk_off(self):
-        if self.__debug:
-            print("No Walking")
-        self.__Ped_Red.on()
-        self.__Ped_Green.off()
-        self.__Car_Green.on()
-        self.__Car_Amber.off()
-        self.__Car_Red.off()
-        self.__Ped_Green.off()
-        self.__Buzzer.warning_off()
-
-    def change(self):
-        if self.__debug:
-            print("Changing")
-        self.__Ped_Red.on()
-        self.__Ped_Green.off()
-        self.__Car_Green.off()
-        self.__Car_Amber.on()
-        self.__Car_Red.off()
-        self.__Ped_Green.off()
-        self.__Buzzer.warning_off()
 ```
 
+### Define the TrafficLightSubsystem
+
 ```python
-# Alternative association method that
-# encapsulates the associated objects
-class Walk_Light:
-    def __init__(self, led_pin, buz_pin, debug):
-        self.LED = Led_Light(led_pin, debug)
-        self.BUZ = Audio_Notification(buz_pin, debug)
+class TrafficLightSubsystem:
+    def __init__(self, red, amber, green, debug=False):
+        self.__red = red
+        self.__amber = amber
+        self.__green = green
         self.__debug = debug
+```
 
-    def walk_on(self):
-        if self.__debug:
-            print("Beep and Light on")
-        self.LED.on()
-        self.BUZ.warning_on()
+### Define the TrafficLightSubsystem
 
-    def walk_off(self):
+```python
+    def show_red(self):
         if self.__debug:
-            print("Beep and Light off")
-        self.LED.off()
-        self.BUZ.warning_off()
+            print("Traffic: Red ON")
+        self.__red.on()
+        self.__amber.off()
+        self.__green.off()
+
+    def show_amber(self):
+        if self.__debug:
+            print("Traffic: Amber ON")
+        self.__red.off()
+        self.__amber.on()
+        self.__green.off()
+
+    def show_green(self):
+        if self.__debug:
+            print("Traffic: Green ON")
+        self.__red.off()
+        self.__amber.off()
+        self.__green.on()
+```
+
+### Define the PedestrianSubsystem
+
+```python
+class TrafficLightSubsystem:
+    def __init__(self, red, green, button, buzzer, debug=False):
+        self.__red = red
+        self.__green = green
+        self.__button = button
+        self.__buzzer = buzzer
+        self.__debug = debug
+```
+
+### Define the PedestrianSubsystem States
+
+```python
+    def show_stop(self):
+        if self.__debug:
+            print("Pedestrian: Red ON")
+        self.__red.on()
+        self.__green.off()
+        self.__buzzer.warning_off()
+
+    def show_walk(self):
+        if self.__debug:
+            print("Pedestrian: Green ON")
+        self.__red.off()
+        self.__green.on()
+        self.__buzzer.warning_on()
+
+    def show_warning(self):
+        if self.__debug:
+            print("Pedestrian: Warning")
+        self.__red.flash()
+        self.__green.off()
+        self.__buzzer.warning_off()
+
+    def is_button_pressed(self):
+        return self.__button.button_state
+
+    def reset_button(self):
+        self.__button.button_state = False
 ```

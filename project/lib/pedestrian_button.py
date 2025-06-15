@@ -28,36 +28,38 @@ class Pedestrian_Button(Pin):
         self.__pin = pin
         self.__last_pressed = ticks_ms()  # Track the last time the button was pressed
         self.__pedestrian_waiting = False
-        self.button_state
         self.irq(
             trigger=Pin.IRQ_RISING, handler=self.callback
         )  # Set up interrupt on rising edge
 
-    @property
-    def button_state(self):
-        """Get the current state of the pedestrian waiting flag.
-
-        Returns:
-            bool: True if a pedestrian is waiting (button has been pressed), False otherwise.
+    def button_state(self, value=None):
         """
-        if self.__debug:
-            print(
-                f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}"
-            )
-        return self.__pedestrian_waiting
+        Get or set the current state of the pedestrian waiting flag.
 
-    @button_state.setter
-    def button_state(self, value):
-        """Set the pedestrian waiting state manually.
-
-        This allows external code to reset the waiting state after handling a button press.
+        - If called with no arguments, returns the current state (getter).
+        - If called with a boolean argument, sets the state (setter).
 
         Args:
-            value (bool): The new state to set, typically False to reset after handling.
+            value (bool, optional): If provided, sets the pedestrian waiting state.
+
+        Returns:
+            bool: Current state if called without arguments.
         """
-        self.__pedestrian_waiting = value
-        if self.__debug:
-            print(f"Button state on Pin {self.__pin} set to {value}")
+        if value is None:
+            # Getter
+            if self.__debug:
+                print(
+                    f"Button connected to Pin {self.__pin} is {'WAITING' if self.__pedestrian_waiting else 'NOT WAITING'}"
+                )
+            return self.__pedestrian_waiting
+        else:
+            self.__pedestrian_waiting = bool(
+                value
+            )  # Convert to boolean to ensure proper type
+            if self.__debug:
+                print(
+                    f"Button state on Pin {self.__pin} set to {self.__pedestrian_waiting}"
+                )
 
     def callback(self, pin):
         """Interrupt handler called when the button is pressed (rising edge).
