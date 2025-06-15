@@ -27,12 +27,12 @@ Unit testing is especially valuable in embedded systems, such as the Pi Pico, wh
 Students should copy the provided script [v02.py](..\project\py_scripts\v02.py) into the main.py tab in the [Wokwi](https://wokwi.com/) IDE. Then click the `Play` button in the simulator window.
 
 1. All 5 LEDs should illuminate.
-2. The buzzer should emit animated musical note on screen and if volume is turned up a constant tone.
+2. The buzzer should emit an animated musical note on screen, and if the volume is turned up, a constant tone.
 3. The momentary switch should return `1` to the IDE terminal when closed (pressed) and 0 when not closed (depressed).
 
 ### Physical Unit Testing
 
-Unit test using the provided script [\project\py_scripts\v02.py](..\project\py_scripts\v02.py). In VSCode: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> -> Select **MicroPico: Connect**. Then right click `v02.py` -> choose **_run current file on pico_**.  
+Unit test using the provided script [\project\py_scripts\v02.py](..\project\py_scripts\v02.py). In VSCode: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> -> Select **MicroPico: Connect**. Then right-click `v02.py` -> choose **_run current file on pico_**.  
 
 1. All 5 LEDs should illuminate.
 2. The buzzer should emit a constant tone.
@@ -91,7 +91,7 @@ Each method is shown with its visibility, name, parameters, and return type.
 
 ## Generalisation
 
-On the Pi Pico, the Pin and PWM libraries are designed to be generalised to provide flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()` or `high()`, `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
+On the Pi Pico, the Pin and PWM libraries are designed to be generalised, providing flexible and reusable interfaces for interacting with the microcontroller’s hardware. The simple `on()`, `off()`, `high()` and `low()` methods are not specific to any hardware but are generalised to the nature of a digital GPIO Pin. As a generalised class is inherited and the classes are extended, they become more specific (less generalised) and functional to specific hardware for which they are designed.
 
 ## Super/Sub Classes
 
