@@ -22,9 +22,9 @@
 
 Polymorphism Overriding occurs when a Sub Class provides a new implementation for a method it inherits from its Super Class.
 
-The method in the Sub Class has the same name and parameters as the one in the Super Class. When the method is called on an object of the Sub Class, Python (or any object-oriented language) uses the Sub’s version, even if the object is referenced using the Super type (`self.super.method()`).
+The method in the Sub Class has the same name and parameters as the one in the Super Class. When the method is called on an object of the Sub Class, Python (or any object-oriented language) uses the Sub Class’s version, even if the object is referenced using the Super type (`self.super.method()`).
 
-In this example we will apply overriding polymorphism and develop new implementations for the `on()`, `off()` and `toggle()` methods. We will extend the functionality of the methods to provide debugging support.
+In this example, we will apply overriding polymorphism and develop new implementations for the `on()`, `off()` and `toggle()` methods. We will extend the functionality of the methods to provide debugging support.
 
 ```python
 from machine import Pin
@@ -124,7 +124,7 @@ The DRY pattern stands for "**Don't Repeat Yourself**"; it is a fundamental prin
 ```
 
 ## Encapsulation
-Encapsulation restricts direct access to some of an object's components (such as attributes or methods), meaning the internal representation of the object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., inaccessible from outside the ) and providing public methods (such as getters and setters) to access or modify those private members.
+Encapsulation restricts direct access to some of an object's components (such as attributes or methods), meaning the internal representation of the object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., inaccessible from outside the class), and providing public methods (such as getters and setters) to access or modify those private members.
 
 ### Benefits of Encapsulation:
 
@@ -141,7 +141,7 @@ while True:
 ```
 
 > [!Note]
-> In Python, identifiers (variable or method names) that start with double underscores (e.g., `__my_var`) are not truly private in the sense of other languages like C# or C++. Instead, Python uses a mechanism called name mangling. When you define a variable with double underscores, Python changes its name internally to `_ClassName__my_var`. This means it is harder (but not impossible) to access it from outside the .
+> In Python, identifiers (variable or method names) that start with double underscores (e.g., `__my_var`) are not truly private in the sense of other languages like C# or C++. Instead, Python uses a mechanism called name mangling. When you define a variable with double underscores, Python changes its name internally to `_ClassName__my_var`. This means it is harder (but not impossible) to access it from outside the class.
 
 ## Setters & Getters
 
@@ -149,7 +149,7 @@ Setters and getters are special methods used in object-oriented programming to a
 
 ### State Attribute
 
-First we need an attribute to hold state for the setter and getter `self.led_light_state`.
+First, we need an attribute to hold state for the setter and getter `self.led_light_state`.
 
 ```python
 def __init__(self, pin, flashing=False, debug=False):
@@ -250,7 +250,7 @@ Class Led_Light inherits from Pin:
 
 ### Adhoc Method Overloading
 
-Adhoc Method Overloading is a common approach to overloading in Python, demonstrated in the below implementations.
+Adhoc Method Overloading is a common approach to overloading in Python, demonstrated in the implementations below.
 
 ```python
 # Default parameters
