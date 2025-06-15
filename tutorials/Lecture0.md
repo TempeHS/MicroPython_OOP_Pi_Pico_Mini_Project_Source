@@ -25,12 +25,12 @@ The Introduction projects should be completed before starting the OOP Mini Proje
 | ![Ultrasonic Sensor](../introduction_projects/images/ultrasonic_sensor.png)<br/>Ultrasonic Sensor | ![I2C Module](../introduction_projects/images/I2C_module.png)<br/>I2C Module |
 
 ## Common Mistakes Students Make
-1. Programming GPIO Pin 3 but wiring to the 3rd Pin not GP3 (check diagram).
+1. Programming GPIO Pin 3, but wiring to the 3rd Pin not GP3 (check diagram).
 2. Incorrect polarity on an LED.
 3. Connecting to the wrong row on a breadboard.
 4. Connecting an analogue sensor to the GND rather than the specific analogue ground AGND.
 5. Not uploading the 2IC Libraries either to the Pi Pico or to Wokwi.
-6. Overcurrent as the Pi Pico and most sensors are 3.3v sensitive. Only motors should be connected to the VBUS (5v). If a sensor is connected to the VBUS, it will return 5V to the GND, causing an overcurrent situation.
+6. Overcurrent, as the Pi Pico and most sensors are 3.3V sensitive. Only motors should be connected to the VBUS (5v). If a sensor is connected to the VBUS, it will return 5V to the GND, causing an overcurrent situation.
 
 
 ## Wokwi
