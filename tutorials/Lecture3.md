@@ -5,7 +5,7 @@
   - [Benefits of Abstraction](#benefits-of-abstraction)
   - [VSCode Instructions](#vscode-instructions)
   - [Wokwi Instructions](#wokwi-instructions)
-- [Implement a non blocking flash method](#implement-a-non-blocking-flash-method)
+- [Implement a Non-Blocking Flash Method](#implement-a-non-blocking-flash-method)
 
 ## Abstraction
 
@@ -46,12 +46,12 @@ while True:
     sleep(0.25)
 ```
 
-## Implement a non blocking flash method
+## Implement a Non-Blocking Flash Method
 
 > [!Important]
 > Make sure you edit the  in the `project\lib\led_light.py`, not your main.py implementation.
 
-Import time and add new attribute to store a time value when the LED last toggled.
+Import time and add a new attribute to store a time value when the LED last toggled.
 
 ```python
 from time import sleep, time
@@ -60,7 +60,7 @@ from time import sleep, time
         super().__init__(pin, Pin.OUT)
         self.__last_toggle_time = time()
 ```
-Implement a non blocking flash. This method should be called repeatedly in the main loop. The LED will toggle only if flashing is enabled and 0.5 seconds have elapsed since the last toggle.
+Implement a non-blocking flash. This method should be called repeatedly in the main loop. The LED will toggle only if flashing is enabled and 0.5 seconds have elapsed since the last toggle.
 
 ```python
     def flash(self):
