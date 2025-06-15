@@ -9,7 +9,7 @@
 
 ## Open and Closed Loop Control Systems
 
-Open and closed loop control systems are two fundamental types of control systems used in engineering, automation, robotics, and other fields to manage the behavior of devices or processes.
+Open-loop and closed-loop control systems are two fundamental types of control systems used in engineering, automation, robotics, and other fields to manage the behaviour of devices or processes.
 
 ### Open-Loop
 
@@ -37,15 +37,15 @@ How it works:
 - The actuator operates on the system.
 - A sensor measures the actual output.
 - The output is fed back and compared with the input (setpoint).
-- The difference (error) is used to adjust the control action to reduce the error.
+- The difference (error) is used to adjust the control action, thereby reducing the error.
 
 Example:
 
-A home thermostat works by allowing the homeowner to set a desired temperature. The system then measures the actual room temperature and adjusts the heater or cooler to reach and maintain the set temperature. As the system approaches—or overshoots—the desired temperature, it modifies its output accordingly.
+A home thermostat allows homeowners to set a desired temperature. The system then measures the actual room temperature and adjusts the heater or cooler to reach and maintain the set temperature. As the system approaches—or overshoots—the desired temperature, it modifies its output accordingly.
 
 ## State Machine
 
-A state machine (also known as a finite state machine or FSM) is a computational model used to design and describe systems that can be in one of a finite number of states at any given time. It transitions between these states in response to external inputs or events such as time, button presses of sensor values.
+A state machine (also known as a finite state machine or FSM) is a computational model used to design and describe systems that can be in one of a finite number of states at any given time. It transitions between these states in response to external inputs or events such as time, button presses, or sensor values.
 
 Key concepts:
 
@@ -59,7 +59,7 @@ Key concepts:
 ### Define the Controller Class and Initialiser
 
 > [!Note]
-> The subsystems (TrafficLightSubsystem, PedestrianSubsystem) are only used by the Controller Class and are tightly coupled to it, so we will keep them in the same `controller.py` file as the Controller Class for simplicity and easier maintenance. However, students can equally abstract them to individual `*.py` files for independance.
+> The subsystems (TrafficLightSubsystem, PedestrianSubsystem) are only used by the Controller Class. They are tightly coupled to it, so we will keep them in the same `controller.py` file as the Controller Class for simplicity and easier maintenance. However, students can equally abstract them to individual `*.py` files for independence if they wish.
 
 ```python
 class Controller:
@@ -74,7 +74,7 @@ class Controller:
         buzzer,
         debug=False,
     ):
-        # Initialize subsystems
+        # Initialise subsystems
         self.__traffic_lights = TrafficLightSubsystem(
             car_red, car_amber, car_green, debug
         )
@@ -92,11 +92,6 @@ class Controller:
 
 ```python
     def set_idle_state(self):
-        """
-        Set system to idle state with traffic flowing and pedestrians stopped.
-
-        This is the default state when no pedestrian is waiting to cross.
-        """
         if self.__debug:
             print("System: IDLE state")
         self.__pedestrian_signals.show_stop()
