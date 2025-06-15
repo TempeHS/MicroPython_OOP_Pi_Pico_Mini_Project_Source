@@ -1,5 +1,5 @@
 from machine import Pin
-import time
+from time import ticks_ms, ticks_diff
 
 
 class Pedestrian_Button(Pin):
@@ -26,7 +26,7 @@ class Pedestrian_Button(Pin):
         super().__init__(pin, Pin.IN, Pin.PULL_DOWN)
         self.__debug = debug
         self.__pin = pin
-        self.__last_pressed = 0  # Track the last time the button was pressed
+        self.__last_pressed = ticks_ms()  # Track the last time the button was pressed
         self.__pedestrian_waiting = False
         self.button_state
         self.irq(
@@ -69,10 +69,8 @@ class Pedestrian_Button(Pin):
         Args:
             pin (Pin): The pin that triggered the interrupt.
         """
-        current_time = time.ticks_ms()  # Get the current time in milliseconds
-        if (
-            time.ticks_diff(current_time, self.__last_pressed) > 200
-        ):  # 200ms debounce delay
+        current_time = ticks_ms()  # Get the current time in milliseconds
+        if ticks_diff(current_time, self.__last_pressed) > 200:  # 200ms debounce delay
             self.__last_pressed = current_time
             self.__pedestrian_waiting = True
             if self.__debug:

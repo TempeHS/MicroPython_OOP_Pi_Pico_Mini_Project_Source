@@ -151,29 +151,52 @@ classDiagram
     }
     Pin <|-- Pedestrian_Button : Inheritance
 
-    class Controller {
-        - __Ped_Red: Class Led_Light
-        - __Ped_Green: Class Led_Light
-        - __Car_Red: Class Led_Light
-        - __Car_Amber: Class Led_Light
-        - __Car_Green: Class Led_Light
-        - __Buzzer: Class Audio_Notification
-        - __Button: Class Pedestrian_Button
-        - bool __debug
-        - str state
-        - float last_state_change
-        + Controller(ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug)
-        + walk()
-        + walk_warning()
-        + idle()
-        + change()
-        + update()
+    class TrafficLightSubsystem {
+        -__red: Led_Light
+        -__amber: Led_Light
+        -__green: Led_Light
+        -__debug: bool
+        +__init__(red: Led_Light, amber: Led_Light, green: Led_Light, debug: bool)
+        +show_red()
+        +show_amber()
+        +show_green()
     }
+    Led_Light --> TrafficLightSubsystem : Association
 
-    Led_Light --> Controller : Association
-    Audio_Notification --> Controller : Association
-    Pedestrian_Button --> Controller : Association
+    class PedestrianSubsystem {
+        -__red: Led_Light
+        -__green: Led_Light
+        -__button: Pedestrian_Button
+        -__buzzer: Audio_Notification
+        -__debug: bool
+        +__init__(red: Led_Light, green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +show_stop()
+        +show_walk()
+        +show_warning()
+        +is_button_pressed() bool
+        +reset_button()
+    }
+    Led_Light --> PedestrianSubsystem : Association
+    Audio_Notification --> PedestrianSubsystem : Association
+    Pedestrian_Button --> PedestrianSubsystem : Association
 
+    class Controller {
+        -__traffic_lights: TrafficLightSubsystem
+        -__pedestrian_signals: PedestrianSubsystem
+        -__debug: bool
+        -__last_state_change: float
+        +state: string
+        +__init__(ped_red: Led_Light, ped_green: Led_Light, car_red: Led_Light, car_amber: Led_Light, car_green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +set_idle_state()
+        +set_change_state()
+        +set_walk_state() 
+        +set_warning_state()
+        +set_error_state()
+        +update()
+    }  
+
+    TrafficLightSubsystem --o Controller : contains
+    PedestrianSubsystem --o Controller : contains   
 ```
 
 > [!Note]

@@ -5,7 +5,6 @@
 - Association
 - Setup controller states
 
-
 ## Multiple Inheritance
 Multiple Inheritance is used to inherit the properties of multiple es. However, Python does not allow multiple inheritance from es that have incompatible memory layouts at the C level, which is common with hardware es in MicroPython.
 
@@ -64,24 +63,15 @@ Association in Object-Oriented Programming (OOP) describes the relationship betw
 - It represents a "uses-a" or "knows-a" relationship.
 - The lifetime of associated objects is independent—neither object controls the lifecycle of the other.
 
+### Association UML
+We will create two subsystem one for the cars and one for teh pedestrians. We will then associate the components with each subsystem.
+
 ```mermaid
 classDiagram
     class Pin {
-        -__pin: int
-        +__init__(pin: int)
-        +value()
-        +high()
-        +low()
-        +on()
-        +off()
-        +toggle()
     }
 
     class PWM {
-        -__pin: int
-        +__init__(pin: int)
-        +freq(freq: int)
-        +duty_u16(duty: int)
     }
 
     class Audio_Notification {
@@ -122,30 +112,40 @@ classDiagram
     }
     Pin <|-- Pedestrian_Button : Inheritance
 
-    class Controller {
-        - __Ped_Red: Class Led_Light
-        - __Ped_Green: Class Led_Light
-        - __Car_Red: Class Led_Light
-        - __Car_Amber: Class Led_Light
-        - __Car_Green: Class Led_Light
-        - __Buzzer: Class Audio_Notification
-        - __Button: Class Pedestrian_Button
-        - bool __debug
-        - str state
-        - float last_state_change
-        + Controller(ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug)
-        + walk()
-        + walk_warning()
-        + idle()
-        + change()
-        + update()
+    class TrafficLightSubsystem {
+        -__red: Led_Light
+        -__amber: Led_Light
+        -__green: Led_Light
+        -__debug: bool
+        +__init__(red: Led_Light, amber: Led_Light, green: Led_Light, debug: bool)
+        +show_red()
+        +show_amber()
+        +show_green()
     }
+    Led_Light --> TrafficLightSubsystem : Association
 
-    Led_Light --> Controller : Association
-    Audio_Notification --> Controller : Association
-    Pedestrian_Button --> Controller : Association
+    class PedestrianSubsystem {
+        -__red: Led_Light
+        -__green: Led_Light
+        -__button: Pedestrian_Button
+        -__buzzer: Audio_Notification
+        -__debug: bool
+        +__init__(red: Led_Light, green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +show_stop()
+        +show_walk()
+        +show_warning()
+        +is_button_pressed() bool
+        +reset_button()
+    }
+    Led_Light --> PedestrianSubsystem : Association
+    Audio_Notification --> PedestrianSubsystem : Association
+    Pedestrian_Button --> PedestrianSubsystem : Association 
+```
+
+```python
 
 ```
+
 
 ### Setup differnet states of the controller using association
 

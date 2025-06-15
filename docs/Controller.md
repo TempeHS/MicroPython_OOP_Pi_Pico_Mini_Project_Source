@@ -1,18 +1,85 @@
-The `Controller`  manages the state machine for a pedestrian crossing system, coordinating LEDs, buzzer, and button input. It handles the sequence of traffic and pedestrian signals based on button presses and timing.
+# Controller Class
 
-### Constructor
+The `Controller` class acts as a **Facade** for the traffic and pedestrian crossing system. It provides a simplified interface to the underlying subsystems that manage traffic lights and pedestrian signals, and implements a state machine to control the crossing sequence and timing.
+
+## Constructor
 
 ```python
 Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug
+    ped_red,
+    ped_green,
+    car_red,
+    car_amber,
+    car_green,
+    button,
+    buzzer,
+    debug=False
 )
 ```
-- `ped_red`, `ped_green`, `car_red`, `car_amber`, `car_green`: Instances of `Led_Light` for each light.
-- `button`: An instance of `Pedestrian_Button`.
-- `buzzer`: An instance of `Audio_Notification`.
-- `debug`: Set to `True` to enable debug print statements.
+- `ped_red` (`Led_Light`): Red pedestrian light
+- `ped_green` (`Led_Light`): Green pedestrian light
+- `car_red` (`Led_Light`): Red traffic light
+- `car_amber` (`Led_Light`): Amber traffic light
+- `car_green` (`Led_Light`): Green traffic light
+- `button` (`Pedestrian_Button`): Pedestrian crossing button
+- `buzzer` (`Audio_Notification`): Crossing buzzer
+- `debug` (`bool`, optional): Enable debug output (default `False`)
 
-### Example Usage
+## Example Usage
+
+```python
+from led_light import Led_Light
+from pedestrian_button import Pedestrian_Button
+from audio_notification import Audio_Notification
+from controller import Controller
+import time
+
+car_red = Led_Light(3, debug=False)
+car_amber = Led_Light(5, debug=False)
+car_green = Led_Light(7, debug=False)
+ped_red = Led_Light(17, debug=False)
+ped_green = Led_Light(19, debug=False)
+button = Pedestrian_Button(22, debug=False)
+buzzer = Audio_Notification(27, debug=False)
+
+controller = Controller(
+    ped_red, ped_green, car_red, car_amber, car_green,
+    button, buzzer, debug=True
+)
+
+while True:
+    controller.update()
+    time.sleep(0.1)
+```
+
+## Methods
+
+- **set_idle_state()**: Set the system to idle state: traffic flows, pedestrians stopped.
+- **set_change_state()**: Transition to stop traffic: amber light for vehicles, pedestrians wait.
+- **set_walk_state()**: Allow pedestrians to cross: red light for vehicles, green for pedestrians.
+- **set_warning_state()**: Warn pedestrians crossing time is ending: red traffic light, flashing pedestrian signal.
+- **set_error_state()**: Set an error state: amber traffic light, pedestrian "don't walk" signal.
+- **update()**: Advance the state machine according to timing and button input. Should be called in the main loop.
+
+## State Machine Logic
+
+- **IDLE**: Traffic flows, pedestrians wait (default state)
+- **CHANGE**: Amber light for vehicles, prepares to stop traffic
+- **WALK**: Red light for vehicles, green light/buzzer for pedestrians to cross
+- **WALK_WARNING**: Red traffic light, pedestrian warning (flashing light, buzzer off)
+- **IDLE**: Returns to idle after crossing
+
+## Subsystems
+
+**TrafficLightSubsystem**  
+Manages vehicle traffic signals.  
+Methods: `show_red()`, `show_amber()`, `show_green()`
+
+**PedestrianSubsystem**  
+Manages pedestrian signals, button input, and audio notifications.  
+Methods: `show_stop()`, `show_walk()`, `show_warning()`, `is_button_pressed()`, `reset_button()`
+
+## Class Unit Test
 
 ```python
 from led_light import Led_Light
@@ -21,57 +88,38 @@ from audio_notification import Audio_Notification
 from controller import Controller
 from time import sleep
 
-# Instantiate hardware objects
-ped_red = Led_Light(19)
-ped_green = Led_Light(17, flashing=True)
-car_red = Led_Light(3)
-car_amber = Led_Light(5)
-car_green = Led_Light(6)
-button = Pedestrian_Button(22)
-buzzer = Audio_Notification(27)
+car_red = Led_Light(3, debug=True)
+car_amber = Led_Light(5, debug=True)
+car_green = Led_Light(7, debug=True)
+ped_red = Led_Light(17, debug=True)
+ped_green = Led_Light(19, debug=True)
+button = Pedestrian_Button(22, debug=True)
+buzzer = Audio_Notification(27, debug=True)
 
-# Create the controller
 controller = Controller(
-    ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug=True
+    ped_red, ped_green, car_red, car_amber, car_green,
+    button, buzzer, debug=True
 )
 
-# Main loop
-while True:
+print("Testing initial state (should be IDLE)")
+if controller.state == "IDLE":
+    print("Initial state test passed")
+else:
+    print("Initial state test failed")
+
+print("Testing state cycle - press the button within 5 seconds")
+sleep(5)
+
+print("Running through complete state cycle...")
+for _ in range(25):
     controller.update()
-    sleep(0.1)
+    print(f"Current state: {controller.state}")
+    sleep(1)
+
+print("Manual test complete - verify state transitions in debug output.")
 ```
 
-### Methods
-
-- **walk_on()**  
-  Activates the pedestrian walk signal, turns on the green pedestrian LED, and sounds the buzzer.
-
-- **walk_warning()**  
-  Activates the warning state (flashing red pedestrian LED, buzzer off).
-
-- **walk_off()**  
-  Deactivates the pedestrian walk signal, turns on the red pedestrian LED, and turns off the buzzer.
-
-- **change()**  
-  Changes the traffic lights to amber for cars, preparing for pedestrian crossing.
-
-- **update()**  
-  Runs the state machine. Call this method repeatedly (e.g., in a loop) to process button presses and manage signal timing.
-
-### State Machine Overview
-
-- **IDLE**: Waiting for a pedestrian button press.
-- **CAR_AMBER**: Amber light for cars, preparing to stop traffic.
-- **WALK_ON**: Pedestrian walk signal active, buzzer sounds.
-- **WALK_WARNING**: Pedestrian warning state (flashing red, buzzer off).
-- **Transitions**: Each state transitions automatically after a set time or event.
-
----
-
-**Note:**  
-- The controller expects the hardware es (`Led_Light`, `Pedestrian_Button`, `Audio_Notification`) to be implemented and working.
-- The button's `button_state` property is set by the button's interrupt handler when pressed.
-- Timing and state transitions are handled automatically by the `update()` method.
+## Class Implementation
 
 ```python
 from led_light import Led_Light
@@ -80,164 +128,320 @@ from audio_notification import Audio_Notification
 from time import sleep, time
 
 
+class TrafficLightSubsystem:
+    """
+    Manages traffic light signals for vehicles.
+
+    This subsystem controls the red, amber, and green traffic lights
+    that regulate vehicle traffic at a pedestrian crossing.
+
+    Attributes:
+        __red (Led_Light): Red traffic light for vehicles
+        __amber (Led_Light): Amber traffic light for vehicles
+        __green (Led_Light): Green traffic light for vehicles
+        __debug (bool): Whether to print debug statements
+    """
+
+    def __init__(self, red, amber, green, debug=False):
+        """
+        Initialize the traffic light subsystem.
+
+        Args:
+            red (Led_Light): Red traffic light for vehicles
+            amber (Led_Light): Amber traffic light for vehicles
+            green (Led_Light): Green traffic light for vehicles
+            debug (bool, optional): Enable debug output. Defaults to False.
+        """
+        self.__red = red
+        self.__amber = amber
+        self.__green = green
+        self.__debug = debug
+
+    def show_red(self):
+        """
+        Activate the red traffic light and deactivate others.
+
+        Signals vehicles to stop at the crossing.
+        """
+        if self.__debug:
+            print("Traffic: Red ON")
+        self.__red.on()
+        self.__amber.off()
+        self.__green.off()
+
+    def show_amber(self):
+        """
+        Activate the amber traffic light and deactivate others.
+
+        Signals vehicles to prepare to stop or proceed with caution.
+        """
+        if self.__debug:
+            print("Traffic: Amber ON")
+        self.__red.off()
+        self.__amber.on()
+        self.__green.off()
+
+    def show_green(self):
+        """
+        Activate the green traffic light and deactivate others.
+
+        Signals vehicles that they may proceed through the crossing.
+        """
+        if self.__debug:
+            print("Traffic: Green ON")
+        self.__red.off()
+        self.__amber.off()
+        self.__green.on()
+
+
+class PedestrianSubsystem:
+    """
+    Manages pedestrian signals, crossing button, and audio notifications.
+
+    This subsystem controls the red/green pedestrian lights, crossing button,
+    and buzzer that together form the pedestrian interface of the crossing.
+
+    Attributes:
+        __red (Led_Light): Red pedestrian light (don't walk)
+        __green (Led_Light): Green pedestrian light (walk)
+        __button (Pedestrian_Button): Button for pedestrians to request crossing
+        __buzzer (Audio_Notification): Audible notification device
+        __debug (bool): Whether to print debug statements
+    """
+
+    def __init__(self, red, green, button, buzzer, debug=False):
+        """
+        Initialize the pedestrian subsystem.
+
+        Args:
+            red (Led_Light): Red pedestrian light (don't walk)
+            green (Led_Light): Green pedestrian light (walk)
+            button (Pedestrian_Button): Crossing request button
+            buzzer (Audio_Notification): Audible notification device
+            debug (bool, optional): Enable debug output. Defaults to False.
+        """
+        self.__red = red
+        self.__green = green
+        self.__button = button
+        self.__buzzer = buzzer
+        self.__debug = debug
+
+    def show_stop(self):
+        """
+        Show 'don't walk' signal to pedestrians.
+
+        Activates the red pedestrian light, deactivates green light,
+        and turns off the warning buzzer.
+        """
+        if self.__debug:
+            print("Pedestrian: Red ON")
+        self.__red.on()
+        self.__green.off()
+        self.__buzzer.warning_off()
+
+    def show_walk(self):
+        """
+        Show 'walk' signal to pedestrians.
+
+        Activates the green pedestrian light, deactivates red light,
+        and turns on the crossing buzzer.
+        """
+        if self.__debug:
+            print("Pedestrian: Green ON")
+        self.__red.off()
+        self.__green.on()
+        self.__buzzer.warning_on()
+
+    def show_warning(self):
+        """
+        Show warning signal to pedestrians that crossing time is ending.
+
+        Flashes the red light, turns off green light, and disables buzzer.
+        """
+        if self.__debug:
+            print("Pedestrian: Warning")
+        self.__red.flash()
+        self.__green.off()
+        self.__buzzer.warning_off()
+
+    def is_button_pressed(self):
+        """
+        Check if the pedestrian crossing button has been pressed.
+
+        Returns:
+            bool: True if button is pressed, False otherwise.
+        """
+        return self.__button.button_state
+
+    def reset_button(self):
+        """
+        Reset the pedestrian crossing button state.
+
+        Called after the crossing cycle completes to reset for next use.
+        """
+        self.__button.button_state = False
+
+
 class Controller:
     """
-    Controller Class manages the traffic light and pedestrian crossing system state machine.
+    Facade for the traffic and pedestrian crossing system.
 
-    This class coordinates the LEDs, buzzer, and button input to manage the sequence
-    of traffic and pedestrian signals based on button presses and timing.
+    Provides a simplified interface to the complex subsystems that manage
+    traffic lights and pedestrian signals. Implements a state machine to
+    control the crossing sequence and timing.
 
-    Args:
-        ped_red (Led_Light): Red pedestrian LED
-        ped_green (Led_Light): Green pedestrian LED
-        car_red (Led_Light): Red traffic LED
-        car_amber (Led_Light): Amber traffic LED
-        car_green (Led_Light): Green traffic LED
-        button (Pedestrian_Button): Pedestrian button input
-        buzzer (Audio_Notification): Buzzer for pedestrian signals
-        debug (bool): Enable debug print statements
+    Attributes:
+        __traffic_lights (TrafficLightSubsystem): Manages vehicle traffic signals
+        __pedestrian_signals (PedestrianSubsystem): Manages pedestrian signals
+        __debug (bool): Whether to print debug statements
+        state (str): Current state of the crossing system
+        __last_state_change (float): Timestamp of the last state transition
     """
 
     def __init__(
-        self, ped_red, ped_green, car_red, car_amber, car_green, button, buzzer, debug
+        self,
+        ped_red,
+        ped_green,
+        car_red,
+        car_amber,
+        car_green,
+        button,
+        buzzer,
+        debug=False,
     ):
         """
-        Initialize the Controller with all required hardware components.
+        Initialize the crossing controller.
 
         Args:
-            ped_red (Led_Light): Red pedestrian LED
-            ped_green (Led_Light): Green pedestrian LED
-            car_red (Led_Light): Red traffic LED
-            car_amber (Led_Light): Amber traffic LED
-            car_green (Led_Light): Green traffic LED
-            button (Pedestrian_Button): Pedestrian button input
-            buzzer (Audio_Notification): Buzzer for pedestrian signals
-            debug (bool): Enable debug print statements
+            ped_red (Led_Light): Red pedestrian light
+            ped_green (Led_Light): Green pedestrian light
+            car_red (Led_Light): Red traffic light
+            car_amber (Led_Light): Amber traffic light
+            car_green (Led_Light): Green traffic light
+            button (Pedestrian_Button): Pedestrian crossing button
+            buzzer (Audio_Notification): Crossing buzzer
+            debug (bool, optional): Enable debug output. Defaults to False.
         """
-        self.__Ped_Red = ped_red
-        self.__Ped_Green = ped_green
-        self.__Car_Red = car_red
-        self.__Car_Amber = car_amber
-        self.__Car_Green = car_green
-        self.__Buzzer = buzzer
-        self.__Button = button
+        # Initialize subsystems
+        self.__traffic_lights = TrafficLightSubsystem(
+            car_red, car_amber, car_green, debug
+        )
+        self.__pedestrian_signals = PedestrianSubsystem(
+            ped_red, ped_green, button, buzzer, debug
+        )
+
+        # Other controller properties
         self.__debug = debug
         self.state = "IDLE"
         self.__last_state_change = time()
 
-    def walk(self):
+    def set_idle_state(self):
         """
-        Activate the pedestrian walk signal.
+        Set system to idle state with traffic flowing and pedestrians stopped.
 
-        Turns on pedestrian green light, car red light, and warning buzzer.
-        Turns off pedestrian red light, car amber and green lights.
+        This is the default state when no pedestrian is waiting to cross.
         """
         if self.__debug:
-            print("Walking")
-        self.__Ped_Red.off()
-        self.__Ped_Green.on()
-        self.__Car_Green.off()
-        self.__Car_Amber.off()
-        self.__Car_Red.on()
-        self.__Buzzer.warning_on()
+            print("System: IDLE state")
+        self.__pedestrian_signals.show_stop()
+        self.__traffic_lights.show_green()
 
-    def walk_warning(self):
+    def set_change_state(self):
         """
-        Activate the pedestrian warning signal.
+        Set system to changing state - preparing to stop traffic.
 
-        Flashes pedestrian red light and keeps car red light on.
-        Turns off pedestrian green light, car amber and green lights, and buzzer.
+        This transition state displays amber light to warn vehicles to slow down.
         """
         if self.__debug:
-            print("No Walking Warning")
-        self.__Ped_Red.flash()
-        self.__Ped_Green.off()
-        self.__Car_Green.off()
-        self.__Car_Amber.off()
-        self.__Car_Red.on()
-        self.__Buzzer.warning_off()
+            print("System: CHANGE state")
+        self.__pedestrian_signals.show_stop()
+        self.__traffic_lights.show_amber()
 
-    def idle(self):
+    def set_walk_state(self):
         """
-        Set the system to idle state.
+        Set system to walk state - allowing pedestrians to cross.
 
-        Turns on pedestrian red light and car green light.
-        Turns off pedestrian green light, car amber and red lights, and buzzer.
+        Stops vehicle traffic with red light and signals pedestrians it's safe to cross.
         """
         if self.__debug:
-            print("No Walking")
-        self.__Ped_Red.on()
-        self.__Ped_Green.off()
-        self.__Car_Green.on()
-        self.__Car_Amber.off()
-        self.__Car_Red.off()
-        self.__Buzzer.warning_off()
+            print("System: WALK state")
+        self.__pedestrian_signals.show_walk()
+        self.__traffic_lights.show_red()
 
-    def change(self):
+    def set_warning_state(self):
         """
-        Change the traffic lights from green to amber.
+        Set system to warning state - indicating walk signal ending soon.
 
-        Turns on pedestrian red light and car amber light.
-        Turns off pedestrian green light, car green and red lights, and buzzer.
+        Warns pedestrians that crossing time is ending while keeping traffic stopped.
         """
         if self.__debug:
-            print("Changing")
-        self.__Ped_Red.on()
-        self.__Ped_Green.off()
-        self.__Car_Green.off()
-        self.__Car_Amber.on()
-        self.__Car_Red.off()
-        self.__Buzzer.warning_off()
+            print("System: WALK WARNING state")
+        self.__pedestrian_signals.show_warning()
+        self.__traffic_lights.show_red()
+
+    def set_error_state(self):
+        """
+        Set system to error state.
+
+        This state is activated when an unexpected condition occurs.
+        Shows amber traffic light and don't walk pedestrian signal.
+        """
+        if self.__debug:
+            print("System: ERROR state")
+        self.__pedestrian_signals.show_stop()
+        self.__traffic_lights.show_amber()  # Flashing amber typically indicates malfunction
 
     def update(self):
         """
         Update the state machine based on current state and conditions.
 
-        This method should be called repeatedly in the main program loop to
-        handle state transitions based on button presses and timing.
+        This is the main interface method that clients call to operate the entire system.
+        It manages state transitions based on timing and pedestrian button input.
+
+        The system cycles through the following states:
+        - IDLE: Normal operation, traffic flowing
+        - CHANGE: Transitioning to stop traffic (amber light)
+        - WALK: Pedestrians crossing (red traffic light, green pedestrian light)
+        - WALK_WARNING: Warning that walk cycle is ending
+        - Back to IDLE
         """
         current_time = time()
         elapsed = current_time - self.__last_state_change
 
         if self.state == "IDLE":
-            if self.__Button.button_state and elapsed > 5:  # Min 5s between crossings
+            if self.__pedestrian_signals.is_button_pressed() and elapsed > 5:
                 self.state = "CHANGE"
                 self.__last_state_change = current_time
                 if self.__debug:
                     print("Switching to CHANGE")
-            self.idle()
+            self.set_idle_state()
 
         elif self.state == "CHANGE":
-            if elapsed > 5:  # 5 seconds of amber light
+            if elapsed > 5:
                 self.state = "WALK"
                 self.__last_state_change = current_time
                 if self.__debug:
                     print("Switching to WALK")
-            self.change()
+            self.set_change_state()
 
         elif self.state == "WALK":
-            if elapsed > 5:  # Walk signal for 5 seconds
-                if self.__debug:
-                    print("Switching to WALK WARNING")
+            if elapsed > 5:
                 self.state = "WALK_WARNING"
                 self.__last_state_change = current_time
-            self.walk()
+                if self.__debug:
+                    print("Switching to WALK WARNING")
+            self.set_walk_state()
 
         elif self.state == "WALK_WARNING":
-            if elapsed > 5:  # Walk signal for 5 seconds
-                if self.__debug:
-                    print("Returning to IDLE")
+            if elapsed > 5:
                 self.state = "IDLE"
                 self.__last_state_change = current_time
-                self.__Button.button_state = False
-            self.walk_warning()
+                self.__pedestrian_signals.reset_button()
+                if self.__debug:
+                    print("Returning to IDLE")
+            self.set_warning_state()
 
         else:  # error state
-            self.__Ped_Red.on()
-            self.__Ped_Green.off()
-            self.__Car_Green.off()
-            self.__Car_Amber.toggle()
-            self.__Car_Red.off()
-            self.__Ped_Green.off()
+            self.set_error_state()
             sleep(1)
 ```
