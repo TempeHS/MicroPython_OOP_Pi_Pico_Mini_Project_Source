@@ -4,13 +4,13 @@
 - [Multiple Inheritance](#multiple-inheritance)
 - [Association](#association)
   - [Facade pattern](#facade-pattern)
-- [Implement Subsytems](#implement-subsytems)
+- [Implement the Subsystems](#implement-the-subsystems)
   - [Create Files](#create-files)
   - [Imports](#imports)
   - [Define the TrafficLightSubsystem](#define-the-trafficlightsubsystem)
 
 ## Multiple Inheritance
-Multiple Inheritance is used to inherit the properties of multiple es. However, Python does not allow multiple inheritance from es that have incompatible memory layouts at the C level, which is common with hardwares in MicroPython.
+Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware in MicroPython.
 
 ```mermaid
 classDiagram
@@ -33,7 +33,7 @@ classDiagram
     C <|-- D : Inheritance
 ```
 
-This code snippet is just to demonstrate the concept and syntax of multiple inheritance. 
+This code snippet demonstrates the concept and syntax of multiple inheritance. 
 
 ```python
 from led_light import Led_Light
@@ -61,7 +61,7 @@ class Walk_Light(Audio_Notification, Led_Light):
 
 ## Association
 
-Association in Object-Oriented Programming (OOP) describes the relationship between two separate es that are connected, but neither "owns" the other. It simply means that objects of one  use or interact with objects of another .
+Association in Object-Oriented Programming (OOP) describes the relationship between two separate es that are connected, but neither "owns" the other. It simply means that objects of one class interact with or use objects of another class.
 
 - Association is a broad term for any relationship between classes that is not inheritance.
 - It represents a "uses-a" or "knows-a" relationship.
@@ -135,11 +135,11 @@ classDiagram
 ```
 
 ### Facade pattern 
-The Facade Pattern provides a simplified interface to a complex subsystem/s, which shields clients from the complexity of subsystem components. Subsystems help manage complexity, improve modularity, and make systems more maintainable, testable, and understandable.
+The Facade Pattern provides a simplified interface to a complex subsystem, shielding clients from the complexity of its components. Subsystems help manage complexity, improve modularity, and make systems more maintainable, testable, and understandable.
 
-Continuing our 'Bottom-Up' approach we will create two subsystems one for traffic and one for pedestrians.
+Continuing our 'Bottom-Up' approach, we will create two subsystems, one for traffic and one for pedestrians.
 
-## Implement Subsytems
+## Implement The Subsystems
 
 ### Create Files
 
@@ -148,7 +148,7 @@ Continuing our 'Bottom-Up' approach we will create two subsystems one for traffi
 
 ### Imports
 
-In your `controller.py` include your imports. This imports all the associated classes and the time library needed for the final controller class.
+In your `controller.py`, include your imports. This imports all the associated classes and the time library needed for the final controller class.
 
 ```python
 from led_light import Led_Light
