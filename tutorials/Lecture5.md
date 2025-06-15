@@ -5,7 +5,7 @@
 - [Create Files](#create-files)
 - [Imports and Constructor](#imports-and-constructor)
 - [Create a Single Beep](#create-a-single-beep)
-- [Implement a Non Blocking Audio Notification](#implement-a-non-blocking-audio-notification)
+- [Implement a Non-Blocking Audio Notification](#implement-a-non-blocking-audio-notification)
 - [Turn Audio Notification Off](#turn-audio-notification-off)
 
 ## Class Overview
@@ -19,7 +19,7 @@ The Audio_Notification extends the machine.PWM to provide an interface for contr
 
 ## Imports and Constructor
 
-In your `audio_notification.py` include your imports, define the class and configure the initialiser with the paramters pin and debug. Add the required parameters to store time and hold state when the button has been pressed.
+In your `audio_notification.py`, include your imports, define the class, and configure the initialiser with the parameters' pin' and' debug'. Add the required parameters to store time and set the duty cycle.
 
 ```python
 from machine import Pin, PWM
@@ -44,7 +44,7 @@ class Audio_Notification(PWM):
         if self.__debug:
             print("Beep")
 ```
-## Implement a Non Blocking Audio Notification
+## Implement a Non-Blocking Audio Notification
 
 ```python
     def warning_on(self):
