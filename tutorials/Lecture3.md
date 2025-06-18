@@ -1,5 +1,7 @@
 # Lecture 3
 
+https://github.com/user-attachments/assets/2c915031-c24c-4ba0-99ea-5f7de4ac1120
+
 ## Lecture 3 Concepts
 - [Abstraction](#abstraction)
   - [Benefits of Abstraction](#benefits-of-abstraction)
