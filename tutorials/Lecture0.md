@@ -1,6 +1,8 @@
 # Lecture 0
 
-{% include youtube.html id="JLMbpiywVxQ" %}
+{% raw %}
+{% include youtube.html id="JLMbpiywVxQ" %}  
+{% endraw %}
 
 ## Table of Contents
 
