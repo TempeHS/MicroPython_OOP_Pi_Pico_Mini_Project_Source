@@ -1,6 +1,6 @@
 # Lecture 4
 
-https://github.com/user-attachments/assets/176a9284-4b8a-41f5-bac0-39ae93500244
+https://github.com/user-attachments/assets/2185636f-0350-4df2-8ada-09b32ea51c91
 
 ## Lecture 4 Concepts
 
