@@ -1,5 +1,7 @@
 # Lecture 2
 
+https://github.com/user-attachments/assets/cd2b7c8e-bbda-4f84-a3c5-0ab8915c28bf
+
 ## Lecture 2 Concepts
 
 - [Overriding Polymorphism](#overriding-polymorphism)
