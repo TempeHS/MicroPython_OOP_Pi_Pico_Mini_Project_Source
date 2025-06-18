@@ -2,7 +2,7 @@
 Abstraction Example
 """
 
-from project.py_scripts.LL_unit_Test import Led_Light
+from led_light import Led_Light
 from time import sleep
 
 red_light = Led_Light(3, True, True)

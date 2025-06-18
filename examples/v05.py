@@ -5,7 +5,6 @@ Overriding Polymorphism Example
 from machine import Pin
 from time import sleep
 
-
 class Led_Light(Pin):
     # Sub Class inherits the 'Pin' Class
     def __init__(self, pin, flashing=False, debug=False):
@@ -27,7 +26,7 @@ class Led_Light(Pin):
             print(f"LED connected to Pin {self.__pin} is low")
 
 
-red_light = Led_Light(3)
+red_light = Led_Light(3, False, False)
 
 while True:
     red_light.on()

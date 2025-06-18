@@ -1,5 +1,7 @@
 # Lecture 0
 
+{% include youtube.html id="JLMbpiywVxQ" %}
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)

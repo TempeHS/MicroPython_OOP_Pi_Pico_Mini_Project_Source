@@ -51,8 +51,9 @@ class Led_Light(Pin):
 red_light = Led_Light(3, False, False)
 
 while True:
-    print(red_light.led_light_state)  # Allowed
-    red_light.led_light_state = 1  # Allowed
-    print(
-        f"Not allowed: {red_light.__pin} ???"
-    )  # Not allowed, should raise AttributeError
+    print(red_light.led_light_state)
+    red_light.led_light_state = 1
+    sleep(0.25)
+    print(red_light.led_light_state)
+    red_light.led_light_state = 0
+    sleep(0.25)

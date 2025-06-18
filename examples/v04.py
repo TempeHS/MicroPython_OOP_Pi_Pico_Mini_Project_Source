@@ -5,12 +5,10 @@ Inhertance Example
 from machine import Pin
 from time import sleep
 
-
 class Led_Light(Pin):
-    # Sub Class inherits the 'Pin' Class
+    # Sub Class inherits the 'Pin' Class 
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
-
 
 red_light = Led_Light(3)
 

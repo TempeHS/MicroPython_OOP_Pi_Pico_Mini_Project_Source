@@ -126,6 +126,8 @@ The DRY pattern stands for "**Don't Repeat Yourself**"; it is a fundamental prin
 ## Encapsulation
 Encapsulation restricts direct access to some of an object's components (such as attributes or methods), meaning the internal representation of the object is hidden from the outside. This is typically achieved by making certain attributes or methods private (i.e., inaccessible from outside the class), and providing public methods (such as getters and setters) to access or modify those private members.
 
+This Python implementation below demonstrates the concept of encapsulation. Unlike languages such as C++ or C#, Python does not provide true encapsulation. Instead, it uses name mangling to obscure values, rather than completely restricting access to data from outside the object. Additionally, in MicroPython, a streamlined version of Python optimized for microcontrollers, encapsulation features have been excluded to conserve memory. While students are not required to implement this code, they should develop a strong understanding of encapsulation as a principle and disregard Python’s specific limitations in this area.
+
 ### Benefits of Encapsulation:
 
 - Data Hiding: Internal object details are hidden, exposing only what is necessary.
@@ -134,14 +136,29 @@ Encapsulation restricts direct access to some of an object's components (such as
 - Flexibility: Implementation can change without affecting code that uses the object, as long as the public interface remains the same.
 
 ```python
-while True:
-    print(red_light.led_light_state) # Allowed
-    red_light.led_light_state = 1 # Allowed
-    print(f"Not allowed: {red_light.__pin} ???") # Not allowed, should raise AttributeError
+class Led_Light():
+    def __init__(self, pin, flashing=False, debug=False):
+        self.debug = debug #PUBLIC attribute
+        self.__pin = pin #Encapsulated PRIVATE attribute
+
+red_light = Led_Light(3, False, False)
+
+try:
+    print(red_light.debug)
+    print("SUCCESS: Accessed a public attribute")
+except AttributeError:
+    print("ERROR: AttributeError not expected!")
+
+try:
+    print(red_light.__pin)
+    print("ERROR: Accessed private attribute when it should be hidden!")
+except AttributeError:
+    print("SUCCESS: AttributeError raised as expected")
 ```
 
 > [!Note]
 > In Python, identifiers (variable or method names) that start with double underscores (e.g., `__my_var`) are not truly private in the sense of other languages like C# or C++. Instead, Python uses a mechanism called name mangling. When you define a variable with double underscores, Python changes its name internally to `_ClassName__my_var`. This means it is harder (but not impossible) to access it from outside the class.
+> This is not implemented in MicroPython for memory space.
 
 ## Setters and Getters
 
