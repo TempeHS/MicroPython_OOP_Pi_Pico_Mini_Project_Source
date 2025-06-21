@@ -1,6 +1,6 @@
 # Lecture 0
 
-{% include youtube.html id="JLMbpiywVxQ" %}
+https://github.com/user-attachments/assets/17bb86a4-4798-4e18-ab1d-dfb6045bb4dd
 
 ## Table of Contents
 

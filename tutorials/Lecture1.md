@@ -1,5 +1,7 @@
 # Lecture 1
 
+https://github.com/user-attachments/assets/30d1d324-4dc8-4b31-9fe5-9ed8af7b2452
+
 ## Lecture 1 Concepts
 
 - [Unit Testing](#unit-testing)
