@@ -81,7 +81,7 @@ classDiagram
 
 Explanation:
 
-1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, Car).
+1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, traffic).
 2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
 3. Methods (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
 Each method is shown with its visibility, name, parameters, and return type.
@@ -176,14 +176,14 @@ A class is like a blueprint for an object—it defines the attributes and method
 from machine import Pin
 from time import sleep
 
-led_car_red = Pin(3, Pin.OUT)
-led_car_orange = Pin(5, Pin.OUT)
-led_car_green = Pin(6, Pin.OUT)
+led_traffic_red = Pin(3, Pin.OUT)
+led_traffic_amber = Pin(5, Pin.OUT)
+led_traffic_green = Pin(6, Pin.OUT)
 
 while(True):
-    led_car_red.toggle()
-    led_car_orange.toggle()
-    led_car_green.toggle()
+    led_traffic_red.toggle()
+    led_traffic_amber.toggle()
+    led_traffic_green.toggle()
     sleep(1)
 ```
 

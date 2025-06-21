@@ -48,6 +48,8 @@ while True:
 
 ## Implement a Non-Blocking Flash Method
 
+The 'Non Blocking' approach is preferred for timing regular events in microcontroller programming because it avoids blocking the code with sleep statements, allowing the controller to multitask.
+
 > [!Important]
 > Make sure you edit the  in the `project\lib\led_light.py`, not your main.py implementation.
 

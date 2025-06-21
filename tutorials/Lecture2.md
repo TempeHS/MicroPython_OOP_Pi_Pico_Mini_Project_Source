@@ -136,6 +136,9 @@ This Python implementation below demonstrates the concept of encapsulation. Unli
 - Flexibility: Implementation can change without affecting code that uses the object, as long as the public interface remains the same.
 
 ```python
+"""
+RUN AS PYTHON NOT MICROPYTHON
+"""
 class Led_Light():
     def __init__(self, pin, flashing=False, debug=False):
         self.debug = debug #PUBLIC attribute
