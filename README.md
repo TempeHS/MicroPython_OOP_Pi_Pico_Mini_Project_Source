@@ -213,7 +213,7 @@ classDiagram
         -__debug: bool
         -__last_state_change: float
         +state: string
-        +__init__(ped_red: Led_Light, ped_green: Led_Light, car_red: Led_Light, car_amber: Led_Light, car_green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +__init__(ped_red: Led_Light, ped_green: Led_Light, traffic_red: Led_Light, traffic_amber: Led_Light, traffic_green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
         +set_idle_state()
         +set_change_state()
         +set_walk_state() 

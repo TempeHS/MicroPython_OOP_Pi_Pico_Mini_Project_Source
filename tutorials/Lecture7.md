@@ -71,16 +71,16 @@ class Controller:
         self,
         ped_red,
         ped_green,
-        car_red,
-        car_amber,
-        car_green,
+        traffic_red,
+        traffic_amber,
+        traffic_green,
         button,
         buzzer,
         debug=False,
     ):
         # Initialise subsystems
         self.__traffic_lights = TrafficLightSubsystem(
-            car_red, car_amber, car_green, debug
+            traffic_red, traffic_amber, traffic_green, debug
         )
         self.__pedestrian_signals = PedestrianSubsystem(
             ped_red, ped_green, button, buzzer, debug

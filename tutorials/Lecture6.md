@@ -12,6 +12,7 @@
   - [Implement the TrafficLightSubsystem States](#define-the-trafficlightsubsystem-states)
   - [Define the PedestrianSubsystem](#define-the-pedestriansubsystem)
   - [Implement the PedestrianSubsystem States](#define-the-pedestriansubsystem-states)
+- [Implement a Driver to Test the Subsystem](implement-a-driver-to-test-the-subsystem)
 
 ## Multiple Inheritance
 Multiple Inheritance is used to inherit the properties of multiple classes. However, Python does not allow multiple inheritance from classes that have incompatible memory layouts at the C level, which is common with hardware in MicroPython.
@@ -148,7 +149,7 @@ Continuing our 'Bottom-Up' approach, we will create two subsystems, one for traf
 ### Create Files
 
 1. Create a Python file in `project\lib` called `controller.py`
-2. Create a Python file in `project\py_scripts` called `v06.py`
+2. Create a Python file in `project\py_scripts` called `v07.py`
 
 ### Imports
 
@@ -238,4 +239,36 @@ class TrafficLightSubsystem:
 
     def reset_button(self):
         self.__button.button_state = False
+```
+
+## Implement a Driver to Test the Subsystem
+
+The below implemenation is a Drive to test the TrafficLightSubsystem, you shoudl use it as a template to design a test for the PedestrianLightSubsystem.
+
+```python
+from led_light import Led_Light
+from controller import TrafficLightSubsystem
+from time import sleep
+
+red = Led_Light(3, False, True)
+amber = Led_Light(5, False, True)
+green = Led_Light(6, False, True)
+
+light = TrafficLightSubsystem(red, amber, green, False) 
+
+def Traffic_Subsystem_Driver():
+    print(“START Testing Traffic Light in 5 seconds”)
+    sleep(5)
+    Light.show_red()
+    print(“Pass: Red ON, Amber OFF & Green OFF”)
+    sleep(10)
+    Light.show_amber()
+    print(“Pass: Red OFF, Amber ON & Green OFF”)
+    sleep(10)
+    Light.show_green()
+    print(“Pass: Red OFF, Amber OFF & Green ON”)
+    sleep(10)
+    print(“END Testing Traffic Light”)
+
+Traffic_Subsystem_Driver()
 ```

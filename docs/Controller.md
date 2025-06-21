@@ -8,9 +8,9 @@ The `Controller` class acts as a **Facade** for the traffic and pedestrian cross
 Controller(
     ped_red,
     ped_green,
-    car_red,
-    car_amber,
-    car_green,
+    traffic_red,
+    traffic_amber,
+    traffic_green,
     button,
     buzzer,
     debug=False
@@ -18,9 +18,9 @@ Controller(
 ```
 - `ped_red` (`Led_Light`): Red pedestrian light
 - `ped_green` (`Led_Light`): Green pedestrian light
-- `car_red` (`Led_Light`): Red traffic light
-- `car_amber` (`Led_Light`): Amber traffic light
-- `car_green` (`Led_Light`): Green traffic light
+- `traffic_red` (`Led_Light`): Red traffic light
+- `traffic_amber` (`Led_Light`): Amber traffic light
+- `traffic_green` (`Led_Light`): Green traffic light
 - `button` (`Pedestrian_Button`): Pedestrian crossing button
 - `buzzer` (`Audio_Notification`): Crossing buzzer
 - `debug` (`bool`, optional): Enable debug output (default `False`)
@@ -34,16 +34,16 @@ from audio_notification import Audio_Notification
 from controller import Controller
 import time
 
-car_red = Led_Light(3, debug=False)
-car_amber = Led_Light(5, debug=False)
-car_green = Led_Light(7, debug=False)
+traffic_red = Led_Light(3, debug=False)
+traffic_amber = Led_Light(5, debug=False)
+traffic_green = Led_Light(7, debug=False)
 ped_red = Led_Light(17, debug=False)
 ped_green = Led_Light(19, debug=False)
 button = Pedestrian_Button(22, debug=False)
 buzzer = Audio_Notification(27, debug=False)
 
 controller = Controller(
-    ped_red, ped_green, car_red, car_amber, car_green,
+    ped_red, ped_green, traffic_red, traffic_amber, traffic_green,
     button, buzzer, debug=True
 )
 
@@ -88,16 +88,16 @@ from audio_notification import Audio_Notification
 from controller import Controller
 from time import sleep
 
-car_red = Led_Light(3, debug=True)
-car_amber = Led_Light(5, debug=True)
-car_green = Led_Light(7, debug=True)
+traffic_red = Led_Light(3, debug=True)
+traffic_amber = Led_Light(5, debug=True)
+traffic_green = Led_Light(7, debug=True)
 ped_red = Led_Light(17, debug=True)
 ped_green = Led_Light(19, debug=True)
 button = Pedestrian_Button(22, debug=True)
 buzzer = Audio_Notification(27, debug=True)
 
 controller = Controller(
-    ped_red, ped_green, car_red, car_amber, car_green,
+    ped_red, ped_green, traffic_red, traffic_amber, traffic_green,
     button, buzzer, debug=True
 )
 
@@ -302,9 +302,9 @@ class Controller:
         self,
         ped_red,
         ped_green,
-        car_red,
-        car_amber,
-        car_green,
+        traffic_red,
+        traffic_amber,
+        traffic_green,
         button,
         buzzer,
         debug=False,
@@ -315,16 +315,16 @@ class Controller:
         Args:
             ped_red (Led_Light): Red pedestrian light
             ped_green (Led_Light): Green pedestrian light
-            car_red (Led_Light): Red traffic light
-            car_amber (Led_Light): Amber traffic light
-            car_green (Led_Light): Green traffic light
+            traffic_red (Led_Light): Red traffic light
+            traffic_amber (Led_Light): Amber traffic light
+            traffic_green (Led_Light): Green traffic light
             button (Pedestrian_Button): Pedestrian crossing button
             buzzer (Audio_Notification): Crossing buzzer
             debug (bool, optional): Enable debug output. Defaults to False.
         """
         # Initialize subsystems
         self.__traffic_lights = TrafficLightSubsystem(
-            car_red, car_amber, car_green, debug
+            traffic_red, traffic_amber, traffic_green, debug
         )
         self.__pedestrian_signals = PedestrianSubsystem(
             ped_red, ped_green, button, buzzer, debug

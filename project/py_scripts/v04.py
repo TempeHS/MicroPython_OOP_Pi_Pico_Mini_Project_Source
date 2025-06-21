@@ -52,4 +52,3 @@ if set1 == 1 and set0 == 0:
     print(".led_light_state setter passed")
 else:
     print(".led_light_state setter failed")
-    

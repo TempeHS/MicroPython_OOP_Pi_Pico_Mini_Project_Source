@@ -178,9 +178,9 @@ class Controller:
         self,
         ped_red,
         ped_green,
-        car_red,
-        car_amber,
-        car_green,
+        traffic_red,
+        traffic_amber,
+        traffic_green,
         button,
         buzzer,
         debug=False,
@@ -191,16 +191,16 @@ class Controller:
         Args:
             ped_red (Led_Light): Red pedestrian light
             ped_green (Led_Light): Green pedestrian light
-            car_red (Led_Light): Red traffic light
-            car_amber (Led_Light): Amber traffic light
-            car_green (Led_Light): Green traffic light
+            traffic_red (Led_Light): Red traffic light
+            traffic_amber (Led_Light): Amber traffic light
+            traffic_green (Led_Light): Green traffic light
             button (Pedestrian_Button): Pedestrian crossing button
             buzzer (Audio_Notification): Crossing buzzer
             debug (bool, optional): Enable debug output. Defaults to False.
         """
         # Initialize subsystems
         self.__traffic_lights = TrafficLightSubsystem(
-            car_red, car_amber, car_green, debug
+            traffic_red, traffic_amber, traffic_green, debug
         )
         self.__pedestrian_signals = PedestrianSubsystem(
             ped_red, ped_green, button, buzzer, debug
@@ -244,16 +244,6 @@ class Controller:
         self.__pedestrian_signals.show_walk()
         self.__traffic_lights.show_red()
 
-    def set_warning_state(self):
-        """
-        Set system to warning state - indicating walk signal ending soon.
-
-        Warns pedestrians that crossing time is ending while keeping traffic stopped.
-        """
-        if self.__debug:
-            print("System: WALK WARNING state")
-        self.__pedestrian_signals.show_warning()
-        self.__traffic_lights.show_red()
 
     def set_error_state(self):
         """
@@ -320,3 +310,13 @@ class Controller:
         else:  # error state
             self.set_error_state()
             sleep(1)
+    def set_warning_state(self):
+        """
+        Set system to warning state - indicating walk signal ending soon.
+
+        Warns pedestrians that crossing time is ending while keeping traffic stopped.
+        """
+        if self.__debug:
+            print("System: WALK WARNING state")
+        self.__pedestrian_signals.show_warning()
+        self.__traffic_lights.show_red()

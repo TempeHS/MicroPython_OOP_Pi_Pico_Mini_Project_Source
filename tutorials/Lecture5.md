@@ -68,7 +68,7 @@ Remember a **driver** is a simple program in a higher system that tests a lower 
 from audio_notification import Audio_Notification
 from led_light import Led_Light
 
-def PedestrianSubsystem_driver():
+def subsystem_driver():
     print("Testing Traffic Light...")
     
     # Create the walk light
@@ -84,7 +84,7 @@ def PedestrianSubsystem_driver():
     print("Test complete!")
 
 # Run the test
-test_traffic_light()
+subsystem_driver()
 ```
 
 ## Implement the Audio_Notification Class
