@@ -1,6 +1,5 @@
 {
   "files.autoSave": "onFocusChange",
-  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[python]": {
@@ -19,12 +18,16 @@
   },
   "python.terminal.activateEnvironment": false,
   "micropico.openOnStart": true,
-  "python.analysis.typeshedPaths": ["~/.micropico-stubs/included"],
+  "micropico.syncFolder": "project",
+  // Uncomment and set the device path if you want to specify a device
+  // "micropico.devicePath": "/dev/ttyACM0",
+  "python.analysis.typeshedPaths": [
+    "~/.micropico-stubs/included"
+  ],
   "python.analysis.extraPaths": [
     "~/.micropico-stubs/included",
     "./examples/smooth_"
   ],
-  "micropico.syncFolder": "project",
   "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "vscode-icons",
   "github.copilot.enable": {
