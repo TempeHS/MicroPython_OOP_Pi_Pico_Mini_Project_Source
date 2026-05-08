@@ -10,7 +10,7 @@
   "waitFor": "onCreateCommand",
   "updateContentCommand": "",
   "postCreateCommand": "pip install -r requirements.txt && apt-get clean && rm -rf /root/.cache/pip",
-  "postStartCommand": "",   // For commands to run each Codespace start
+  "postStartCommand": "", // For commands to run each Codespace start
   "customizations": {
     "vscode": {
       "settings": {
@@ -33,7 +33,7 @@
           "css": false,
           "SQL": false
         },
-        "chat.agent.enabled": true
+        "chat.agent.enabled": false
       },
       "extensions": [
         "bierner.markdown-mermaid",
@@ -52,7 +52,7 @@
         "tal7aouy.icons",
         "saeris.markdown-github-alerts",
         "yy0931.vscode-sqlite3-editor",
-        "benpaddlejones.pico-bridge"       
+        "benpaddlejones.pico-bridge"
       ]
     }
   }

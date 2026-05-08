@@ -37,5 +37,5 @@
     "html": false,
     "css": false
   },
-  "chat.agent.enabled": true
+  "chat.agent.enabled": false
 }
