@@ -28,7 +28,11 @@
     "/home/codespace/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.1.4/emulator/mock/typings",
     "/home/codespace/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.1.4/emulator/mock/micropython",
     "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.1.4/emulator/mock/typings",
-    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.1.4/emulator/mock/micropython"
+    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.1.4/emulator/mock/micropython",
+    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.2.0/emulator/mock/typings",
+    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.2.0/emulator/mock/micropython",
+    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.3.30/emulator/mock/typings",
+    "/home/vscode/.vscode-remote/extensions/benpaddlejones.pico-bridge-2.3.30/emulator/mock/micropython"
   ],
   "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vscode-icons",
@@ -37,5 +41,5 @@
     "html": false,
     "css": false
   },
-  "chat.agent.enabled": false
+  "chat.agent.enabled": true
 }

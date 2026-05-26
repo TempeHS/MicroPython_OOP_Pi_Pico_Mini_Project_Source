@@ -3,7 +3,7 @@
 ## Lecture 5 Concepts
 
 - [Audio_Notification Class](#audio_notification-class)
-    - [Create Files](#create-files)
+  - [Create Files](#create-files)
 - [What Are Stubs and Drivers?](#what-are-stubs-and-drivers)
   - [Why Use Stubs and Drivers?](#why-use-stubs-and-drivers)
   - [Stub Example](#stub-example)
@@ -23,11 +23,15 @@ The Audio_Notification extends the machine.PWM to provide an interface for contr
 1. Create a Python file in `project\lib` called `audio_notification.py`
 2. Create a Python file in `project\py_scripts` called `v06.py`
 
-## What Are Stubs and Drivers? 
+## What Are Stubs and Drivers?
 
-Imagine you're building a puzzle:
-- A **stub** is a fake puzzle piece you use temporarily
-- A **driver** is a simple tool to check if your real pieces fit together
+Think of building a car:
+
+- A **stub** is like using a cardboard wheel while you wait for the real tire to arrive. It lets you keep building and testing the rest of the car, even though the real wheel isn’t ready yet.
+- A **driver** is like a remote control you use to test if the car’s engine or lights work, even before the whole car is finished.
+
+Stubs help you fill in missing parts.  
+Drivers help you test parts by themselves.
 
 Definitions
 A **stub** is a simplified version that replaces a real lower component so it doesn't need to be full implemented.
@@ -51,7 +55,7 @@ Remember a **stub** is a simplified version that replaces a real lower component
 class Audio_Notification:
     def __init__(self, pin):
         self.__pin = pin
-    
+
     def warning_on(self):
         # Just pretend to Beep
         print("Beep")
@@ -62,30 +66,22 @@ class Audio_Notification:
 Remember a **driver** is a simple program in a higher system that tests a lower component without fully implementing the higher system.
 
 ```python
-# v05.py Driver Implementation
-
-# Import the real component we want to test
+# Driver to test Audio_Notification
 from audio_notification import Audio_Notification
-from led_light import Led_Light
 
-def subsystem_driver():
-    print("Testing Traffic Light...")
-    
-    # Create the walk light
-    led_pedestrian_green = Led_Light(17, True, True)
-    
-    # Create the Audio Notification
-    audio_stub = Audio_Notification(27, False)
-    
-    # Test walk state
-    led_pedestrian_green.on()
-    audio_stub.warning_on()
+def test_audio():
+    audio = Audio_Notification(27)
+    audio.warning_on()
+    print("Audio notification")
 
-    print("Test complete!")
-
-# Run the test
-subsystem_driver()
+test_audio()
 ```
+
+**Summary:**
+
+- Use a **stub** to fake a missing part.
+- Use a **driver** to test a part.
+- This helps you build and test your project step by step!
 
 ## Implement the Audio_Notification Class
 
@@ -105,6 +101,7 @@ class Audio_Notification(PWM):
         self.duty_u16(0)  # Start with buzzer off
         self.__last_toggle_time = time()
 ```
+
 ## Create a Single Beep
 
 ```python
@@ -116,6 +113,7 @@ class Audio_Notification(PWM):
         if self.__debug:
             print("Beep")
 ```
+
 ## Implement a Non-Blocking Audio Notification
 
 ```python
@@ -127,6 +125,7 @@ class Audio_Notification(PWM):
             self.beep(freq=500, duration=100)
             self.__last_toggle_time = now
 ```
+
 ## Turn Audio Notification Off
 
 ```python

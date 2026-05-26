@@ -2,12 +2,12 @@ from time import sleep
 from pedestrian_button import Pedestrian_Button
 
 # Replace 22 with the GPIO pin your button is connected to
-button = Pedestrian_Button(22, debug=True)
+button = Pedestrian_Button(22, debug=False)
 
 print("Please press and release the button within 5 seconds...")
 pressed = False
 for _ in range(50):
-    if button.button_state:
+    if button.button_state():
         pressed = True
         break
     sleep(0.1)
@@ -18,9 +18,9 @@ else:
     print("Button press not detected: .button_state failed")
 
 print("Testing button_state setter (reset to False)")
-button.button_state = False
+button.button_state(False)
 sleep(0.1)
-if button.button_state is False:
+if button.button_state() is False:
     print(".button_state setter passed")
 else:
     print(".button_state setter failed")

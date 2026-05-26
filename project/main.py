@@ -5,9 +5,8 @@ import utime
 import uos
 from machine import Pin
 
-
 # File name of the script to import
-file_name = "v02"
+file_name = "v05"
 
 SCRIPT_DIRECTORY = "/py_scripts"
 CONTEXT_RADIUS = 2
@@ -74,7 +73,11 @@ def get_script_path():
     if "/" not in module_path and "." in module_path:
         module_path = module_path.replace(".", "/")
     suffix = "" if module_path.endswith(".py") else ".py"
-    return "{}{}{}".format(SCRIPT_DIRECTORY, "/" if not module_path.startswith("/") else "", module_path + suffix)
+    return "{}{}{}".format(
+        SCRIPT_DIRECTORY,
+        "/" if not module_path.startswith("/") else "",
+        module_path + suffix,
+    )
 
 
 def build_candidate_paths(filename):
@@ -112,7 +115,9 @@ def get_traceback_location(error):
     while current:
         frame = getattr(current, "tb_frame", None)
         code_obj = getattr(frame, "f_code", None)
-        potential_filename = getattr(code_obj, "co_filename", None) if code_obj else None
+        potential_filename = (
+            getattr(code_obj, "co_filename", None) if code_obj else None
+        )
         if isinstance(potential_filename, str):
             fallback = (potential_filename, current.tb_lineno)
             if not LAUNCHER_FILENAME or potential_filename != LAUNCHER_FILENAME:
@@ -169,7 +174,9 @@ def get_error_location(error):
     return filename, line_no
 
 
-def print_code_context(error, context_radius=CONTEXT_RADIUS, override_location=None, trace_frames=None):
+def print_code_context(
+    error, context_radius=CONTEXT_RADIUS, override_location=None, trace_frames=None
+):
     if override_location:
         filename, line_no = override_location
     else:
@@ -185,7 +192,9 @@ def print_code_context(error, context_radius=CONTEXT_RADIUS, override_location=N
         resolved_filename = get_script_path()
         lines, resolved_path = load_source_lines(resolved_filename)
     if not lines:
-        syntax_filename, syntax_line, syntax_column, syntax_source = get_syntax_error_details(error)
+        syntax_filename, syntax_line, syntax_column, syntax_source = (
+            get_syntax_error_details(error)
+        )
         if syntax_source:
             target_filename = resolved_filename or syntax_filename or "dynamic source"
             target_line = line_no or syntax_line or "?"
@@ -213,7 +222,8 @@ def print_code_context(error, context_radius=CONTEXT_RADIUS, override_location=N
                     print("--- Code Context ---")
                     print(
                         "Unable to open {}. Showing context from {} instead.".format(
-                            resolved_filename or "dynamic source", alt_resolved or alt_filename
+                            resolved_filename or "dynamic source",
+                            alt_resolved or alt_filename,
                         )
                     )
                     lines = alt_lines
@@ -238,7 +248,9 @@ def print_code_context(error, context_radius=CONTEXT_RADIUS, override_location=N
             else:
                 path_to_show = resolved_path or resolved_filename or fallback_path
                 print("--- Code Context ---")
-                print("Unable to open {} to display source context.".format(path_to_show))
+                print(
+                    "Unable to open {} to display source context.".format(path_to_show)
+                )
                 return
     path_to_show = resolved_path or resolved_filename or get_script_path()
     total_lines = len(lines)
@@ -248,7 +260,11 @@ def print_code_context(error, context_radius=CONTEXT_RADIUS, override_location=N
         return
     if line_no < 1 or line_no > total_lines:
         print("--- Code Context ({}:{}) ---".format(path_to_show, line_no))
-        print("Reported line {} is outside the range of this file (1-{}).".format(line_no, total_lines))
+        print(
+            "Reported line {} is outside the range of this file (1-{}).".format(
+                line_no, total_lines
+            )
+        )
         return
     start = max(0, line_no - 1 - context_radius)
     end = min(total_lines, line_no - 1 + context_radius + 1)
@@ -308,7 +324,7 @@ def extract_traceback_frames(trace_text):
         line_index += len(line_marker)
         remainder = line[line_index:]
         try:
-            line_no = int(remainder.split(',', 1)[0].strip())
+            line_no = int(remainder.split(",", 1)[0].strip())
         except ValueError:
             line_no = None
         frames.append((filename, line_no))
@@ -347,14 +363,18 @@ def log_exception(title, error, trace_text, location_override=None):
         return
     try:
         timestamp = utime.localtime() if hasattr(utime, "localtime") else None
-        stamp = "{}-{}-{} {}:{}:{}".format(
-            timestamp[0],
-            timestamp[1],
-            timestamp[2],
-            timestamp[3],
-            timestamp[4],
-            timestamp[5],
-        ) if timestamp else "UNKNOWN-TIME"
+        stamp = (
+            "{}-{}-{} {}:{}:{}".format(
+                timestamp[0],
+                timestamp[1],
+                timestamp[2],
+                timestamp[3],
+                timestamp[4],
+                timestamp[5],
+            )
+            if timestamp
+            else "UNKNOWN-TIME"
+        )
         if location_override:
             filename, line_no = location_override
         else:
@@ -381,12 +401,16 @@ def handle_exception(title, error):
     filename, line_no = get_error_location(error)
     trace_text = capture_trace_text(error)
     trace_frames = extract_traceback_frames(trace_text)
-    parsed_filename, parsed_line = (trace_frames[-1] if trace_frames else (None, None))
+    parsed_filename, parsed_line = trace_frames[-1] if trace_frames else (None, None)
     if parsed_filename or parsed_line:
         use_parsed = False
         if not filename and not line_no:
             use_parsed = True
-        elif parsed_filename and parsed_filename not in (None, LAUNCHER_FILENAME) and parsed_filename != filename:
+        elif (
+            parsed_filename
+            and parsed_filename not in (None, LAUNCHER_FILENAME)
+            and parsed_filename != filename
+        ):
             use_parsed = True
         elif title == "SYNTAX ERROR" and parsed_filename:
             use_parsed = True
@@ -402,14 +426,23 @@ def handle_exception(title, error):
                 line_no = parsed_line
     if filename or line_no:
         print("Location: {}:{}".format(filename or "unknown", line_no or "?"))
-    print("Timestamp: {}".format(utime.localtime() if hasattr(utime, "localtime") else "unknown"))
-    print_code_context(error, override_location=(filename, line_no), trace_frames=trace_frames)
+    print(
+        "Timestamp: {}".format(
+            utime.localtime() if hasattr(utime, "localtime") else "unknown"
+        )
+    )
+    print_code_context(
+        error, override_location=(filename, line_no), trace_frames=trace_frames
+    )
     print("--- Traceback ---")
     sys.stdout.write(trace_text)
     log_exception(title, error, trace_text, location_override=(filename, line_no))
 
+
 # Import the v01.py script and setup exception handling
 try:
+    if file_name in sys.modules:
+        del sys.modules[file_name]
     __import__(file_name)
 except KeyboardInterrupt:
     print("KEYBOARD INTERRUPT")
