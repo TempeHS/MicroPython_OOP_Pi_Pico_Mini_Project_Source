@@ -102,6 +102,7 @@ classDiagram
         + warning_off()
         + beep(freq=1000, duration=500)
     }
+    PWM <|-- AudioNotification : Inheritance
 
     class LedLight {
         - __debug: bool
@@ -116,6 +117,7 @@ classDiagram
         + led_light_state
         + led_light_state(value)
     }
+    Pin <|-- LedLight : Inheritance
 
     class PedestrianButton {
         - __pin: int
@@ -127,6 +129,7 @@ classDiagram
         + button_state(value)
         + callback(pin)
     }
+    Pin <|-- PedestrianButton : Inheritance
 
     %% --- LOWER TIER (Subsystem Classes) ---
 
@@ -140,6 +143,7 @@ classDiagram
         +show_amber()
         +show_green()
     }
+    TrafficLightSubsystem --> LedLight : association
 
     class PedestrianSubsystem {
         -__red
@@ -154,6 +158,9 @@ classDiagram
         +is_button_pressed()
         +reset_button()
     }
+    PedestrianSubsystem --> LedLight : association
+    PedestrianSubsystem --> PedestrianButton : association
+    PedestrianSubsystem --> AudioNotification : association
 
     %% --- BOTTOM TIER (Facade Class) ---
 
@@ -161,20 +168,8 @@ classDiagram
         +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
         +update()
     }
-
-    %% Inheritance first
-
-    Pin <|-- LedLight : Inheritance
-    Pin <|-- PedestrianButton : Inheritance
-    PWM <|-- AudioNotification : Inheritance
-
-    %% Association second
     ControllerFacade --> TrafficLightSubsystem : association
     ControllerFacade --> PedestrianSubsystem : association
-    TrafficLightSubsystem --> LedLight : association
-    PedestrianSubsystem --> LedLight : association
-    PedestrianSubsystem --> PedestrianButton : association
-    PedestrianSubsystem --> AudioNotification : association
 ```
 
 ```python
