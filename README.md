@@ -140,12 +140,12 @@ classDiagram
         +duty_u16(duty: int)
     }
 
-    class Led_Light {
+    class LedLight {
         - __debug: bool
         - __pin: int
         - __flashing: int
         - __last_toggle_time: float
-        + Led_Light(pin, flashing=False, debug=False)
+        + LedLight(pin, flashing=False, debug=False)
         + on()
         + off()
         + toggle()
@@ -153,59 +153,59 @@ classDiagram
         + led_light_state
         + led_light_state(value)
     }
-    Pin <|-- Led_Light : Inheritance
+    Pin <|-- LedLight : Inheritance
 
-    class Pedestrian_Button {
+    class PedestrianButton {
         - __pin: int
         - __debug: bool
         - __last_pressed: int
         - __pedestrian_waiting: bool
-        + Pedestrian_Button(pin, debug)
+        + PedestrianButton(pin, debug)
         + button_state() : bool
         + button_state(value)
         + callback(pin)
     }
-    Pin <|-- Pedestrian_Button : Inheritance
+    Pin <|-- PedestrianButton : Inheritance
 
-    class Audio_Notification {
+    class AudioNotification {
         - __debug: bool
         - __last_toggle_time: floot
         - __pin: int
-        + Audio_Notification(pin, debug=False)
+        + AudioNotification(pin, debug=False)
         + warning_on()
         + warning_off()
         + beep(freq=1000, duration=500)
     }
-    PWM <|-- Audio_Notification : Inheritance
+    PWM <|-- AudioNotification : Inheritance
 
     class TrafficLightSubsystem {
-        -__red: Led_Light
-        -__amber: Led_Light
-        -__green: Led_Light
+        -__red: LedLight
+        -__amber: LedLight
+        -__green: LedLight
         -__debug: bool
-        +__init__(red: Led_Light, amber: Led_Light, green: Led_Light, debug: bool)
+        +__init__(red: LedLight, amber: LedLight, green: LedLight, debug: bool)
         +show_red()
         +show_amber()
         +show_green()
     }
-    Led_Light --> TrafficLightSubsystem : Association
+    LedLight --> TrafficLightSubsystem : Association
 
     class PedestrianSubsystem {
-        -__red: Led_Light
-        -__green: Led_Light
-        -__button: Pedestrian_Button
-        -__buzzer: Audio_Notification
+        -__red: LedLight
+        -__green: LedLight
+        -__button: PedestrianButton
+        -__buzzer: AudioNotification
         -__debug: bool
-        +__init__(red: Led_Light, green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +__init__(red: LedLight, green: LedLight, button: PedestrianButton, buzzer: AudioNotification, debug: bool)
         +show_stop()
         +show_walk()
         +show_warning()
         +is_button_pressed() bool
         +reset_button()
     }
-    Led_Light --> PedestrianSubsystem : Association
-    Audio_Notification --> PedestrianSubsystem : Association
-    Pedestrian_Button --> PedestrianSubsystem : Association
+    LedLight --> PedestrianSubsystem : Association
+    AudioNotification --> PedestrianSubsystem : Association
+    PedestrianButton --> PedestrianSubsystem : Association
 
     class Controller {
         -__traffic_lights: TrafficLightSubsystem
@@ -213,7 +213,7 @@ classDiagram
         -__debug: bool
         -__last_state_change: float
         +state: string
-        +__init__(ped_red: Led_Light, ped_green: Led_Light, traffic_red: Led_Light, traffic_amber: Led_Light, traffic_green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +__init__(ped_red: LedLight, ped_green: LedLight, traffic_red: LedLight, traffic_amber: LedLight, traffic_green: LedLight, button: PedestrianButton, buzzer: AudioNotification, debug: bool)
         +set_idle_state()
         +set_change_state()
         +set_walk_state()

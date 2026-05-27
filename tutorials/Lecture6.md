@@ -42,15 +42,15 @@ classDiagram
 This code snippet demonstrates the concept and syntax of multiple inheritance.
 
 ```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
+from led_light import LedLight
+from pedestrian_button import PedestrianButton
+from audio_notification import AudioNotification
 
 
-class Walk_Light(Audio_Notification, Led_Light):
+class WalkLight(AudioNotification, LedLight):
     def __init__(self, led_pin, buz_pin, debug):
-        Led_Light.super().__init__(self, led_pin, False, debug)
-        Audio_Notification.super().__init__(self, buz_pin, debug)
+        LedLight.super().__init__(self, led_pin, False, debug)
+        AudioNotification.super().__init__(self, buz_pin, debug)
 
     def walk_on(self):
         if self.__debug:
@@ -75,12 +75,12 @@ Association in Object-Oriented Programming (OOP) describes the relationship betw
 
 ```mermaid
 classDiagram
-    class Led_Light {
+    class LedLight {
         - __debug: bool
         - __pin: int
         - __flashing: int
         - __last_toggle_time: float
-        + Led_Light(pin, flashing=False, debug=False)
+        + LedLight(pin, flashing=False, debug=False)
         + on()
         + off()
         + toggle()
@@ -89,55 +89,55 @@ classDiagram
         + led_light_state(value)
     }
 
-    class Pedestrian_Button {
+    class PedestrianButton {
         - __pin: int
         - __debug: bool
         - __last_pressed: int
         - __pedestrian_waiting: bool
-        + Pedestrian_Button(pin, debug)
+        + PedestrianButton(pin, debug)
         + button_state() : bool
         + button_state(value)
         + callback(pin)
     }
 
-    class Audio_Notification {
+    class AudioNotification {
         - __debug: bool
         - __last_toggle_time: floot
         - __pin: int
-        + Audio_Notification(pin, debug=False)
+        + AudioNotification(pin, debug=False)
         + warning_on()
         + warning_off()
         + beep(freq=1000, duration=500)
     }
 
     class TrafficLightSubsystem {
-        -__red: Led_Light
-        -__amber: Led_Light
-        -__green: Led_Light
+        -__red: LedLight
+        -__amber: LedLight
+        -__green: LedLight
         -__debug: bool
-        +__init__(red: Led_Light, amber: Led_Light, green: Led_Light, debug: bool)
+        +__init__(red: LedLight, amber: LedLight, green: LedLight, debug: bool)
         +show_red()
         +show_amber()
         +show_green()
     }
-    Led_Light --> TrafficLightSubsystem : Association
+    LedLight --> TrafficLightSubsystem : Association
 
     class PedestrianSubsystem {
-        -__red: Led_Light
-        -__green: Led_Light
-        -__button: Pedestrian_Button
-        -__buzzer: Audio_Notification
+        -__red: LedLight
+        -__green: LedLight
+        -__button: PedestrianButton
+        -__buzzer: AudioNotification
         -__debug: bool
-        +__init__(red: Led_Light, green: Led_Light, button: Pedestrian_Button, buzzer: Audio_Notification, debug: bool)
+        +__init__(red: LedLight, green: LedLight, button: PedestrianButton, buzzer: AudioNotification, debug: bool)
         +show_stop()
         +show_walk()
         +show_warning()
         +is_button_pressed() bool
         +reset_button()
     }
-    Led_Light --> PedestrianSubsystem : Association
-    Audio_Notification --> PedestrianSubsystem : Association
-    Pedestrian_Button --> PedestrianSubsystem : Association
+    LedLight --> PedestrianSubsystem : Association
+    AudioNotification --> PedestrianSubsystem : Association
+    PedestrianButton --> PedestrianSubsystem : Association
 ```
 
 ## Facade pattern
@@ -158,9 +158,9 @@ Continuing our 'Bottom-Up' approach, we will create two subsystems, one for traf
 In your `controller.py`, include your imports. This imports all the associated classes and the time library needed for the final controller class.
 
 ```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
+from led_light import LedLight
+from pedestrian_button import PedestrianButton
+from audio_notification import AudioNotification
 from time import sleep, time
 ```
 
@@ -248,13 +248,13 @@ class TrafficLightSubsystem:
 The below implementation is a Driver to test the TrafficLightSubsystem; you should use it as a template to design a test for the PedestrianLightSubsystem.
 
 ```python
-from led_light import Led_Light
+from led_light import LedLight
 from controller import TrafficLightSubsystem
 from time import sleep
 
-red = Led_Light(3, False, True)
-amber = Led_Light(5, False, True)
-green = Led_Light(6, False, True)
+red = LedLight(3, False, True)
+amber = LedLight(5, False, True)
+green = LedLight(6, False, True)
 
 light = TrafficLightSubsystem(red, amber, green, False)
 

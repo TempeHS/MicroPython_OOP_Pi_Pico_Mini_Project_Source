@@ -1,12 +1,12 @@
 """
-Manually Unit Test for Pedestrian_Button Class
+Manually Unit Test for PedestrianButton Class
 """
 
 from time import sleep
-from pedestrian_button import Pedestrian_Button
+from pedestrian_button import PedestrianButton
 
 # Replace 22 with the GPIO pin your button is connected to
-button = Pedestrian_Button(22, debug=True)
+button = PedestrianButton(22, debug=True)
 
 print("Testing initial button_state (should be False if not pressed)")
 initial_state = button.button_state

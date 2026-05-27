@@ -6,7 +6,7 @@ from machine import Pin
 from time import sleep
 
 
-class Led_Light(Pin):
+class LedLight(Pin):
     # Sub Class inherits the Super 'Pin' Class
     def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
@@ -38,7 +38,7 @@ class Led_Light(Pin):
                 print(f"LED connected to Pin {self.__pin} is low")
 
 
-red_light = Led_Light(3, False, True)
+red_light = LedLight(3, False, True)
 
 while True:
     red_light.toggle()

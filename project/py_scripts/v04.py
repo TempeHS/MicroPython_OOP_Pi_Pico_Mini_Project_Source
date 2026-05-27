@@ -1,8 +1,8 @@
 from time import sleep
-from led_light import Led_Light
+from led_light import LedLight
 
 # Replace 3 with a valid GPIO pin number for your board
-led = Led_Light(3, flashing=True, debug=True)
+led = LedLight(3, flashing=True, debug=True)
 
 print("Testing on()")
 led.on()

@@ -1,11 +1,11 @@
-# Audio_Notification Class
+# AudioNotification Class
 
-The `Audio_Notification` extends the `machine.PWM` to provide an interface for controlling a piezo buzzer or speaker, with optional debug output. It supports warning beeps and custom tones.
+The `AudioNotification` extends the `machine.PWM` to provide an interface for controlling a piezo buzzer or speaker, with optional debug output. It supports warning beeps and custom tones.
 
 ## Constructor
 
 ```python
-Audio_Notification(pin, debug=False)
+AudioNotification(pin, debug=False)
 ```
 
 - `pin`: The GPIO pin number the buzzer is connected to.
@@ -14,11 +14,11 @@ Audio_Notification(pin, debug=False)
 ## Example Usage
 
 ```python
-from audio_notification import Audio_Notification
+from audio_notification import AudioNotification
 import time
 
-# Create an Audio_Notification on GPIO pin 15 with debug enabled
-buzzer = Audio_Notification(27, debug=True)
+# Create an AudioNotification on GPIO pin 15 with debug enabled
+buzzer = AudioNotification(27, debug=True)
 
 # Sound a warning beep (non-blocking, call repeatedly in your loop)
 buzzer.warning_on()
@@ -53,10 +53,10 @@ buzzer.beep(freq=2000, duration=1000)
 
 ```python
 from time import sleep
-from audio_notification import Audio_Notification
+from audio_notification import AudioNotification
 
 # Replace 18 with the GPIO pin your buzzer is connected to
-buzzer = Audio_Notification(18, debug=True)
+buzzer = AudioNotification(18, debug=True)
 
 print("Testing beep()")
 buzzer.beep(freq=1000, duration=200)
@@ -82,9 +82,9 @@ from machine import Pin, PWM
 from time import sleep, time
 
 
-class Audio_Notification(PWM):
+class AudioNotification(PWM):
     """
-    Audio_Notification extends PWM to provide an interface for controlling a piezo buzzer.
+    AudioNotification extends PWM to provide an interface for controlling a piezo buzzer.
 
     This class provides methods for generating warning beeps and custom tones
     with optional debug output.
@@ -96,7 +96,7 @@ class Audio_Notification(PWM):
 
     def __init__(self, pin, debug=False):
         """
-        Initialise the Audio_Notification object.
+        Initialise the AudioNotification object.
 
         Args:
             pin (int): The GPIO pin number to which the buzzer is connected

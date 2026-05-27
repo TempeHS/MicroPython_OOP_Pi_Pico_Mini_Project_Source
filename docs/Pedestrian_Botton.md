@@ -1,11 +1,11 @@
-# Pedestrian_Button Class
+# PedestrianButton Class
 
-The `Pedestrian_Button` class extends the `machine.Pin` class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses.
+The `PedestrianButton` class extends the `machine.Pin` class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses.
 
 ## Constructor
 
 ```python
-Pedestrian_Button(pin, debug=False)
+PedestrianButton(pin, debug=False)
 ```
 
 - `pin` (`int`): The GPIO pin number the button is connected to.
@@ -14,11 +14,11 @@ Pedestrian_Button(pin, debug=False)
 ## Example Usage
 
 ```python
-from pedestrian_button import Pedestrian_Button
+from pedestrian_button import PedestrianButton
 from time import sleep
 
-# Create a Pedestrian_Button on GPIO pin 22 with debug enabled
-button = Pedestrian_Button(22, debug=True)
+# Create a PedestrianButton on GPIO pin 22 with debug enabled
+button = PedestrianButton(22, debug=True)
 
 # Main loop
 while True:
@@ -53,11 +53,11 @@ while True:
 ## Class Unit Test
 
 ```python
-from pedestrian_button import Pedestrian_Button
+from pedestrian_button import PedestrianButton
 from time import sleep
 
 # Create button with debug enabled
-button = Pedestrian_Button(22, debug=True)
+button = PedestrianButton(22, debug=True)
 
 print("Testing initial state (should be False)")
 if button.button_state() == False:
@@ -95,7 +95,7 @@ from machine import Pin
 from time import ticks_ms, ticks_diff
 
 
-class Pedestrian_Button(Pin):
+class PedestrianButton(Pin):
     """Pedestrian button class that extends machine.Pin to provide a debounced button interface.
 
     This class implements a button with interrupt-based detection and software debouncing.
@@ -107,7 +107,7 @@ class Pedestrian_Button(Pin):
     """
 
     def __init__(self, pin, debug):
-        """Initialise the Pedestrian_Button object.
+        """Initialise the PedestrianButton object.
 
         Sets up the pin as an input with pull-down resistor and configures
         an interrupt handler for rising edge detection.

@@ -55,7 +55,7 @@ A UML (Unified Modelling Language) class diagram visually describes the structur
 ```
 
 ### Mermaid Markdown UML Class Diagram Example
-Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom Led_Light class that inherits from it.
+Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom LedLight class that inherits from it.
 
 ```mermaid
 classDiagram
@@ -69,7 +69,7 @@ classDiagram
         +toggle()
     }
 
-    class Led_Light {
+    class LedLight {
         -debug: bool
         -pin: int
         -flashing: bool
@@ -78,7 +78,7 @@ classDiagram
         +off()
         +toggle()
     }
-    Pin <|-- Led_Light : inherits
+    Pin <|-- LedLight : inherits
 ```
 
 Explanation:
@@ -118,23 +118,23 @@ classDiagram
         +duty_u16(duty: int)
     }
 
-    class Audio_Notification {
+    class AudioNotification {
         - __debug: bool
         - __last_toggle_time: floot
         - __pin: int
-        + Audio_Notification(pin, debug=False)
+        + AudioNotification(pin, debug=False)
         + warning_on()
         + warning_off()
         + beep(freq=1000, duration=500)
     }
-    PWM <|-- Audio_Notification : Inheritance
+    PWM <|-- AudioNotification : Inheritance
 
-    class Led_Light {
+    class LedLight {
         - __debug: bool
         - __pin: int
         - __flashing: int
         - __last_toggle_time: float
-        + Led_Light(pin, flashing=False, debug=False)
+        + LedLight(pin, flashing=False, debug=False)
         + on()
         + off()
         + toggle()
@@ -142,19 +142,19 @@ classDiagram
         + led_light_state
         + led_light_state(value)
     }
-    Pin <|-- Led_Light : Inheritance
+    Pin <|-- LedLight : Inheritance
 
-    class Pedestrian_Button {
+    class PedestrianButton {
         - __pin: int
         - __debug: bool
         - __last_pressed: int
         - __pedestrian_waiting: bool
-        + Pedestrian_Button(pin, debug)
+        + PedestrianButton(pin, debug)
         + button_state : bool
         + button_state(value)
         + callback(pin)
     }
-    Pin <|-- Pedestrian_Button : Inheritance
+    Pin <|-- PedestrianButton : Inheritance
 
 ```
 
@@ -193,19 +193,19 @@ while(True):
 
 Inheritance is a fundamental concept in object-oriented programming (OOP). It allows another class (called a Sub Class) to inherit properties and behaviours (methods and attributes) from another Class (called a Super Class).
 
-In this case, the `Led_Light` Class inherits from the Pin Class, and without any further instructions, the Sub Class inherits and can call all the methods of the Super Class, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
+In this case, the `LedLight` Class inherits from the Pin Class, and without any further instructions, the Sub Class inherits and can call all the methods of the Super Class, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
 
 
 ```python
 from machine import Pin
 from time import sleep
 
-class Led_Light(Pin):
+class LedLight(Pin):
     # Sub Class inherits the 'Pin' Class 
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
 
-red_light = Led_Light(3)
+red_light = LedLight(3)
 
 while True:
     red_light.on()

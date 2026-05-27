@@ -34,10 +34,10 @@ Abstraction in Object-Oriented Programming (OOP) is a principle that focuses on 
 ![Create a new file on Wokwi](/images/wokwi_new_file.png)
 
 ```Python
-from led_light import Led_Light
+from led_light import LedLight
 from time import sleep
 
-red_light = Led_Light(3, True, True)
+red_light = LedLight(3, True, True)
 
 while True:
     print(red_light.led_light_state)

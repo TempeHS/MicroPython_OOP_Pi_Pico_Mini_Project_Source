@@ -1,8 +1,8 @@
 from time import sleep
-from audio_notification import Audio_Notification
+from audio_notification import AudioNotification
 
 # Replace 18 with the GPIO pin your buzzer is connected to
-buzzer = Audio_Notification(18, debug=True)
+buzzer = AudioNotification(18, debug=True)
 
 print("Testing beep()")
 buzzer.beep(freq=1000, duration=200)

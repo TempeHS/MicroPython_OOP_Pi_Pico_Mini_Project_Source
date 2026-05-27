@@ -2,26 +2,15 @@ from machine import Pin
 from time import ticks_ms, ticks_diff
 
 
-class Pedestrian_Button(Pin):
-    """Pedestrian button class that extends machine.Pin to provide a debounced button interface.
-
-    This class implements a button with interrupt-based detection and software debouncing.
-    It maintains an internal state to track if a pedestrian is waiting after a button press.
-
-    Args:
-        pin (int): The GPIO pin number the button is connected to.
-        debug (bool): Whether to print debug statements.
-    """
+class PedestrianButton(Pin):
+    """Debounced pedestrian request button."""
 
     def __init__(self, pin, debug):
-        """Initialise the Pedestrian_Button object.
-
-        Sets up the pin as an input with pull-down resistor and configures
-        an interrupt handler for rising edge detection.
+        """Initialize a PedestrianButton.
 
         Args:
-            pin (int): The GPIO pin number the button is connected to.
-            debug (bool): Whether to print debug statements.
+            pin (int): GPIO pin number.
+            debug (bool): True to print debug messages.
         """
         super().__init__(pin, Pin.IN, Pin.PULL_DOWN)
         self.__debug = debug
@@ -33,17 +22,13 @@ class Pedestrian_Button(Pin):
         )  # Set up interrupt on rising edge
 
     def button_state(self, value=None):
-        """
-        Get or set the current state of the pedestrian waiting flag.
-
-        - If called with no arguments, returns the current state (getter).
-        - If called with a boolean argument, sets the state (setter).
+        """Get or set the waiting state.
 
         Args:
-            value (bool, optional): If provided, sets the pedestrian waiting state.
+            value (bool, optional): New waiting state.
 
         Returns:
-            bool: Current state if called without arguments.
+            bool: Current waiting state when called as getter.
         """
         if value is None:
             # Getter
@@ -62,14 +47,10 @@ class Pedestrian_Button(Pin):
                 )
 
     def callback(self, pin):
-        """Interrupt handler called when the button is pressed (rising edge).
-
-        Implements software debouncing by ignoring presses that occur within
-        200ms of the previous press. Sets the pedestrian_waiting flag when a
-        valid button press is detected.
+        """Handle button interrupt with debounce.
 
         Args:
-            pin (Pin): The pin that triggered the interrupt.
+            pin (Pin): Pin that triggered the interrupt.
         """
         current_time = ticks_ms()  # Get the current time in milliseconds
         if ticks_diff(current_time, self.__last_pressed) > 200:  # 200ms debounce delay

@@ -4,16 +4,16 @@ https://github.com/user-attachments/assets/2185636f-0350-4df2-8ada-09b32ea51c91
 
 ## Lecture 4 Concepts
 
-- [Pedestrian_Button Class](#pedestrian_button-class)
+- [PedestrianButton Class](#pedestrian_button-class)
     - [Create Files](#create-files)
     - [Imports and Constructor](#imports-and-constructor)
     - [Implement an Interrupt](#implement-an-interrupt)
     - [Getter and Setter](#getter-and-setter)
     - [Create a Callback Method for the Interrupt Trigger](#create-a-callback-method-for-the-interrupt-trigger)
 
-## Pedestrian_Button Class
+## PedestrianButton Class
 
-The Pedestrian_Button class extends the Pin class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses. It also provides optional debug output.
+The PedestrianButton class extends the Pin class to provide a debounced button interface specifically designed for pedestrian crossing systems. It uses interrupt-based detection and software debouncing to reliably capture button presses. It also provides optional debug output.
 
 ### Create Files
 
@@ -29,7 +29,7 @@ from machine import Pin
 import time
 
 
-class Pedestrian_Button(Pin):
+class PedestrianButton(Pin):
     # Sub Class inherits the Super 'Pin' 
 
     def __init__(self, pin, debug):
@@ -52,7 +52,7 @@ An interrupt is a signal to the processor that an event needs immediate attentio
 3. `handler=self.callback` The `self.callback` method will be executed whenever the button is pressed.
 
 ```python
-class Pedestrian_Button(Pin):
+class PedestrianButton(Pin):
     # Sub Class inherits the Super 'Pin' 
 
     def __init__(self, pin, debug):

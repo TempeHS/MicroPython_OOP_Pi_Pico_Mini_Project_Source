@@ -3,12 +3,12 @@ Encapsulation Example
 RUN AS PYTHON NOT MICROPYTHON
 """
 
-class Led_Light():
+class LedLight():
     def __init__(self, pin, flashing=False, debug=False):
         self.debug = debug #PUBLIC attribute
         self.__pin = pin #Encapsulated PRIVATE attribute
 
-red_light = Led_Light(3, False, False)
+red_light = LedLight(3, False, False)
 
 try:
     print(red_light.debug)

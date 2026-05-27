@@ -1,8 +1,8 @@
 from time import sleep
-from pedestrian_button import Pedestrian_Button
+from pedestrian_button import PedestrianButton
 
 # Replace 22 with the GPIO pin your button is connected to
-button = Pedestrian_Button(22, debug=False)
+button = PedestrianButton(22, debug=False)
 
 print("Please press and release the button within 5 seconds...")
 pressed = False

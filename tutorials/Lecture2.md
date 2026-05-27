@@ -32,7 +32,7 @@ In this example, we will apply overriding polymorphism and develop new implement
 from machine import Pin
 from time import sleep
 
-class Led_Light(Pin):
+class LedLight(Pin):
     # Sub Class inherits the 'Pin' Class
     def __init__(self, pin, flashing=False, debug=False):
         super().__init__(pin, Pin.OUT)
@@ -60,7 +60,7 @@ class Led_Light(Pin):
            self.off()
 
 
-red_light = Led_Light(3, False, False)
+red_light = LedLight(3, False, False)
 
 while True:
     red_light.on()
@@ -143,12 +143,12 @@ This Python implementation below demonstrates the concept of encapsulation. Unli
 """
 RUN AS PYTHON NOT MICROPYTHON
 """
-class Led_Light():
+class LedLight():
     def __init__(self, pin, flashing=False, debug=False):
         self.debug = debug #PUBLIC attribute
         self.__pin = pin #Encapsulated PRIVATE attribute
 
-red_light = Led_Light(3, False, False)
+red_light = LedLight(3, False, False)
 
 try:
     print(red_light.debug)
@@ -217,7 +217,7 @@ def __init__(self, pin, flashing=False, debug=False):
 ### Test the Setter & Getter
 
 ```python
-red_light = Led_Light(3, False, False)
+red_light = LedLight(3, False, False)
 
 while True:
     print(red_light.led_light_state)
@@ -239,7 +239,7 @@ When you call the method, depending on the parameters passed, the corresponding 
 Because Python is dynamically typed, it does not support overloaded polymorphism, as the last definition of a method overwrites any previous ones.
 
 ```text
-Class Led_Light inherits from Pin:
+Class LedLight inherits from Pin:
     Method __init__(pin, flashing = False, debug = False):
         Call Super Class (Pin) constructor with pin and output mode
         SET led_light_state (property, see below)

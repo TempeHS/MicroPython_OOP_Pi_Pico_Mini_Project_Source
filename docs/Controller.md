@@ -16,31 +16,31 @@ Controller(
     debug=False
 )
 ```
-- `ped_red` (`Led_Light`): Red pedestrian light
-- `ped_green` (`Led_Light`): Green pedestrian light
-- `traffic_red` (`Led_Light`): Red traffic light
-- `traffic_amber` (`Led_Light`): Amber traffic light
-- `traffic_green` (`Led_Light`): Green traffic light
-- `button` (`Pedestrian_Button`): Pedestrian crossing button
-- `buzzer` (`Audio_Notification`): Crossing buzzer
+- `ped_red` (`LedLight`): Red pedestrian light
+- `ped_green` (`LedLight`): Green pedestrian light
+- `traffic_red` (`LedLight`): Red traffic light
+- `traffic_amber` (`LedLight`): Amber traffic light
+- `traffic_green` (`LedLight`): Green traffic light
+- `button` (`PedestrianButton`): Pedestrian crossing button
+- `buzzer` (`AudioNotification`): Crossing buzzer
 - `debug` (`bool`, optional): Enable debug output (default `False`)
 
 ## Example Usage
 
 ```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
+from led_light import LedLight
+from pedestrian_button import PedestrianButton
+from audio_notification import AudioNotification
 from controller import Controller
 import time
 
-traffic_red = Led_Light(3, debug=False)
-traffic_amber = Led_Light(5, debug=False)
-traffic_green = Led_Light(7, debug=False)
-ped_red = Led_Light(17, debug=False)
-ped_green = Led_Light(19, debug=False)
-button = Pedestrian_Button(22, debug=False)
-buzzer = Audio_Notification(27, debug=False)
+traffic_red = LedLight(3, debug=False)
+traffic_amber = LedLight(5, debug=False)
+traffic_green = LedLight(7, debug=False)
+ped_red = LedLight(17, debug=False)
+ped_green = LedLight(19, debug=False)
+button = PedestrianButton(22, debug=False)
+buzzer = AudioNotification(27, debug=False)
 
 controller = Controller(
     ped_red, ped_green, traffic_red, traffic_amber, traffic_green,
@@ -82,19 +82,19 @@ Methods: `show_stop()`, `show_walk()`, `show_warning()`, `is_button_pressed()`, 
 ## Class Unit Test
 
 ```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
+from led_light import LedLight
+from pedestrian_button import PedestrianButton
+from audio_notification import AudioNotification
 from controller import Controller
 from time import sleep
 
-traffic_red = Led_Light(3, debug=True)
-traffic_amber = Led_Light(5, debug=True)
-traffic_green = Led_Light(7, debug=True)
-ped_red = Led_Light(17, debug=True)
-ped_green = Led_Light(19, debug=True)
-button = Pedestrian_Button(22, debug=True)
-buzzer = Audio_Notification(27, debug=True)
+traffic_red = LedLight(3, debug=True)
+traffic_amber = LedLight(5, debug=True)
+traffic_green = LedLight(7, debug=True)
+ped_red = LedLight(17, debug=True)
+ped_green = LedLight(19, debug=True)
+button = PedestrianButton(22, debug=True)
+buzzer = AudioNotification(27, debug=True)
 
 controller = Controller(
     ped_red, ped_green, traffic_red, traffic_amber, traffic_green,
@@ -122,9 +122,9 @@ print("Manual test complete - verify state transitions in debug output.")
 ## Class Implementation
 
 ```python
-from led_light import Led_Light
-from pedestrian_button import Pedestrian_Button
-from audio_notification import Audio_Notification
+from led_light import LedLight
+from pedestrian_button import PedestrianButton
+from audio_notification import AudioNotification
 from time import sleep, time
 
 
@@ -136,9 +136,9 @@ class TrafficLightSubsystem:
     that regulate vehicle traffic at a pedestrian crossing.
 
     Attributes:
-        __red (Led_Light): Red traffic light for vehicles
-        __amber (Led_Light): Amber traffic light for vehicles
-        __green (Led_Light): Green traffic light for vehicles
+        __red (LedLight): Red traffic light for vehicles
+        __amber (LedLight): Amber traffic light for vehicles
+        __green (LedLight): Green traffic light for vehicles
         __debug (bool): Whether to print debug statements
     """
 
@@ -147,9 +147,9 @@ class TrafficLightSubsystem:
         Initialise the traffic light subsystem.
 
         Args:
-            red (Led_Light): Red traffic light for vehicles
-            amber (Led_Light): Amber traffic light for vehicles
-            green (Led_Light): Green traffic light for vehicles
+            red (LedLight): Red traffic light for vehicles
+            amber (LedLight): Amber traffic light for vehicles
+            green (LedLight): Green traffic light for vehicles
             debug (bool, optional): Enable debug output. Defaults to False.
         """
         self.__red = red
@@ -202,10 +202,10 @@ class PedestrianSubsystem:
     and buzzer that together form the pedestrian interface of the crossing.
 
     Attributes:
-        __red (Led_Light): Red pedestrian light (don't walk)
-        __green (Led_Light): Green pedestrian light (walk)
-        __button (Pedestrian_Button): Button for pedestrians to request crossing
-        __buzzer (Audio_Notification): Audible notification device
+        __red (LedLight): Red pedestrian light (don't walk)
+        __green (LedLight): Green pedestrian light (walk)
+        __button (PedestrianButton): Button for pedestrians to request crossing
+        __buzzer (AudioNotification): Audible notification device
         __debug (bool): Whether to print debug statements
     """
 
@@ -214,10 +214,10 @@ class PedestrianSubsystem:
         Initialise the pedestrian subsystem.
 
         Args:
-            red (Led_Light): Red pedestrian light (don't walk)
-            green (Led_Light): Green pedestrian light (walk)
-            button (Pedestrian_Button): Crossing request button
-            buzzer (Audio_Notification): Audible notification device
+            red (LedLight): Red pedestrian light (don't walk)
+            green (LedLight): Green pedestrian light (walk)
+            button (PedestrianButton): Crossing request button
+            buzzer (AudioNotification): Audible notification device
             debug (bool, optional): Enable debug output. Defaults to False.
         """
         self.__red = red
@@ -313,13 +313,13 @@ class Controller:
         Initialise the crossing controller.
 
         Args:
-            ped_red (Led_Light): Red pedestrian light
-            ped_green (Led_Light): Green pedestrian light
-            traffic_red (Led_Light): Red traffic light
-            traffic_amber (Led_Light): Amber traffic light
-            traffic_green (Led_Light): Green traffic light
-            button (Pedestrian_Button): Pedestrian crossing button
-            buzzer (Audio_Notification): Crossing buzzer
+            ped_red (LedLight): Red pedestrian light
+            ped_green (LedLight): Green pedestrian light
+            traffic_red (LedLight): Red traffic light
+            traffic_amber (LedLight): Amber traffic light
+            traffic_green (LedLight): Green traffic light
+            button (PedestrianButton): Pedestrian crossing button
+            buzzer (AudioNotification): Crossing buzzer
             debug (bool, optional): Enable debug output. Defaults to False.
         """
         # Initialise subsystems

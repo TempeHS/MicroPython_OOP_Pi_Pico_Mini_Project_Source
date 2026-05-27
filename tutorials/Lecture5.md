@@ -2,21 +2,21 @@
 
 ## Lecture 5 Concepts
 
-- [Audio_Notification Class](#audio_notification-class)
+- [AudioNotification Class](#audio_notification-class)
   - [Create Files](#create-files)
 - [What Are Stubs and Drivers?](#what-are-stubs-and-drivers)
   - [Why Use Stubs and Drivers?](#why-use-stubs-and-drivers)
   - [Stub Example](#stub-example)
   - [Driver Example](#driver-example)
-- [Implement the Audio_Notification Class](#implement-the-audio_notification-class)
+- [Implement the AudioNotification Class](#implement-the-audio_notification-class)
   - [Imports and Constructor](#imports-and-constructor)
   - [Create a Single Beep](#create-a-single-beep)
   - [Implement a Non-Blocking Audio Notification](#implement-a-non-blocking-audio-notification)
   - [Turn Audio Notification Off](#turn-audio-notification-off)
 
-## Audio_Notification Class
+## AudioNotification Class
 
-The Audio_Notification extends the machine.PWM to provide an interface for controlling a piezo buzzer or speaker, with optional debug output. It supports warning beeps and custom tones.
+The AudioNotification extends the machine.PWM to provide an interface for controlling a piezo buzzer or speaker, with optional debug output. It supports warning beeps and custom tones.
 
 ### Create Files
 
@@ -48,11 +48,11 @@ This simple approach helps you build and test your code without needing to compl
 
 ### Stub Example
 
-Remember a **stub** is a simplified version that replaces a real lower component so it doesn't need to be full implemented. We are going to implement the Audio_Notification Class as a Stub so we can test the components that we will later use in a PedestrianSubSystem before fully implementing the Audio_Notification Class.
+Remember a **stub** is a simplified version that replaces a real lower component so it doesn't need to be full implemented. We are going to implement the AudioNotification Class as a Stub so we can test the components that we will later use in a PedestrianSubSystem before fully implementing the AudioNotification Class.
 
 ```python
 # audio_notification.py Stub Implementation
-class Audio_Notification:
+class AudioNotification:
     def __init__(self, pin):
         self.__pin = pin
 
@@ -66,11 +66,11 @@ class Audio_Notification:
 Remember a **driver** is a simple program in a higher system that tests a lower component without fully implementing the higher system.
 
 ```python
-# Driver to test Audio_Notification
-from audio_notification import Audio_Notification
+# Driver to test AudioNotification
+from audio_notification import AudioNotification
 
 def test_audio():
-    audio = Audio_Notification(27)
+    audio = AudioNotification(27)
     audio.warning_on()
     print("Audio notification")
 
@@ -83,7 +83,7 @@ test_audio()
 - Use a **driver** to test a part.
 - This helps you build and test your project step by step!
 
-## Implement the Audio_Notification Class
+## Implement the AudioNotification Class
 
 ## Imports and Constructor
 
@@ -94,7 +94,7 @@ from machine import Pin, PWM
 from time import sleep, time
 
 
-class Audio_Notification(PWM):
+class AudioNotification(PWM):
     def __init__(self, pin, debug=False):
         super().__init__(Pin(pin))
         self.__debug = debug

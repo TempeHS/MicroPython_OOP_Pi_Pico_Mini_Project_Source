@@ -1,11 +1,11 @@
-## Led_Light Class
+## LedLight Class
 
-The `Led_Light` extends the `machine.Pin` to provide advanced control of an LED, including toggling, non-blocking flashing, and optional debug output.
+The `LedLight` extends the `machine.Pin` to provide advanced control of an LED, including toggling, non-blocking flashing, and optional debug output.
 
 ## Constructor
 
 ```python
-Led_Light(pin, flashing=False, debug=False)
+LedLight(pin, flashing=False, debug=False)
 ```
 
 - `pin`: The GPIO pin number the LED is connected to.
@@ -15,11 +15,11 @@ Led_Light(pin, flashing=False, debug=False)
 ## Example Usage
 
 ```python
-from led_light import Led_Light
+from led_light import LedLight
 from time import sleep
 
-# Create a Led_Light on GPIO pin 3, with flashing and debug enabled
-led = Led_Light(3, flashing=True, debug=True)
+# Create a LedLight on GPIO pin 3, with flashing and debug enabled
+led = LedLight(3, flashing=True, debug=True)
 
 # Turn the LED on
 led.on()
@@ -68,10 +68,10 @@ while True:
 
 ```python
 from time import sleep
-from led_light import Led_Light
+from led_light import LedLight
 
 # Replace 3 with a valid GPIO pin number for your board
-led = Led_Light(3, flashing=True, debug=True)
+led = LedLight(3, flashing=True, debug=True)
 
 print("Testing on()")
 led.on()
@@ -131,7 +131,7 @@ from machine import Pin
 from time import sleep, time
 
 
-class Led_Light(Pin):
+class LedLight(Pin):
     """LED Light Class that extends machine.Pin to provide higher-level LED control.
 
     This class provides methods to control an LED including on, off, toggle, and non-blocking flashing.
@@ -144,7 +144,7 @@ class Led_Light(Pin):
     """
 
     def __init__(self, pin, flashing=False, debug=False):
-        """Initialise the Led_Light object.
+        """Initialise the LedLight object.
 
         Args:
             pin (int): The GPIO pin number the LED is connected to.

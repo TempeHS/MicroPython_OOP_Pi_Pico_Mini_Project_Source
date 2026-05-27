@@ -1,10 +1,10 @@
-from led_light import Led_Light
+from led_light import LedLight
 from controller import TrafficLightSubsystem
 from time import sleep
 
-red = Led_Light(3, False, True)
-amber = Led_Light(5, False, True)
-green = Led_Light(6, False, True)
+red = LedLight(3, False, True)
+amber = LedLight(5, False, True)
+green = LedLight(6, False, True)
 
 light = TrafficLightSubsystem(red, amber, green, True) 
 

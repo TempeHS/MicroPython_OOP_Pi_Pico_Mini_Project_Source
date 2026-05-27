@@ -6,13 +6,13 @@ from machine import Pin
 from time import sleep
 
 
-class Led_Light(Pin):
+class LedLight(Pin):
     # Sub Class inherits the 'Pin' Class
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
 
 
-red_light = Led_Light(3)
+red_light = LedLight(3)
 
 while True:
     red_light.on()
