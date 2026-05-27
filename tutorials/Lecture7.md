@@ -71,23 +71,99 @@ Key concepts:
 classDiagram
     direction BT
 
-    class Controller {
+    class ControllerFacade["Controller (Facarde)"] {
         +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
         +update()
     }
 
-    class TrafficLightSubsystem
-    class PedestrianSubsystem
-    class LedLight
-    class PedestrianButton
-    class AudioNotification
+    class Pin {
+        -__pin
+        +__init__(pin)
+        +value()
+        +high()
+        +low()
+        +on()
+        +off()
+        +toggle()
+    }
 
-    Controller --> TrafficLightSubsystem : facade
-    Controller --> PedestrianSubsystem : facade
-    TrafficLightSubsystem --> LedLight : manages
-    PedestrianSubsystem --> LedLight : controls
-    PedestrianSubsystem --> PedestrianButton : reads
-    PedestrianSubsystem --> AudioNotification : controls
+    class PWM {
+        -__pin
+        +__init__(pin)
+        +freq(freq)
+        +duty_u16(duty)
+    }
+
+    class LedLight {
+        -__debug
+        -__pin
+        -__flashing
+        -__last_toggle_time
+        +LedLight(pin, flashing, debug)
+        +on()
+        +off()
+        +toggle()
+        +flash()
+        +led_light_state
+        +led_light_state(value)
+    }
+
+    class PedestrianButton {
+        -__pin
+        -__debug
+        -__last_pressed
+        -__pedestrian_waiting
+        +PedestrianButton(pin, debug)
+        +button_state()
+        +button_state(value)
+        +callback(pin)
+    }
+
+    class AudioNotification {
+        -__debug
+        -__last_toggle_time
+        -__pin
+        +AudioNotification(pin, debug)
+        +warning_on()
+        +warning_off()
+        +beep(freq, duration)
+    }
+
+    class TrafficLightSubsystem {
+        -__red
+        -__amber
+        -__green
+        -__debug
+        +TrafficLightSubsystem(red, amber, green, debug)
+        +show_red()
+        +show_amber()
+        +show_green()
+    }
+
+    class PedestrianSubsystem {
+        -__red
+        -__green
+        -__button
+        -__buzzer
+        -__debug
+        +PedestrianSubsystem(red, green, button, buzzer, debug)
+        +show_stop()
+        +show_walk()
+        +show_warning()
+        +is_button_pressed()
+        +reset_button()
+    }
+
+    Pin <|-- LedLight : inheritence
+    Pin <|-- PedestrianButton : inheritence
+    PWM <|-- AudioNotification : inheritence
+
+    ControllerFacade --> TrafficLightSubsystem : association
+    ControllerFacade --> PedestrianSubsystem : association
+    TrafficLightSubsystem --> LedLight : association
+    PedestrianSubsystem --> LedLight : association
+    PedestrianSubsystem --> PedestrianButton : association
+    PedestrianSubsystem --> AudioNotification : association
 ```
 
 ```python
