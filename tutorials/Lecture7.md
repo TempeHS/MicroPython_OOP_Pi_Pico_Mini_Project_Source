@@ -69,7 +69,6 @@ Key concepts:
 
 ```mermaid
 classDiagram
-    direction TB
 
     %% --- TOP TIER (Base Classes) ---
 
