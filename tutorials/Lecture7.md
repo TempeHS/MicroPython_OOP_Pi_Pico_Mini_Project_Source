@@ -69,7 +69,9 @@ Key concepts:
 
 ```mermaid
 classDiagram
-    direction BT
+    direction TB
+
+    %% --- TOP TIER (Base Classes) ---
 
     class Pin {
         -__pin: int
@@ -88,6 +90,8 @@ classDiagram
         +freq(freq: int)
         +duty_u16(duty: int)
     }
+
+    %% --- MIDDLE TIER (Inherited Device Classes) ---
 
     class AudioNotification {
         - __debug: bool
@@ -124,67 +128,7 @@ classDiagram
         + callback(pin)
     }
 
-    Pin <|-- LedLight : Inheritance
-    Pin <|-- PedestrianButton : Inheritance
-    PWM <|-- AudioNotification : Inheritance
-```
-
-```mermaid
-classDiagram
-    direction BT
-
-    class Pin {
-        -__pin: int
-        +__init__(pin: int)
-        +value()
-        +high()
-        +low()
-        +on()
-        +off()
-        +toggle()
-    }
-
-    class PWM {
-        -__pin: int
-        +__init__(pin: int)
-        +freq(freq: int)
-        +duty_u16(duty: int)
-    }
-
-    class AudioNotification {
-        - __debug: bool
-        - __last_toggle_time: floot
-        - __pin: int
-        + AudioNotification(pin, debug=False)
-        + warning_on()
-        + warning_off()
-        + beep(freq=1000, duration=500)
-    }
-
-    class LedLight {
-        - __debug: bool
-        - __pin: int
-        - __flashing: int
-        - __last_toggle_time: float
-        + LedLight(pin, flashing=False, debug=False)
-        + on()
-        + off()
-        + toggle()
-        + flash()
-        + led_light_state
-        + led_light_state(value)
-    }
-
-    class PedestrianButton {
-        - __pin: int
-        - __debug: bool
-        - __last_pressed: int
-        - __pedestrian_waiting: bool
-        + PedestrianButton(pin, debug)
-        + button_state : bool
-        + button_state(value)
-        + callback(pin)
-    }
+    %% --- LOWER TIER (Subsystem Classes) ---
 
     class TrafficLightSubsystem {
         -__red
@@ -211,11 +155,20 @@ classDiagram
         +reset_button()
     }
 
+    %% --- BOTTOM TIER (Facade Class) ---
+
     class ControllerFacade["Controller (Facarde)"] {
         +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
         +update()
     }
 
+    %% Inheritance first
+
+    Pin <|-- LedLight : Inheritance
+    Pin <|-- PedestrianButton : Inheritance
+    PWM <|-- AudioNotification : Inheritance
+
+    %% Association second
     ControllerFacade --> TrafficLightSubsystem : association
     ControllerFacade --> PedestrianSubsystem : association
     TrafficLightSubsystem --> LedLight : association
