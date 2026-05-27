@@ -163,19 +163,19 @@ classDiagram
     }
 
     %% Layer 1 -> Layer 2: inheritance from MicroPython base classes
-    Pin <|-- LedLight
-    Pin <|-- PedestrianButton
-    PWM <|-- AudioNotification
+    Pin <|-- LedLight : Inheritance
+    Pin <|-- PedestrianButton : Inheritance
+    PWM <|-- AudioNotification : Inheritance
 
     %% Layer 2 -> Layer 3: subsystem composition/usage
-    LedLight --> TrafficLightSubsystem : Inheritence
-    LedLight --> PedestrianSubsystem : used by
-    PedestrianButton --> PedestrianSubsystem : used by
-    AudioNotification --> PedestrianSubsystem : used by
+    LedLight --> TrafficLightSubsystem : Association
+    LedLight --> PedestrianSubsystem : Association
+    PedestrianButton --> PedestrianSubsystem : Association
+    AudioNotification --> PedestrianSubsystem : Association
 
     %% Layer 3 -> Layer 4: facade orchestration
-    TrafficLightSubsystem --> ControllerFacade : orchestrated by
-    PedestrianSubsystem --> ControllerFacade : orchestrated by
+    TrafficLightSubsystem --> ControllerFacade : Association
+    PedestrianSubsystem --> ControllerFacade : Association
 ```
 
 ```python
