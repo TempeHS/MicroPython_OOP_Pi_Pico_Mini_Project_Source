@@ -77,8 +77,8 @@ classDiagram
     }
 
     class Pin {
-        -__pin
-        +__init__(pin)
+        -__pin: int
+        +__init__(pin: int)
         +value()
         +high()
         +low()
@@ -88,45 +88,45 @@ classDiagram
     }
 
     class PWM {
-        -__pin
-        +__init__(pin)
-        +freq(freq)
-        +duty_u16(duty)
-    }
-
-    class LedLight {
-        -__debug
-        -__pin
-        -__flashing
-        -__last_toggle_time
-        +LedLight(pin, flashing, debug)
-        +on()
-        +off()
-        +toggle()
-        +flash()
-        +led_light_state
-        +led_light_state(value)
-    }
-
-    class PedestrianButton {
-        -__pin
-        -__debug
-        -__last_pressed
-        -__pedestrian_waiting
-        +PedestrianButton(pin, debug)
-        +button_state()
-        +button_state(value)
-        +callback(pin)
+        -__pin: int
+        +__init__(pin: int)
+        +freq(freq: int)
+        +duty_u16(duty: int)
     }
 
     class AudioNotification {
-        -__debug
-        -__last_toggle_time
-        -__pin
-        +AudioNotification(pin, debug)
-        +warning_on()
-        +warning_off()
-        +beep(freq, duration)
+        - __debug: bool
+        - __last_toggle_time: floot
+        - __pin: int
+        + AudioNotification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
+    }
+
+    class LedLight {
+        - __debug: bool
+        - __pin: int
+        - __flashing: int
+        - __last_toggle_time: float
+        + LedLight(pin, flashing=False, debug=False)
+        + on()
+        + off()
+        + toggle()
+        + flash()
+        + led_light_state
+        + led_light_state(value)
+    }
+
+    class PedestrianButton {
+        - __pin: int
+        - __debug: bool
+        - __last_pressed: int
+        - __pedestrian_waiting: bool
+        + PedestrianButton(pin, debug)
+        + button_state : bool
+        + button_state(value)
+        + callback(pin)
     }
 
     class TrafficLightSubsystem {
@@ -154,9 +154,9 @@ classDiagram
         +reset_button()
     }
 
-    Pin <|-- LedLight : inheritence
-    Pin <|-- PedestrianButton : inheritence
-    PWM <|-- AudioNotification : inheritence
+    Pin <|-- LedLight : Inheritance
+    Pin <|-- PedestrianButton : Inheritance
+    PWM <|-- AudioNotification : Inheritance
 
     ControllerFacade --> TrafficLightSubsystem : association
     ControllerFacade --> PedestrianSubsystem : association
