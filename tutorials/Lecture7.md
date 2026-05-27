@@ -71,11 +71,6 @@ Key concepts:
 classDiagram
     direction BT
 
-    class ControllerFacade["Controller (Facarde)"] {
-        +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
-        +update()
-    }
-
     class Pin {
         -__pin: int
         +__init__(pin: int)
@@ -152,6 +147,11 @@ classDiagram
         +show_warning()
         +is_button_pressed()
         +reset_button()
+    }
+
+    class ControllerFacade["Controller (Facarde)"] {
+        +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
+        +update()
     }
 
     Pin <|-- LedLight : Inheritance
