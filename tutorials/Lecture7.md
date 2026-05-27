@@ -71,7 +71,6 @@ Key concepts:
 classDiagram
     direction TB
 
-    namespace Super["Generalised Supper Classes"] {
         class Pin {
             -__pin: int
             +__init__(pin: int)
@@ -89,9 +88,7 @@ classDiagram
             +freq(freq: int)
             +duty_u16(duty: int)
         }
-    }
 
-    namespace Sub["Sub Classes"] {
         class AudioNotification {
             - __debug: bool
             - __last_toggle_time: float
@@ -126,9 +123,7 @@ classDiagram
             + button_state(value)
             + callback(pin)
         }
-    }
 
-    namespace Subsystem {
         class TrafficLightSubsystem {
             -__red
             -__amber
@@ -153,14 +148,11 @@ classDiagram
             +is_button_pressed()
             +reset_button()
         }
-    }
 
-    namespace Facade {
         class ControllerFacade["Controller (Facade)"] {
             +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
             +update()
         }
-    }
 
     %% Layer 1 -> Layer 2: inheritance from MicroPython base classes
     Pin <|-- LedLight : Inheritance
