@@ -120,7 +120,7 @@ classDiagram
 
     class AudioNotification {
         - __debug: bool
-        - __last_toggle_time: floot
+        - __last_toggle_time: float
         - __pin: int
         + AudioNotification(pin, debug=False)
         + warning_on()

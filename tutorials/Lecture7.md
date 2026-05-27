@@ -94,7 +94,7 @@ classDiagram
     namespace Sub {
         class AudioNotification {
             - __debug: bool
-            - __last_toggle_time: floot
+            - __last_toggle_time: float
             - __pin: int
             + AudioNotification(pin, debug=False)
             + warning_on()
@@ -156,22 +156,26 @@ classDiagram
     }
 
     namespace Facade {
-        class ControllerFacade["Controller (Facarde)"] {
+        class ControllerFacade["Controller (Facade)"] {
             +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
             +update()
         }
     }
 
+    %% Layer 1 -> Layer 2: inheritance from MicroPython base classes
     Pin <|-- LedLight
     Pin <|-- PedestrianButton
     PWM <|-- AudioNotification
 
-    ControllerFacade --> TrafficLightSubsystem : association
-    ControllerFacade --> PedestrianSubsystem : association
-    TrafficLightSubsystem --> LedLight : association
-    PedestrianSubsystem --> LedLight : association
-    PedestrianSubsystem --> PedestrianButton : association
-    PedestrianSubsystem --> AudioNotification : association
+    %% Layer 2 -> Layer 3: subsystem composition/usage
+    LedLight --> TrafficLightSubsystem : used by
+    LedLight --> PedestrianSubsystem : used by
+    PedestrianButton --> PedestrianSubsystem : used by
+    AudioNotification --> PedestrianSubsystem : used by
+
+    %% Layer 3 -> Layer 4: facade orchestration
+    TrafficLightSubsystem --> ControllerFacade : orchestrated by
+    PedestrianSubsystem --> ControllerFacade : orchestrated by
 ```
 
 ```python
