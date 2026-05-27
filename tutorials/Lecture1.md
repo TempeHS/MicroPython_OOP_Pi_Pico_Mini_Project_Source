@@ -15,7 +15,6 @@ https://github.com/user-attachments/assets/30d1d324-4dc8-4b31-9fe5-9ed8af7b2452
   - [PWM Library](#pwm-library)
 - [Instantiation](#instantiation)
 
-
 ## Unit Testing
 
 Unit testing is the process of writing and running small, isolated tests that check the correctness of individual pieces of code (such as functions or modules). The goal is to ensure that each unit of your embedded software works as expected, independently from the rest of the system.
@@ -32,7 +31,7 @@ Students should copy the provided script [v02.py](..\project\py_scripts\v02.py) 
 
 ### Physical Unit Testing
 
-Unit test using the provided script [\project\py_scripts\v02.py](..\project\py_scripts\v02.py). In VSCode: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> -> Select **MicroPico: Connect**. Then right-click `v02.py` -> choose **_run current file on pico_**.  
+Unit test using the provided script [\project\py_scripts\v02.py](..\project\py_scripts\v02.py). In VSCode: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> -> Select **MicroPico: Connect**. Then right-click `v02.py` -> choose **_run current file on pico_**.
 
 1. All 5 LEDs should illuminate.
 2. The buzzer should emit a constant tone.
@@ -55,6 +54,7 @@ A UML (Unified Modelling Language) class diagram visually describes the structur
 ```
 
 ### Mermaid Markdown UML Class Diagram Example
+
 Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom LedLight class that inherits from it.
 
 ```mermaid
@@ -86,7 +86,7 @@ Explanation:
 1. Class Name (Top Section): This is the uppermost part of the box. It displays the name of the class (e.g., Student, Order, traffic).
 2. Attributes (Middle Section): This section lists the attributes (or properties/fields) of the class. Each attribute is typically shown with its visibility (+ for public, - for private, # for protected), name, and type.
 3. Methods (Bottom Section): This section lists the methods (or operations/functions) that belong to the class.
-Each method is shown with its visibility, name, parameters, and return type.
+   Each method is shown with its visibility, name, parameters, and return type.
 4. Connections (lines and arrows): These lines and arrows represent relationships (such as inheritance, association, aggregation, and composition) between class boxes.
 
 ## Generalisation
@@ -195,13 +195,12 @@ Inheritance is a fundamental concept in object-oriented programming (OOP). It al
 
 In this case, the `LedLight` Class inherits from the Pin Class, and without any further instructions, the Sub Class inherits and can call all the methods of the Super Class, including `on()`, `off()`, `high()`, `low()`, `toggle()`, etc.
 
-
 ```python
 from machine import Pin
 from time import sleep
 
 class LedLight(Pin):
-    # Sub Class inherits the 'Pin' Class 
+    # Sub Class inherits the 'Pin' Class
     def __init__(self, pin):
         super().__init__(pin, Pin.OUT)
 
