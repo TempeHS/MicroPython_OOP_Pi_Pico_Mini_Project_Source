@@ -65,6 +65,31 @@ Key concepts:
 > [!Note]
 > The subsystems (TrafficLightSubsystem, PedestrianSubsystem) are only used by the Controller Class. They are tightly coupled to it, so we will keep them in the same `controller.py` file as the Controller Class for simplicity and easier maintenance. However, students can equally abstract them to individual `*.py` files for independence if they wish.
 
+### Controller Facade UML Class Diagram
+
+```mermaid
+classDiagram
+    direction BT
+
+    class Controller {
+        +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
+        +update()
+    }
+
+    class TrafficLightSubsystem
+    class PedestrianSubsystem
+    class LedLight
+    class PedestrianButton
+    class AudioNotification
+
+    Controller --> TrafficLightSubsystem : facade
+    Controller --> PedestrianSubsystem : facade
+    TrafficLightSubsystem --> LedLight : manages
+    PedestrianSubsystem --> LedLight : controls
+    PedestrianSubsystem --> PedestrianButton : reads
+    PedestrianSubsystem --> AudioNotification : controls
+```
+
 ```python
 class Controller:
     def __init__(
@@ -127,9 +152,11 @@ class Controller:
 ```
 
 ## Implement the State Machine
+
 This is the main interface method that clients call to operate the entire system. It manages state transitions based on timing and pedestrian button input.
 
 The system cycles through the following states:
+
 - IDLE: Normal operation, traffic flowing
 - CHANGE: Transitioning to stop traffic (amber light)
 - WALK: Pedestrians crossing (red traffic light, green pedestrian light)
