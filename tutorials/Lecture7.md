@@ -71,88 +71,88 @@ Key concepts:
 classDiagram
     direction TB
 
-        class Pin {
-            -__pin: int
-            +__init__(pin: int)
-            +value()
-            +high()
-            +low()
-            +on()
-            +off()
-            +toggle()
-        }
+    class Pin {
+        -__pin: int
+        +__init__(pin: int)
+        +value()
+        +high()
+        +low()
+        +on()
+        +off()
+        +toggle()
+    }
 
-        class PWM {
-            -__pin: int
-            +__init__(pin: int)
-            +freq(freq: int)
-            +duty_u16(duty: int)
-        }
+    class PWM {
+        -__pin: int
+        +__init__(pin: int)
+        +freq(freq: int)
+        +duty_u16(duty: int)
+    }
 
-        class AudioNotification {
-            - __debug: bool
-            - __last_toggle_time: float
-            - __pin: int
-            + AudioNotification(pin, debug=False)
-            + warning_on()
-            + warning_off()
-            + beep(freq=1000, duration=500)
-        }
+    class AudioNotification {
+        - __debug: bool
+        - __last_toggle_time: float
+        - __pin: int
+        + AudioNotification(pin, debug=False)
+        + warning_on()
+        + warning_off()
+        + beep(freq=1000, duration=500)
+    }
 
-        class LedLight {
-            - __debug: bool
-            - __pin: int
-            - __flashing: int
-            - __last_toggle_time: float
-            + LedLight(pin, flashing=False, debug=False)
-            + on()
-            + off()
-            + toggle()
-            + flash()
-            + led_light_state
-            + led_light_state(value)
-        }
+    class LedLight {
+        - __debug: bool
+        - __pin: int
+        - __flashing: int
+        - __last_toggle_time: float
+        + LedLight(pin, flashing=False, debug=False)
+        + on()
+        + off()
+        + toggle()
+        + flash()
+        + led_light_state
+        + led_light_state(value)
+    }
 
-        class PedestrianButton {
-            - __pin: int
-            - __debug: bool
-            - __last_pressed: int
-            - __pedestrian_waiting: bool
-            + PedestrianButton(pin, debug)
-            + button_state : bool
-            + button_state(value)
-            + callback(pin)
-        }
+    class PedestrianButton {
+        - __pin: int
+        - __debug: bool
+        - __last_pressed: int
+        - __pedestrian_waiting: bool
+        + PedestrianButton(pin, debug)
+        + button_state : bool
+        + button_state(value)
+        + callback(pin)
+    }
 
-        class TrafficLightSubsystem {
-            -__red
-            -__amber
-            -__green
-            -__debug
-            +TrafficLightSubsystem(red, amber, green, debug)
-            +show_red()
-            +show_amber()
-            +show_green()
-        }
+    class TrafficLightSubsystem {
+        -__red
+        -__amber
+        -__green
+        -__debug
+        +TrafficLightSubsystem(red, amber, green, debug)
+        +show_red()
+        +show_amber()
+        +show_green()
+    }
 
-        class PedestrianSubsystem {
-            -__red
-            -__green
-            -__button
-            -__buzzer
-            -__debug
-            +PedestrianSubsystem(red, green, button, buzzer, debug)
-            +show_stop()
-            +show_walk()
-            +show_warning()
-            +is_button_pressed()
-            +reset_button()
-        }
+    class PedestrianSubsystem {
+        -__red
+        -__green
+        -__button
+        -__buzzer
+        -__debug
+        +PedestrianSubsystem(red, green, button, buzzer, debug)
+        +show_stop()
+        +show_walk()
+        +show_warning()
+        +is_button_pressed()
+        +reset_button()
+    }
 
-        class ControllerFacade["Controller (Facade)"] {
-            +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
-            +update()
-        }
+    class ControllerFacade["Controller (Facade)"] {
+        +__init__(ped_red, ped_green, traffic_red, traffic_amber, traffic_green, button, buzzer, debug)
+        +update()
+    }
 
     %% Layer 1 -> Layer 2: inheritance from MicroPython base classes
     Pin <|-- LedLight : Inheritance
