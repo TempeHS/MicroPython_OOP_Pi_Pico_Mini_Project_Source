@@ -71,7 +71,7 @@ Key concepts:
 classDiagram
     direction TB
 
-    namespace Super {
+    namespace Super["Generalised Supper Classes"] {
         class Pin {
             -__pin: int
             +__init__(pin: int)
@@ -91,7 +91,7 @@ classDiagram
         }
     }
 
-    namespace Sub {
+    namespace Sub["Sub Classes"] {
         class AudioNotification {
             - __debug: bool
             - __last_toggle_time: float
@@ -168,7 +168,7 @@ classDiagram
     PWM <|-- AudioNotification
 
     %% Layer 2 -> Layer 3: subsystem composition/usage
-    LedLight --> TrafficLightSubsystem : used by
+    LedLight --> TrafficLightSubsystem : Inheritence
     LedLight --> PedestrianSubsystem : used by
     PedestrianButton --> PedestrianSubsystem : used by
     AudioNotification --> PedestrianSubsystem : used by
