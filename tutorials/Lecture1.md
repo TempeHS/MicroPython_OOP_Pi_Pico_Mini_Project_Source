@@ -61,19 +61,24 @@ Below is a Mermaid class diagram for a Pi Pico GPIO Pin and a custom LedLight cl
 classDiagram
 
     class Pin {
+        -pin: int
+        +__init__(pin: int)
+        +value()
+        +high()
+        +low()
+        +toggle()
     }
 
-    class PedestrianButton {
-        - __pin: int
-        - __debug: bool
-        - __last_pressed: int
-        - __pedestrian_waiting: bool
-        + PedestrianButton(pin, debug)
-        + button_state : bool
-        + button_state(value)
-        + callback(pin)
+    class LedLight {
+        -debug: bool
+        -pin: int
+        -flashing: bool
+        +__init__(pin: int, flashing: bool, debug: bool)
+        +on()
+        +off()
+        +toggle()
     }
-    Pin <|-- PedestrianButton : Inheritance
+    Pin <|-- LedLight : inherits
 ```
 
 Explanation:
