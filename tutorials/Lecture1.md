@@ -73,6 +73,7 @@ classDiagram
         + button_state(value)
         + callback(pin)
     }
+    Pin <|-- PedestrianButton : Inheritance
 ```
 
 Explanation:
