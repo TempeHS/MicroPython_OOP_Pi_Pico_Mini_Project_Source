@@ -162,9 +162,9 @@ classDiagram
         }
     }
 
-    Pin <|-- LedLight : Inheritance
-    Pin <|-- PedestrianButton : Inheritance
-    PWM <|-- AudioNotification : Inheritance
+    Pin <|-- LedLight
+    Pin <|-- PedestrianButton
+    PWM <|-- AudioNotification
 
     ControllerFacade --> TrafficLightSubsystem : association
     ControllerFacade --> PedestrianSubsystem : association
