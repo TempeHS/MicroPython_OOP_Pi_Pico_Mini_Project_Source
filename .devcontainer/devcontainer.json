@@ -1,9 +1,7 @@
 {
   "name": "Python Flask Development Container",
-  "image": "mcr.microsoft.com/devcontainers/python:0-3.11-bullseye",
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/coverage-py:2": {}
-  },
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  "features": {},
   "hostRequirements": {
     "cpus": 4
   },
@@ -49,6 +47,7 @@
         "ms-python.python",
         "oderwat.indent-rainbow",
         "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-british-english",
         "yusifaliyevpro.vscicons",
         "saeris.markdown-github-alerts",
         "yy0931.vscode-sqlite3-editor",
